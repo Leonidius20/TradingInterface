@@ -1,0 +1,9 @@
+building:
+  name: Building
+  items:
+    1-0:
+      price: 10
+      discount: 5
+    grass:
+      price: 11
+      discount: 50

@@ -1,0 +1,8 @@
+# Plugin language. if <default> - server language will be used. If there is no translation in your language, there will be created a file called <your_lang>.lng with all strings in English. You'll have to translate them.
+language: default
+# If true, a file with all strings will be created. You can edit the strings.
+save-translation: false
+# If true, all modifications of buyable and sellable items' lists will be logged.
+edit-logging: true
+# If true, all transactions will be logged.
+transaction-logging: false
