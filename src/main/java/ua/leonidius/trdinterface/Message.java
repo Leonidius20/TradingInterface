@@ -56,7 +56,7 @@ public enum Message {
     // Buy item selector window
     WDW_BUY_EMPTY_CAT ("There are no items in this category."),
     BTN_ITEM_BUY ("%1% (%2%%3%)"),
-    BTN_ITEM_BUY_SALE ("%1% (%2%%3%) %4%% off!"),
+    BTN_ITEM_BUY_SALE ("%1% (%2%%3%) &c-%4%%!"),
 
     // Buy window
     WDW_BUY_TITLE ("Buying %1%"),

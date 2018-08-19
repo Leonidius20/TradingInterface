@@ -16,8 +16,9 @@ import java.io.File;
 public class Trading extends PluginBase implements Listener {
 
     public static Config buyCfg, sellCfg, customNames;
-    public static Trading plugin;
+    private static Trading plugin;
     public static Settings settings;
+    //public static File imageFolder;
 
     @Override
     public void onEnable() {
@@ -33,6 +34,9 @@ public class Trading extends PluginBase implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
 
         getDataFolder().mkdirs();
+        /*imageFolder = new File(getDataFolder(), "images");
+        imageFolder.mkdirs();*/
+
         saveResource("config.yml");
         saveResource("buyList.yml");
         saveResource("sellList.yml");
@@ -51,7 +55,7 @@ public class Trading extends PluginBase implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onFormResponse(PlayerFormRespondedEvent event) {
         if (event.getResponse() == null) return;
-        Screen screen = (Screen)event.getWindow();
-        screen.onResponse(event);
+        if (!(event.getWindow() instanceof Screen)) return;
+        ((Screen)event.getWindow()).onResponse(event);
     }
 }

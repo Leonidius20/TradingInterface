@@ -9,11 +9,11 @@ import ua.leonidius.trdinterface.screens.Screen;
 /**
  * Created by Leonidius20 on 07.07.18.
  */
-public class BuyNotEnoughWindow extends FormWindowSimple implements Screen {
+public class BuyFailScreen extends FormWindowSimple implements Screen {
 
-    String categoryId;
+    private String categoryId;
 
-    public BuyNotEnoughWindow(int code, String categoryId) {
+    public BuyFailScreen(int code, String categoryId) {
         super(Message.WDW_FAIL_TITLE.getText(), "");
         this.categoryId = categoryId;
         switch (code) {

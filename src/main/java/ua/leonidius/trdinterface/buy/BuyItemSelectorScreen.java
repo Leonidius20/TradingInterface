@@ -7,7 +7,6 @@ import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.ConfigSection;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.elements.ItemButton;
 import ua.leonidius.trdinterface.screens.Screen;
 
@@ -18,7 +17,7 @@ import static ua.leonidius.trdinterface.Trading.buyCfg;
  */
 public class BuyItemSelectorScreen extends FormWindowSimple implements Screen {
 
-    String categoryId;
+    private String categoryId;
 
     public BuyItemSelectorScreen(String categoryId) {
         super(buyCfg.getSection(categoryId).getString("name"), "");
@@ -65,11 +64,11 @@ public class BuyItemSelectorScreen extends FormWindowSimple implements Screen {
         int maxByInventory = Buy.getMaxByInventory(player, item);
 
         if (maxByMoney == 0 && maxByInventory == 0) {
-            player.showFormWindow(new BuyNotEnoughWindow(0, categoryId));
+            player.showFormWindow(new BuyFailScreen(0, categoryId));
         } else if (maxByMoney == 0){
-            player.showFormWindow(new BuyNotEnoughWindow(1, categoryId));
+            player.showFormWindow(new BuyFailScreen(1, categoryId));
         } else if (maxByInventory == 0) {
-            player.showFormWindow(new BuyNotEnoughWindow(2, categoryId));
+            player.showFormWindow(new BuyFailScreen(2, categoryId));
         } else {
             int maxAmount = Math.min(maxByInventory, maxByMoney);
             player.showFormWindow(new BuyScreen(categoryId, button.getStringId(), price, maxAmount));

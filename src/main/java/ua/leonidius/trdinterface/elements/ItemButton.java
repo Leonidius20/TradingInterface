@@ -7,11 +7,14 @@
 package ua.leonidius.trdinterface.elements;
 
 import cn.nukkit.form.element.ElementButton;
+import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
 import ua.leonidius.trdinterface.ItemName;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
+
+import java.io.File;
 
 public class ItemButton extends ElementButton {
 
@@ -21,17 +24,27 @@ public class ItemButton extends ElementButton {
     public ItemButton(String id) {
         super(ItemName.get(id));
         this.id = id;
+        //addItemIcon(id);
     }
 
     public ItemButton(String id, double price) {
         super(Message.BTN_ITEM_BUY.getText(ItemName.get(id), price, Trading.settings.currency));
         this.id = id;
+        //addItemIcon(id);
     }
 
     public ItemButton(String id, double price, int discount) {
         super(Message.BTN_ITEM_BUY_SALE.getText(ItemName.get(id), price, Trading.settings.currency, discount));
         this.id = id;
+        //addItemIcon(id);
     }
+
+    /*private void addItemIcon(String id) {
+        File image = new File(Trading.imageFolder, id+".png");
+        if (image.exists()) {
+            addImage(new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, image.getPath()));
+        }
+    }*/
 
     public String getStringId() {
         return id;
