@@ -18,18 +18,20 @@ public class ShopCommand extends PluginCommand implements CommandExecutor{
         super("shop", owner);
         setExecutor(this);
         setDescription(Message.CMD_SHOP.getText());
-        commandParameters.clear();
+        getCommandParameters().clear();
     }
 
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        Player player;
-        if (sender instanceof Player) {
-            player = (Player) sender;
-        } else {
+        if (!sender.isPlayer()) {
             Message.CMD_CONSOLE.print(sender);
             return true;
         }
-        player.showFormWindow(new MainScreen(player.hasPermission("shop.edit")));
+
+        Player player = sender.getServer().getPlayer(sender.getName());
+
+        if (player != null) {
+            player.showFormWindow(new MainScreen(player.hasPermission("shop.edit")));
+        }
         return true;
     }
 }
