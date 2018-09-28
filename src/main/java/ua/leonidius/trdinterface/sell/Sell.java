@@ -20,7 +20,7 @@ public abstract class Sell {
         Item item = Item.fromString(id);
         item.setCount(amount);
 
-        double price = Trading.sellCfg.getDouble(id);
+        double price = Trading.sellCfg.getDouble(id.replace(":", "-"));
 
         double cost = price*amount;
 
