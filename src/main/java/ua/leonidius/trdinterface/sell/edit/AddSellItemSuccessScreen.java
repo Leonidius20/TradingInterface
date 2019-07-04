@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.sell.edit;
+/*package ua.leonidius.trdinterface.sell.edit;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
@@ -11,7 +11,7 @@ import ua.leonidius.trdinterface.screens.Screen;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class AddSellItemSuccessScreen extends FormWindowSimple implements Screen {
+/*public class AddSellItemSuccessScreen extends FormWindowSimple implements Screen {
 
     public AddSellItemSuccessScreen(String itemId) {
         super(Message.WDW_SUCCESS_TITLE.getText(), Message.WDW_ADD_SELL_ITEM_SUCCESS.getText(ItemName.get(itemId)));
@@ -21,4 +21,5 @@ public class AddSellItemSuccessScreen extends FormWindowSimple implements Screen
     public void onResponse(PlayerFormRespondedEvent event) {
         event.getPlayer().showFormWindow(new EditSellListScreen());
     }
-}
+
+}*/

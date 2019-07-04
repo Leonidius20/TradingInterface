@@ -58,9 +58,15 @@ public enum Message {
     BTN_ITEM_BUY ("%1% (%2%%3%)"),
     BTN_ITEM_BUY_SALE ("%1% (%2%%3%) &c-%4%%!"),
 
-    // Buy window
+    // Buy window & BuyManageItemScreen
     WDW_BUY_TITLE ("Buying %1%"),
+    WDW_BUY_NAME ("Name: %1%"),
+    WDW_BUY_ORIGINAL_NAME ("Original name: %1% (%2%:%3%)"),
     WDW_BUY_PRICE ("Price: %1%%2% per item"),
+    WDW_BUY_DISCOUNT ("Discount: %1%%\nPrice with discount: %2%%3%"),
+    WDW_BUY_CUSTOM_LORE ("Lore: %1%"),
+    WDW_BUY_ENCHANTMENTS ("Enchantments: %1%"),
+    WDW_BUY_ENCHANTMENTS_ABSENT ("none"),
     WDW_BUY_AMOUNT ("Select amount"),
 
     // Sell item selector window
@@ -77,8 +83,8 @@ public enum Message {
     // Category creation window
     WDW_NEW_CATEGORY ("Creating a new category"),
     WDW_NEW_CATEGORY_NAME ("Choose a name:"),
-    WDW_NEW_CATEGORY_ID ("Choose a unique ID (string):"),
-    WDW_NEW_CATEGORY_FAIL ("A category with such an ID already exists."),
+    //WDW_NEW_CATEGORY_ID ("Choose a unique ID (string):"),
+    WDW_NEW_CATEGORY_FAIL ("A category with such a name already exists."),
     WDW_NEW_CATEGORY_SUCCESS ("A new category has been created successfully."),
 
     // Category renaming window
@@ -98,6 +104,9 @@ public enum Message {
     WDW_ADD_ITEM_TITLE ("Adding item"),
     WDW_ADD_ITEM_ID ("Item's ID (string or number)"),
     WDW_ADD_ITEM_PRICE ("Price per item"),
+    WDW_ADD_ITEM_CUSTOM_NAME ("Custom name (optional)"),
+    WDW_ADD_ITEM_CUSTOM_LORE ("Custom lore (optional)"),
+    WDW_ADD_ITEM_ENCHANTMENTS ("You will be able to add enchantments to the item later."),
     WDW_ADD_BUY_ITEM_SUCCESS ("You have successfully added %1% to the list of buyable items."),
     WDW_ADD_SELL_ITEM_SUCCESS ("You have successfully added %1% to the list of sellable items."),
     WDW_INVALID_PARAMS ("Invalid parameters."),
@@ -105,13 +114,18 @@ public enum Message {
 
     // Item editing windows
     WDW_EDIT_ITEM_TITLE ("Editing item"),
-    BUY_ITEM_INFO ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%"),
-    BUY_ITEM_INFO_DISC ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%\nPrice with discount: %5%%6%"),
+    //BUY_ITEM_INFO ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%"),
+    //BUY_ITEM_INFO_DISC ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%\nPrice with discount: %5%%6%"),
     SELL_ITEM_INFO ("Item: %1%\nPrice: %2%%3%"),
     BTN_EDIT_ITEM ("* Edit item"),
     BTN_DELETE_ITEM ("* Delete item"),
     BTN_EDIT_DISCOUNT ("* Edit discount"),
     BTN_ADD_DISCOUNT ("+ Add discount"),
+
+    // BuyManageItemScreen
+    BTN_BUY_ITEM ("Buy this item"),
+    BTN_ADD_ENCHANTMENT ("Add enchantment"),
+    BTN_REMOVE_ENCHANTMENT ("Remove enchantment"),
 
     // Item deletion windows
     WDW_DELETE_ITEM_TITLE ("Deleting item"),
@@ -146,17 +160,19 @@ public enum Message {
     BUY_NO_MONEY ("Not enough money to buy this item."),
     BUY_NO_SPACE ("There is no free space in your inventory."),
     BUY_NO_SPACE_AND_MONEY ("There is no free space in your inventory and there is not enough money to buy this item."),
+    ERROR ("An error occurred."),
     BUY_SUCCESS ("You have successfully bought %1%x %2% for %3%%4%."),
 
     // Sell success string
     SELL_SUCCESS ("You have successfully sold %1%x %2% for %3%%4%."),
 
     // List edit logs
-    LOG_CATEGORY_ADDED ("User %1% has added a new category of buyable items called %2% (ID: %3%)."),
-    LOG_CATEGORY_DELETED ("User %1% has deleted a category of buyable items called %2% (ID: %3%)."),
-    LOG_CATEGORY_RENAMED ("User %1% has renamed a category of buyable items called %2% (ID: %3%) into %4%."),
+    LOG_CATEGORY_ADDED ("User %1% has added a new category of buyable items called %2%."),
+    LOG_CATEGORY_DELETED ("User %1% has deleted a category of buyable items called %2%."),
+    LOG_CATEGORY_RENAMED ("User %1% has renamed a category of buyable items called %2% into %3%."),
 
     LOG_BUY_ITEM_ADDED ("User %1% has added %2% (ID: %3%) to the list of buyable items, price: %4%%5%."),
+    LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME ("User %1% has added %2% (original name: %3%, ID: %4%) to the list of buyable items, price: %5%%6%."),
     LOG_BUY_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of buyable items."),
     LOG_BUY_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for buying, new price: %4%%5%, old price: %6%%7%."),
 

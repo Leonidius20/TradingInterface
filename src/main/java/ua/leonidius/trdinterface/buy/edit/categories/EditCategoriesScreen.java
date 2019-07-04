@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.buy.edit.categories;
+/*package ua.leonidius.trdinterface.buy.edit.categories;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
@@ -13,7 +13,7 @@ import ua.leonidius.trdinterface.screens.Screen;
 /**
  * Created by Leonidius20 on 08.08.18.
  */
-public class EditCategoriesScreen extends FormWindowSimple implements Screen {
+/*public class EditCategoriesScreen extends FormWindowSimple implements Screen {
 
     public EditCategoriesScreen() {
         super(Message.MENU_EDIT_BUY_LIST.getText(), "");
@@ -38,4 +38,5 @@ public class EditCategoriesScreen extends FormWindowSimple implements Screen {
             player.showFormWindow(new EditCategoryScreen(button.getCategoryId()));
         }
     }
-}
+
+}*/

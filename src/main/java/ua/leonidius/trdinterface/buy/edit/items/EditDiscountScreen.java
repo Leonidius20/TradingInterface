@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.buy.edit.items;
+/*package ua.leonidius.trdinterface.buy.edit.items;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
@@ -14,7 +14,7 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class EditDiscountScreen extends FormWindowCustom implements Screen {
+/*public class EditDiscountScreen extends FormWindowCustom implements Screen {
 
     String categoryId, key;
     boolean discountExisted;
@@ -77,9 +77,10 @@ public class EditDiscountScreen extends FormWindowCustom implements Screen {
 
             buyCfg.save();
 
-            event.getPlayer().showFormWindow(new BuyItemMenuScreen(categoryId, key));
+            event.getPlayer().showFormWindow(new BuyManageItemScreen(categoryId, key));
         } catch (Exception e) {
             event.getPlayer().showFormWindow(new EditDiscountFailScreen(categoryId, key, EditDiscountFailScreen.invalidParams));
         }
     }
-}
+
+}*/

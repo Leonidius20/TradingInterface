@@ -11,7 +11,7 @@ import ua.leonidius.trdinterface.screens.MainScreen;
 /**
  * Created by Leonidius20 on 07.01.18.
  */
-public class ShopCommand extends PluginCommand implements CommandExecutor{
+public class ShopCommand extends PluginCommand implements CommandExecutor {
 
     @SuppressWarnings("unchecked")
     ShopCommand(Plugin owner) {
@@ -28,10 +28,10 @@ public class ShopCommand extends PluginCommand implements CommandExecutor{
         }
 
         Player player = sender.getServer().getPlayer(sender.getName());
+        if (player == null) return false;
 
-        if (player != null) {
-            player.showFormWindow(new MainScreen(player.hasPermission("shop.edit")));
-        }
+        player.showFormWindow(new MainScreen(1));
+
         return true;
     }
 }

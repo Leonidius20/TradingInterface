@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.sell.edit;
+/*package ua.leonidius.trdinterface.sell.edit;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
@@ -15,7 +15,7 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class AddSellItemScreen extends FormWindowCustom implements Screen {
+/*public class AddSellItemScreen extends FormWindowCustom implements Screen {
 
     public AddSellItemScreen() {
         super(Message.WDW_ADD_ITEM_TITLE.getText());
@@ -52,4 +52,5 @@ public class AddSellItemScreen extends FormWindowCustom implements Screen {
             event.getPlayer().showFormWindow(new AddSellItemFailScreen(AddSellItemFailScreen.invalidParams));
         }
     }
-}
+
+}*/

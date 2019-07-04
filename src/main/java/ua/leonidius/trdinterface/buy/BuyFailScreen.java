@@ -1,5 +1,6 @@
 package ua.leonidius.trdinterface.buy;
 
+import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindowSimple;
@@ -11,11 +12,16 @@ import ua.leonidius.trdinterface.screens.Screen;
  */
 public class BuyFailScreen extends FormWindowSimple implements Screen {
 
-    private String categoryId;
+    private int shopId, categoryId;
 
-    public BuyFailScreen(int code, String categoryId) {
+    // TODO: test if we can safely put final static variables here (id codes of failures)
+
+    public BuyFailScreen(int code, int shopId, int categoryId) {
         super(Message.WDW_FAIL_TITLE.getText(), "");
+
+        this.shopId = shopId;
         this.categoryId = categoryId;
+
         switch (code) {
             case 0:
                 setContent(Message.BUY_NO_SPACE_AND_MONEY.getText());
@@ -25,11 +31,16 @@ public class BuyFailScreen extends FormWindowSimple implements Screen {
                 break;
             case 2:
                 setContent(Message.BUY_NO_SPACE.getText());
+            case 3:
+                setContent(Message.ERROR.getText());
         }
+
         addButton(new ElementButton(Message.BTN_BACK.getText()));
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        event.getPlayer().showFormWindow(new BuyItemSelectorScreen(categoryId));
+        Player player = event.getPlayer();
+        player.showFormWindow(new BuyItemSelectorScreen(shopId, categoryId, player.hasPermission("shop.edit")));
     }
+
 }

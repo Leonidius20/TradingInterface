@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.sell.edit;
+/*package ua.leonidius.trdinterface.sell.edit;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
@@ -13,7 +13,7 @@ import ua.leonidius.trdinterface.screens.Screen;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class SellItemMenuScreen extends FormWindowSimple implements Screen {
+/*public class SellItemMenuScreen extends FormWindowSimple implements Screen {
 
     String key;
 
@@ -43,4 +43,5 @@ public class SellItemMenuScreen extends FormWindowSimple implements Screen {
             player.showFormWindow(new DeleteSellItemScreen(key));
         }
     }
-}
+
+}*/

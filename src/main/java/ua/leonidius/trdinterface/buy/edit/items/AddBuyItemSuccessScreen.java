@@ -1,10 +1,11 @@
 package ua.leonidius.trdinterface.buy.edit.items;
 
+import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindowSimple;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.buy.edit.categories.EditCategoryScreen;
+import ua.leonidius.trdinterface.buy.BuyItemSelectorScreen;
 import ua.leonidius.trdinterface.screens.Screen;
 
 /**
@@ -12,15 +13,20 @@ import ua.leonidius.trdinterface.screens.Screen;
  */
 public class AddBuyItemSuccessScreen extends FormWindowSimple implements Screen {
 
-    String categoryId;
+    private int shopId, categoryId;
 
-    public AddBuyItemSuccessScreen(String itemName, String categoryId) {
+    public AddBuyItemSuccessScreen(String itemName, int shopId, int categoryId) {
         super(Message.WDW_SUCCESS_TITLE.getText(), Message.WDW_ADD_BUY_ITEM_SUCCESS.getText(itemName));
+
+        this.shopId = shopId;
         this.categoryId = categoryId;
+
         addButton(new ElementButton(Message.BTN_BACK.getText()));
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        event.getPlayer().showFormWindow(new EditCategoryScreen(categoryId));
+        Player player = event.getPlayer();
+        player.showFormWindow(new BuyItemSelectorScreen(shopId, categoryId, player.hasPermission("shop.edit")));
     }
+
 }

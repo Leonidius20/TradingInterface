@@ -2,14 +2,13 @@ package ua.leonidius.trdinterface.buy.edit.items;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
+import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.utils.ConfigSection;
-import ua.leonidius.trdinterface.ItemName;
+import cn.nukkit.item.Item;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.ShopEditor;
 import ua.leonidius.trdinterface.screens.Screen;
 
-import static ua.leonidius.trdinterface.Trading.buyCfg;
 import static ua.leonidius.trdinterface.Trading.settings;
 
 /**
@@ -17,37 +16,49 @@ import static ua.leonidius.trdinterface.Trading.settings;
  */
 public class AddBuyItemScreen extends FormWindowCustom implements Screen {
 
-    String categoryId;
+    private int shopId, categoryId;
 
-    public AddBuyItemScreen(String categoryId) {
+    public AddBuyItemScreen(int shopId, int categoryId) {
         super(Message.WDW_ADD_ITEM_TITLE.getText());
+
+        this.shopId = shopId;
         this.categoryId = categoryId;
-        addElement(new ElementInput(Message.WDW_ADD_ITEM_ID.getText()));
-        addElement(new ElementInput(Message.WDW_ADD_ITEM_PRICE.getText()));
+
+        addElement(new ElementInput(Message.WDW_ADD_ITEM_ID.getText())); // 0
+        addElement(new ElementInput(Message.WDW_ADD_ITEM_PRICE.getText())); // 1
+        addElement(new ElementInput(Message.WDW_ADD_ITEM_CUSTOM_NAME.getText())); // 2
+        addElement(new ElementInput(Message.WDW_ADD_ITEM_CUSTOM_LORE.getText())); // 3
+        addElement(new ElementLabel(Message.WDW_ADD_ITEM_ENCHANTMENTS.getText())); // 4
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {
         try {
-            String id = getResponse().getInputResponse(0);
-            String key = id.replace(":", "-");
-
-            if (buyCfg.getSection(categoryId).getSection("items").exists(key)) {
-                event.getPlayer().showFormWindow(new AddBuyItemFailScreen(categoryId, AddBuyItemFailScreen.alreadyExists));
-                return;
-            }
+            Item item = Item.fromString(getResponse().getInputResponse(0));
 
             double price = Double.parseDouble(getResponse().getInputResponse(1).replace(",", "."));
 
-            buyCfg.getSection(categoryId).getSection("items").set(key, new ConfigSection("price", price));
-            buyCfg.save();
+            String customName = getResponse().getInputResponse(2);
+            if (customName == null && !customName.equals("")) item.setCustomName(customName);
+
+            String customLore = getResponse().getInputResponse(3);
+            if (!customLore.equals("")) item.setLore(customLore);
+
+            ShopEditor.addBuyItem(shopId, categoryId, item, price);
 
             if (settings.editLogging) {
-                Message.LOG_BUY_ITEM_ADDED.log(event.getPlayer().getName(), ItemName.get(id), id, price, settings.currency);
+                if (customName.equals("")) {
+                    Message.LOG_BUY_ITEM_ADDED.log(event.getPlayer().getName(), item.getName(),
+                            item.getId() + ":" + item.getDamage(), price, settings.currency);
+                } else {
+                    Message.LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME.log(event.getPlayer().getName(), customName, item.getName(),
+                            item.getId() + ":" + item.getDamage(), price, settings.currency);
+                }
             }
 
-            event.getPlayer().showFormWindow(new AddBuyItemSuccessScreen(ItemName.get(id), categoryId));
+            event.getPlayer().showFormWindow(new AddBuyItemSuccessScreen( item.getName(), shopId, categoryId));
         } catch (Exception e) {
-            event.getPlayer().showFormWindow(new AddBuyItemFailScreen(categoryId, AddBuyItemFailScreen.invalidParams));
+            event.getPlayer().showFormWindow(new AddBuyItemFailScreen(shopId, categoryId));
         }
     }
+
 }

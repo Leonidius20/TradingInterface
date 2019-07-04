@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.buy.edit.items;
+/*package ua.leonidius.trdinterface.buy.edit.items;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
@@ -9,7 +9,7 @@ import ua.leonidius.trdinterface.screens.Screen;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class EditDiscountFailScreen extends FormWindowSimple implements Screen {
+/*public class EditDiscountFailScreen extends FormWindowSimple implements Screen {
 
     String categoryId, key;
     final static boolean moreThan100 = false, invalidParams = true;
@@ -32,4 +32,5 @@ public class EditDiscountFailScreen extends FormWindowSimple implements Screen {
     public void onResponse(PlayerFormRespondedEvent event) {
         event.getPlayer().showFormWindow(new BuyItemMenuScreen(categoryId, key));
     }
-}
+
+}*/

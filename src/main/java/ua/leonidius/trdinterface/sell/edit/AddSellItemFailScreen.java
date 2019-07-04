@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.sell.edit;
+/*package ua.leonidius.trdinterface.sell.edit;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
@@ -9,7 +9,7 @@ import ua.leonidius.trdinterface.screens.Screen;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class AddSellItemFailScreen extends FormWindowSimple implements Screen {
+/*public class AddSellItemFailScreen extends FormWindowSimple implements Screen {
 
     final static boolean invalidParams = true, alreadyExists = false;
 
@@ -21,4 +21,5 @@ public class AddSellItemFailScreen extends FormWindowSimple implements Screen {
     public void onResponse(PlayerFormRespondedEvent event) {
         event.getPlayer().showFormWindow(new EditSellListScreen());
     }
-}
+
+}*/

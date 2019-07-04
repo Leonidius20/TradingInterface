@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.buy.edit.items;
+/*package ua.leonidius.trdinterface.buy.edit.items;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementDropdown;
@@ -18,7 +18,7 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 08.08.18.
  */
-public class EditBuyItemScreen extends FormWindowCustom implements Screen {
+/*public class EditBuyItemScreen extends FormWindowCustom implements Screen {
 
     String categoryId, key;
 
@@ -47,9 +47,10 @@ public class EditBuyItemScreen extends FormWindowCustom implements Screen {
                 Message.LOG_BUY_ITEM_EDITED.log(playerName, ItemName.get(id), id, newPrice, settings.currency, oldPrice, settings.currency);
             }
 
-            event.getPlayer().showFormWindow(new BuyItemMenuScreen(categoryId, key));
+            event.getPlayer().showFormWindow(new BuyManageItemScreen(categoryId, key));
         } catch (Exception e) {
             event.getPlayer().showFormWindow(new AddBuyItemFailScreen(categoryId, AddBuyItemFailScreen.invalidParams));
         }
     }
-}
+
+}*/

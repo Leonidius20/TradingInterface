@@ -26,7 +26,7 @@ public class CustomNamesScreen extends FormWindowSimple implements Screen {
         Player player = event.getPlayer();
 
         if (getResponse().getClickedButtonId() == 0) { // Back
-            player.showFormWindow(new MainScreen(player.hasPermission("shop.edit")));
+            player.showFormWindow(new MainScreen(1));
         } else if (getResponse().getClickedButtonId() == 1) { // Add custom name
             player.showFormWindow(new AddCustomNameScreen());
         } else {

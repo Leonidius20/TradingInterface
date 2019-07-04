@@ -39,7 +39,7 @@ public class SellItemSelectorScreen extends FormWindowSimple implements Screen {
     public void onResponse(PlayerFormRespondedEvent event) {
         // Back button pressed
         if (!(getResponse().getClickedButton() instanceof SellItemButton)) {
-            event.getPlayer().showFormWindow(new MainScreen(event.getPlayer().hasPermission("shop.edit")));
+            event.getPlayer().showFormWindow(new MainScreen(1));
             return;
         }
 

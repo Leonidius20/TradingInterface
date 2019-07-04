@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.buy.edit.items;
+/*package ua.leonidius.trdinterface.buy.edit.items;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.window.FormWindowModal;
@@ -14,7 +14,7 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class DeleteItemScreen extends FormWindowModal implements Screen {
+/*public class DeleteItemScreen extends FormWindowModal implements Screen {
 
     String categoryId, key;
 
@@ -36,7 +36,8 @@ public class DeleteItemScreen extends FormWindowModal implements Screen {
 
             event.getPlayer().showFormWindow(new EditCategoryScreen(categoryId));
         } else { // No
-            event.getPlayer().showFormWindow(new BuyItemMenuScreen(categoryId, key));
+            event.getPlayer().showFormWindow(new BuyManageItemScreen(categoryId, key));
         }
     }
-}
+
+}*/

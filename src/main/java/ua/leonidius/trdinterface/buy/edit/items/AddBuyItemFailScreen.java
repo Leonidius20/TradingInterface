@@ -1,10 +1,11 @@
 package ua.leonidius.trdinterface.buy.edit.items;
 
+import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindowSimple;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.buy.edit.categories.EditCategoryScreen;
+import ua.leonidius.trdinterface.buy.BuyItemSelectorScreen;
 import ua.leonidius.trdinterface.screens.Screen;
 
 /**
@@ -12,23 +13,28 @@ import ua.leonidius.trdinterface.screens.Screen;
  */
 public class AddBuyItemFailScreen extends FormWindowSimple implements Screen {
 
-    String categoryId;
-    final static boolean invalidParams = true, alreadyExists = false;
+    private int shopId, categoryId;
+    //final static boolean invalidParams = true, alreadyExists = false;
 
-    public AddBuyItemFailScreen(String categoryId, boolean mode) {
-        super(Message.WDW_FAIL_TITLE.getText(), "");
+    public AddBuyItemFailScreen(int shopId, int categoryId) {
+        super(Message.WDW_FAIL_TITLE.getText(), Message.WDW_INVALID_PARAMS.getText());
 
-        if (mode == invalidParams) {
+        this.shopId = shopId;
+        this.categoryId = categoryId;
+
+        /*if (mode == invalidParams) {
             setContent(Message.WDW_INVALID_PARAMS.getText());
         } else if (mode == alreadyExists) {
             setContent(Message.WDW_ITEM_ALREADY_EXISTS.getText());
-        }
+        }*/
 
-        this.categoryId = categoryId;
         addButton(new ElementButton(Message.BTN_BACK.getText()));
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        event.getPlayer().showFormWindow(new EditCategoryScreen(categoryId));
+        Player player = event.getPlayer();
+        player.showFormWindow(new BuyItemSelectorScreen(shopId, categoryId, player.hasPermission("shop.edit")));
+        // TODO: possibly make a retrun to AddBuyItemScreen with the inputs kept
     }
+
 }
