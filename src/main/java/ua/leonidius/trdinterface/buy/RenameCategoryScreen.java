@@ -5,7 +5,7 @@ import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.window.FormWindowCustom;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.ShopEditor;
+import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.screens.Screen;
 
@@ -35,7 +35,7 @@ public class RenameCategoryScreen extends FormWindowCustom implements Screen {
         Player player = event.getPlayer();
 
         try {
-            ShopEditor.renameCategory(categoryId, newName);
+            ShopHelper.renameCategory(categoryId, newName);
 
             if (settings.editLogging) {
                 Message.LOG_CATEGORY_RENAMED.log(event.getPlayer().getName(), oldName, newName);

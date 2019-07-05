@@ -15,14 +15,20 @@ public class Settings extends SimpleConfig {
     }
 
     //general
-    @Path (value = "save-translation")
+    @Path(value = "save-translation")
     public boolean save_translation = false;
-    @Path (value = "language")
+
+    @Path(value = "language")
     public String language = "default";
-    @Path (value = "edit-logging")
+
+    @Path(value = "edit-logging")
     public boolean editLogging = true;
-    @Path (value = "transaction-logging")
+
+    @Path(value = "transaction-logging")
     public boolean transactionLogging = false;
+
+    @Path(value = "debug")
+    public boolean debugMode = false;
 
     public String currency;
 

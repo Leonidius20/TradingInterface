@@ -122,6 +122,9 @@ public enum Message {
     BTN_EDIT_DISCOUNT ("* Edit discount"),
     BTN_ADD_DISCOUNT ("+ Add discount"),
 
+    // AddEnchantmentFailScreen
+    WDW_ADD_ENCHANTMENT_FAIL("Failed to add enchantment."),
+
     // BuyManageItemScreen
     BTN_BUY_ITEM ("Buy this item"),
     BTN_ADD_ENCHANTMENT ("Add enchantment"),
@@ -183,6 +186,10 @@ public enum Message {
     LOG_SELL_ITEM_ADDED ("User %1% has added %2% (ID: %3%) to the list of sellable items, price: %4%%5%."),
     LOG_SELL_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of sellable items."),
     LOG_SELL_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for selling, new price: %4%%5%, old price: %6%%7%."),
+
+    LOG_BUY_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%:%6%)"),
+    LOG_SELL_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%:%6%)"),
+    LOG_BUY_ENCHANTMENT_REMOVED ("User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%:%6%)"),
 
     // Transaction logs
     LOG_BOUGHT ("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),

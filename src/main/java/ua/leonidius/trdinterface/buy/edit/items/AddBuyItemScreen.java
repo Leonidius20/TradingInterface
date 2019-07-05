@@ -6,7 +6,7 @@ import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.item.Item;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.ShopEditor;
+import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.screens.Screen;
 
 import static ua.leonidius.trdinterface.Trading.settings;
@@ -38,19 +38,21 @@ public class AddBuyItemScreen extends FormWindowCustom implements Screen {
             double price = Double.parseDouble(getResponse().getInputResponse(1).replace(",", "."));
 
             String customName = getResponse().getInputResponse(2);
-            if (customName == null && !customName.equals("")) item.setCustomName(customName);
+            if (customName != null && !customName.equals("")) item.setCustomName(customName);
 
             String customLore = getResponse().getInputResponse(3);
-            if (!customLore.equals("")) item.setLore(customLore);
+            if (customLore != null && !customLore.equals("")) item.setLore(customLore);
+            // TODO: split the lore string into different lines (separate with \n)
 
-            ShopEditor.addBuyItem(shopId, categoryId, item, price);
+            ShopHelper.addBuyItem(shopId, categoryId, item, price);
 
             if (settings.editLogging) {
-                if (customName.equals("")) {
+                if (customName == null || customName.equals("")) {
                     Message.LOG_BUY_ITEM_ADDED.log(event.getPlayer().getName(), item.getName(),
                             item.getId() + ":" + item.getDamage(), price, settings.currency);
                 } else {
-                    Message.LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME.log(event.getPlayer().getName(), customName, item.getName(),
+                    Message.LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME.log(event.getPlayer().getName(), customName,
+                            Item.fromString(item.getId() + ":" + item.getDamage()).getName(),
                             item.getId() + ":" + item.getDamage(), price, settings.currency);
                 }
             }

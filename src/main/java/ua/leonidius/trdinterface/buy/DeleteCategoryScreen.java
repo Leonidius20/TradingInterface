@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.window.FormWindowModal;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.ShopEditor;
+import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.screens.Screen;
 
@@ -39,7 +39,7 @@ public class DeleteCategoryScreen extends FormWindowModal implements Screen {
         }
 
         try {
-            ShopEditor.deleteCategory(categoryId);
+            ShopHelper.deleteCategory(categoryId);
 
             if (settings.editLogging) {
                 Message.LOG_CATEGORY_DELETED.log(event.getPlayer().getName(), categoryName);

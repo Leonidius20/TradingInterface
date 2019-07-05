@@ -6,3 +6,5 @@ save-translation: false
 edit-logging: true
 # If true, all transactions will be logged.
 transaction-logging: false
+# If true, debug information will be shown in the console.
+debug: false

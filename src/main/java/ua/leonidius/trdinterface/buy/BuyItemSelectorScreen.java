@@ -64,7 +64,8 @@ public class BuyItemSelectorScreen extends FormWindowSimple implements Screen {
                     CompoundTag nbt = NBTIO.read(nbtBytes);
                     item.setCompoundTag(nbt);
                 }
-                addButton(new ItemButton(item.getName(), recordId));
+                double price = items.getDouble("price");
+                addButton(new ItemButton(ShopHelper.buildItemButtonText(item, price), recordId));
             }
         } catch (SQLException | IOException e) {
             Trading.getPlugin().getLogger().error(e.getMessage());
@@ -88,13 +89,13 @@ public class BuyItemSelectorScreen extends FormWindowSimple implements Screen {
             switch (getResponse().getClickedButtonId()) {
                 case 1: // Rename category button
                     player.showFormWindow(new RenameCategoryScreen(shopId, categoryId, categoryName));
-                    break;
+                    return;
                 case 2: // Delete category button
                     player.showFormWindow(new DeleteCategoryScreen(categoryName, shopId, categoryId));
-                    break;
+                    return;
                 case 3: // Add item button
                     player.showFormWindow(new AddBuyItemScreen(shopId, categoryId));
-                    break;
+                    return;
             }
         }
 

@@ -9,8 +9,8 @@ public class ItemButton extends ElementButton {
 
     private int itemId;
 
-    public ItemButton(String itemName, int itemId) {
-        super(itemName);
+    public ItemButton(String text, int itemId) {
+        super(text);
         this.itemId = itemId;
     }
 

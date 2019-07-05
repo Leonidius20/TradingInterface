@@ -5,13 +5,12 @@ import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.window.FormWindowCustom;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.ShopEditor;
+import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.screens.Screen;
 
 import java.sql.SQLException;
 
-import static ua.leonidius.trdinterface.Trading.getPlugin;
 import static ua.leonidius.trdinterface.Trading.settings;
 
 /**
@@ -34,7 +33,7 @@ public class AddCategoryScreen extends FormWindowCustom implements Screen {
         String categoryName = getResponse().getInputResponse(0);
 
         try {
-            ShopEditor.addCategory(shopId, categoryName);
+            ShopHelper.addCategory(shopId, categoryName);
 
             if (settings.editLogging) {
                 Message.LOG_CATEGORY_ADDED.log(player.getName(), categoryName);
