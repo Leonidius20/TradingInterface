@@ -1,13 +1,14 @@
-package ua.leonidius.trdinterface.buy;
+package ua.leonidius.trdinterface.buy.edit.categories;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
-import cn.nukkit.form.window.FormWindowCustom;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.screens.Screen;
+import ua.leonidius.trdinterface.screens.CustomScreen;
+import ua.leonidius.trdinterface.screens.InfoScreen;
 
 import java.sql.SQLException;
 
@@ -16,17 +17,20 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 08.08.18.
  */
-public class AddCategoryScreen extends FormWindowCustom implements Screen {
+public class AddCategoryScreen extends CustomScreen {
 
     private int shopId;
 
-    public AddCategoryScreen(int shopId) {
-        super(Message.WDW_NEW_CATEGORY.getText());
+    public AddCategoryScreen(ScreenManager manager, int shopId) {
+        super(manager, Message.WDW_NEW_CATEGORY.getText());
 
         this.shopId = shopId;
 
         addElement(new ElementInput(Message.WDW_NEW_CATEGORY_NAME.getText()));
     }
+
+    @Override
+    public void update() {}
 
     public void onResponse(PlayerFormRespondedEvent event) {
         Player player = event.getPlayer();
@@ -39,10 +43,10 @@ public class AddCategoryScreen extends FormWindowCustom implements Screen {
                 Message.LOG_CATEGORY_ADDED.log(player.getName(), categoryName);
             }
 
-            player.showFormWindow(new AddCategoryOutcomeScreen(shopId, true));
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.WDW_NEW_CATEGORY_SUCCESS.getText()));
         } catch (SQLException e) {
-            Trading.getPlugin().getLogger().error(e.getMessage()); // TODO: remove
-            player.showFormWindow(new AddCategoryOutcomeScreen(shopId, false));
+            if (settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.WDW_NEW_CATEGORY_FAIL.getText()));
         }
     }
 

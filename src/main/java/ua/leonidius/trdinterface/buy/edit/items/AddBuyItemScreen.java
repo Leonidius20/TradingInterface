@@ -3,23 +3,28 @@ package ua.leonidius.trdinterface.buy.edit.items;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.item.Item;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
-import ua.leonidius.trdinterface.screens.Screen;
+import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.screens.CustomScreen;
+import ua.leonidius.trdinterface.screens.InfoScreen;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 import static ua.leonidius.trdinterface.Trading.settings;
 
 /**
  * Created by Leonidius20 on 08.08.18.
  */
-public class AddBuyItemScreen extends FormWindowCustom implements Screen {
+public class AddBuyItemScreen extends CustomScreen {
 
-    private int shopId, categoryId;
+    private transient int shopId, categoryId;
 
-    public AddBuyItemScreen(int shopId, int categoryId) {
-        super(Message.WDW_ADD_ITEM_TITLE.getText());
+    public AddBuyItemScreen(ScreenManager manager, int shopId, int categoryId) {
+        super(manager, Message.WDW_ADD_ITEM_TITLE.getText());
 
         this.shopId = shopId;
         this.categoryId = categoryId;
@@ -30,6 +35,9 @@ public class AddBuyItemScreen extends FormWindowCustom implements Screen {
         addElement(new ElementInput(Message.WDW_ADD_ITEM_CUSTOM_LORE.getText())); // 3
         addElement(new ElementLabel(Message.WDW_ADD_ITEM_ENCHANTMENTS.getText())); // 4
     }
+
+    @Override
+    public void update() {}
 
     public void onResponse(PlayerFormRespondedEvent event) {
         try {
@@ -57,9 +65,13 @@ public class AddBuyItemScreen extends FormWindowCustom implements Screen {
                 }
             }
 
-            event.getPlayer().showFormWindow(new AddBuyItemSuccessScreen( item.getName(), shopId, categoryId));
-        } catch (Exception e) {
-            event.getPlayer().showFormWindow(new AddBuyItemFailScreen(shopId, categoryId));
+            String message = Message.WDW_ADD_BUY_ITEM_SUCCESS.getText(item.getName());
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
+        } catch (SQLException | IOException dbe) {
+            if (settings.debugMode) Trading.getPlugin().getLogger().error(dbe.getMessage());
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
+        } catch (NumberFormatException nfe) {
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.WDW_INVALID_PARAMS.getText()));
         }
     }
 

@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.screens;
+/*package ua.leonidius.trdinterface.screens;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
@@ -11,7 +11,7 @@ import static ua.leonidius.trdinterface.Trading.customNames;
 /**
  * Created by Leonidius20 on 11.08.18.
  */
-public class AddCustomNameScreen extends FormWindowCustom implements Screen {
+/*public class AddCustomNameScreen extends FormWindowCustom implements Screen {
 
     public AddCustomNameScreen() {
         super(Message.WDW_ADD_CUSTOM_NAME_TITLE.getText());
@@ -45,4 +45,4 @@ public class AddCustomNameScreen extends FormWindowCustom implements Screen {
         customNames.save();
         event.getPlayer().showFormWindow(new CustomNamesScreen());
     }
-}
+}*/

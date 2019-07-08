@@ -1,24 +1,20 @@
-/*
- * A main screen of the plugin, contains two buttons
- * for opening buying and selling menus.
- * Created by Leonidius20 on 26.06.18.
- * This class is a part of "Trading Interface".
- */
 package ua.leonidius.trdinterface.screens;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.window.FormWindowSimple;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
+import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.buy.BuyCategoriesScreen;
-import ua.leonidius.trdinterface.sell.SellItemSelectorScreen;
 
-public class MainScreen extends FormWindowSimple implements Screen {
+import java.sql.SQLException;
 
-    private int shopId;
+public class MainScreen extends SimpleScreen {
 
-    public MainScreen(int shopId) {
-        super(Message.WDW_MAIN_TITLE.getText(), "");
+    private transient int shopId;
+
+    public MainScreen(ScreenManager manager, int shopId) {
+        super(manager, Message.WDW_MAIN_TITLE.getText(), "");
 
         this.shopId = shopId;
 
@@ -35,18 +31,21 @@ public class MainScreen extends FormWindowSimple implements Screen {
 
     public void onResponse(PlayerFormRespondedEvent event) {
         int clickedButtonId = getResponse().getClickedButtonId();
-        boolean hasPermission = event.getPlayer().hasPermission("shop.edit");
+
         switch (clickedButtonId) {
             case 0:  // Buy button
-                event.getPlayer().showFormWindow(new BuyCategoriesScreen(shopId, hasPermission));
-                // TODO: pass the shop name as argument
+                try {
+                    SimpleScreen window = new BuyCategoriesScreen(getScreenManager(), shopId);
+                    getScreenManager().addAndShow(window);
+                } catch (SQLException e) {
+                    if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+                    getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
+                }
                 break;
             case 1:  // Sell button
-                //event.getPlayer().showFormWindow(new SellItemSelectorScreen(event.getPlayer().getInventory()));
-                // TODO: uncomment and fix
                 break;
             case 2:
-                event.getPlayer().showFormWindow(new CustomNamesScreen());
+                //event.getPlayer().showFormWindow(new CustomNamesScreen());
                 break;
             /*case 2:  // Edit buyable items button
                 event.getPlayer().showFormWindow(new EditCategoriesScreen(shopId));
@@ -61,5 +60,8 @@ public class MainScreen extends FormWindowSimple implements Screen {
                 */
         }
     }
+
+    @Override
+    public void update() {}
 
 }

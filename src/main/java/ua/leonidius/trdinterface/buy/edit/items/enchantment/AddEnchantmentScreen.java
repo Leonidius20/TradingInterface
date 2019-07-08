@@ -1,30 +1,28 @@
-package ua.leonidius.trdinterface.buy.edit.items;
+package ua.leonidius.trdinterface.buy.edit.items.enchantment;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementSlider;
-import cn.nukkit.form.window.FormWindowCustom;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.buy.BuyManageItemScreen;
-import ua.leonidius.trdinterface.screens.Screen;
+import ua.leonidius.trdinterface.screens.CustomScreen;
+import ua.leonidius.trdinterface.screens.InfoScreen;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class AddEnchantmentScreen extends FormWindowCustom implements Screen {
+public class AddEnchantmentScreen extends CustomScreen {
 
-    private int shopId, categoryId, itemId;
+    private int itemId;
 
-    public AddEnchantmentScreen(int shopId, int categoryId, int itemId) {
-        super(""); // TODO: add title
+    public AddEnchantmentScreen(ScreenManager manager, int itemId) {
+        super(manager); // TODO: add title
 
-        this.shopId = shopId;
-        this.categoryId = categoryId;
         this.itemId = itemId;
 
         ElementDropdown dropdown = new ElementDropdown("SELECT ENCHANTMENT"); // TODO: translate
@@ -39,13 +37,16 @@ public class AddEnchantmentScreen extends FormWindowCustom implements Screen {
     }
 
     @Override
+    public void update() {}
+
+    @Override
     public void onResponse(PlayerFormRespondedEvent event) {
         Player player = event.getPlayer();
 
         int enchantmentLevel = (int)getResponse().getSliderResponse(1);
 
         if (enchantmentLevel == 0) { // Going back
-            player.showFormWindow(new BuyManageItemScreen(player, shopId, categoryId, itemId));
+            getScreenManager().back();
             return;
         }
 
@@ -61,12 +62,10 @@ public class AddEnchantmentScreen extends FormWindowCustom implements Screen {
                         item.getName(), item.getId(), item.getDamage());
             }
 
-            player.showFormWindow(new BuyManageItemScreen(player, shopId, categoryId, itemId));
+            getScreenManager().back();
         } catch (SQLException | IOException e) {
-            if (Trading.settings.debugMode) {
-                Trading.getPlugin().getLogger().error(e.getMessage());
-            }
-            player.showFormWindow(new AddEnchantmentFailScreen(shopId, categoryId, itemId));
+            if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
         }
     }
 

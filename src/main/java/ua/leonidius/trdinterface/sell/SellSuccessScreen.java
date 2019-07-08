@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.sell;
+/*package ua.leonidius.trdinterface.sell;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
@@ -10,7 +10,7 @@ import ua.leonidius.trdinterface.screens.Screen;
 /**
  * Created by Leonidius20 on 08.08.18.
  */
-public class SellSuccessScreen extends FormWindowSimple implements Screen {
+/*public class SellSuccessScreen extends FormWindowSimple implements Screen {
 
 
     public SellSuccessScreen(String name, int amount, double cost) {
@@ -21,4 +21,4 @@ public class SellSuccessScreen extends FormWindowSimple implements Screen {
     public void onResponse(PlayerFormRespondedEvent event) {
         event.getPlayer().showFormWindow(new SellItemSelectorScreen(event.getPlayer().getInventory()));
     }
-}
+}*/

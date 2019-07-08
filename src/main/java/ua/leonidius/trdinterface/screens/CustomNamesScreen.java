@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.screens;
+/*package ua.leonidius.trdinterface.screens;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
@@ -11,7 +11,7 @@ import ua.leonidius.trdinterface.elements.CustomNameButton;
 /**
  * Created by Leonidius20 on 11.08.18.
  */
-public class CustomNamesScreen extends FormWindowSimple implements Screen {
+/*public class CustomNamesScreen extends FormWindowSimple implements Screen {
 
     public CustomNamesScreen() {
         super(Message.MENU_CUSTOM_NAMES.getText(), Message.WDW_CUSTOM_NAMES_HINT.getText());
@@ -35,3 +35,4 @@ public class CustomNamesScreen extends FormWindowSimple implements Screen {
         }
     }
 }
+*/

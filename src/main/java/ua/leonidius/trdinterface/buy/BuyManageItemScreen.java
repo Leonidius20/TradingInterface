@@ -3,92 +3,83 @@ package ua.leonidius.trdinterface.buy;
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.item.Item;
-import cn.nukkit.nbt.NBTIO;
-import cn.nukkit.nbt.tag.CompoundTag;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.buy.edit.items.AddEnchantmentScreen;
-import ua.leonidius.trdinterface.buy.edit.items.RemoveEnchantmentScreen;
-import ua.leonidius.trdinterface.screens.Screen;
+import ua.leonidius.trdinterface.buy.edit.items.enchantment.AddEnchantmentScreen;
+import ua.leonidius.trdinterface.buy.edit.items.enchantment.RemoveEnchantmentScreen;
+import ua.leonidius.trdinterface.screens.InfoScreen;
+import ua.leonidius.trdinterface.screens.SimpleScreen;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 /**
  * This screen is shown to players who have permissions to manage the shop. It allows to select an action
  * to perform on an item: buy, edit, delete, edit discount,
  */
-public class BuyManageItemScreen extends FormWindowSimple implements Screen {
+public class BuyManageItemScreen extends SimpleScreen {
 
-    private int shopId, categoryId, itemId;
+    private transient int itemId;
 
-    public BuyManageItemScreen(Player player, int shopId, int categoryId, int itemId) {
-        super(Message.WDW_EDIT_ITEM_TITLE.getText(), "");
+    public BuyManageItemScreen(ScreenManager manager, int itemId) throws SQLException, IOException {
+        super(manager, Message.WDW_EDIT_ITEM_TITLE.getText(), "");
 
-        this.shopId = shopId;
-        this.categoryId = categoryId;
         this.itemId = itemId;
 
-        try {
-            setContent(ShopHelper.buildDescription(itemId));
+        addButton(new ElementButton(Message.BTN_BACK.getText())); // 0
+        addButton(new ElementButton(Message.BTN_BUY_ITEM.getText())); // 1
+        addButton(new ElementButton(Message.BTN_EDIT_ITEM.getText())); // 2
+        addButton(new ElementButton(Message.BTN_EDIT_DISCOUNT.getText())); // 3
+        addButton(new ElementButton(Message.BTN_ADD_ENCHANTMENT.getText())); // 4
+        addButton(new ElementButton(Message.BTN_REMOVE_ENCHANTMENT.getText())); // 5
+        addButton(new ElementButton(Message.BTN_DELETE_ITEM.getText())); // 6
 
-            addButton(new ElementButton(Message.BTN_BACK.getText())); // 0
-            addButton(new ElementButton(Message.BTN_BUY_ITEM.getText())); // 1
-            addButton(new ElementButton(Message.BTN_EDIT_ITEM.getText())); // 2
-            addButton(new ElementButton(Message.BTN_EDIT_DISCOUNT.getText())); // 3
-            addButton(new ElementButton(Message.BTN_ADD_ENCHANTMENT.getText())); // 4
-            addButton(new ElementButton(Message.BTN_REMOVE_ENCHANTMENT.getText())); // 5
-            addButton(new ElementButton(Message.BTN_DELETE_ITEM.getText())); // 6
-        } catch (SQLException | IOException e) {
-            Trading.getPlugin().getLogger().error(e.getMessage());
-            player.showFormWindow(new BuyItemSelectorScreen(shopId, categoryId, player.hasPermission("shop.edit")));
-        }
+        update();
+    }
+
+    @Override
+    public void update() throws SQLException, IOException {
+        setContent(ShopHelper.buildDescription(itemId));
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {
         Player player = event.getPlayer();
         switch (getResponse().getClickedButtonId()) {
             case 0: // Back
-                player.showFormWindow(new BuyItemSelectorScreen(shopId, categoryId,
-                        player.hasPermission("shop.edit")));
+                getScreenManager().back();
                 break;
             case 1: // Buy
                 try {
-                    String query = "SELECT id, price, nbt FROM buy_items WHERE record_id = ?";
-                    PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-                    statement.setInt(1, itemId);
-                    ResultSet results = statement.executeQuery();
-                    results.next();
-                    Item item = Item.fromString(results.getString("id"));
-                    byte[] nbtBytes = results.getBytes("nbt");
-                    if (nbtBytes != null && nbtBytes.length != 0) {
-                        CompoundTag nbt = NBTIO.read(nbtBytes);
-                        item.setCompoundTag(nbt);
-                    }
-                    double priceWithoutDiscount = results.getDouble("price");
+                    Map<Item, Double> itemAndPrice = ShopHelper.getItemAndPrice(itemId);
+                    Item item = itemAndPrice.keySet().iterator().next();
+
+                    double priceWithoutDiscount = itemAndPrice.get(item);
                     double price = priceWithoutDiscount; // TODO: apply discount
 
                     int maxByMoney = Buy.getMaxByMoney(player, price);
                     int maxByInventory = Buy.getMaxByInventory(player, item);
 
                     if (maxByMoney == 0 && maxByInventory == 0) {
-                        player.showFormWindow(new BuyFailScreen(0, shopId, categoryId));
+                        String message = Message.BUY_NO_SPACE_AND_MONEY.getText();
+                        getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
                     } else if (maxByMoney == 0) {
-                        player.showFormWindow(new BuyFailScreen(1, shopId, categoryId));
+                        String message = Message.BUY_NO_MONEY.getText();
+                        getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
                     } else if (maxByInventory == 0) {
-                        player.showFormWindow(new BuyFailScreen(2, shopId, categoryId));
+                        String message = Message.BUY_NO_SPACE.getText();
+                        getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
                     } else {
                         int maxAmount = Math.min(maxByInventory, maxByMoney);
-                        player.showFormWindow(new BuySelectAmountScreen(player, shopId, categoryId, itemId, maxAmount));
+                        getScreenManager().addAndShow(new BuySelectAmountScreen(getScreenManager(),
+                                itemId, maxAmount), true);
                     }
                 } catch (SQLException | IOException e) {
-                    Trading.getPlugin().getLogger().error(e.getMessage());
-                    player.showFormWindow(new BuyFailScreen(3, shopId, categoryId));
+                    if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+                    getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
                 }
                 break;
             case 2: // Edit
@@ -96,10 +87,15 @@ public class BuyManageItemScreen extends FormWindowSimple implements Screen {
             case 3: // Edit discount
                 break;
             case 4: // Add enchantment
-                player.showFormWindow(new AddEnchantmentScreen(shopId, categoryId, itemId));
+                getScreenManager().addAndShow(new AddEnchantmentScreen(getScreenManager(), itemId), true);
                 break;
             case 5: // Remove enchantment
-                player.showFormWindow(new RemoveEnchantmentScreen(player, shopId, categoryId, itemId));
+                try {
+                    getScreenManager().addAndShow(new RemoveEnchantmentScreen(getScreenManager(), itemId));
+                } catch (SQLException | IOException e) {
+                    if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+                    getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
+                }
                 break;
             case 6: // Delete item
                 break;

@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.screens;
+/*package ua.leonidius.trdinterface.screens;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
@@ -8,7 +8,7 @@ import ua.leonidius.trdinterface.Message;
 /**
  * Created by Leonidius20 on 11.08.18.
  */
-public class AddCustomNameFailScreen extends FormWindowSimple implements Screen {
+/*public class AddCustomNameFailScreen extends FormWindowSimple implements Screen {
 
     final static boolean alreadyExists = true, incorrectParams = false;
 
@@ -27,4 +27,4 @@ public class AddCustomNameFailScreen extends FormWindowSimple implements Screen 
     public void onResponse(PlayerFormRespondedEvent event) {
         event.getPlayer().showFormWindow(new CustomNamesScreen());
     }
-}
+}*/

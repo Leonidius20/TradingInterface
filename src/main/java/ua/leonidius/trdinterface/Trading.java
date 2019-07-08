@@ -19,12 +19,11 @@ import java.sql.Statement;
  */
 public class Trading extends PluginBase implements Listener {
 
-    public static Config buyCfg, sellCfg, customNames;
+    public static Config sellCfg, customNames;
     private static Trading plugin;
     public static Settings settings;
-    //public static File imageFolder;
 
-    public static Connection connection;
+    private static Connection connection;
 
     @Override
     public void onEnable() {
@@ -44,11 +43,7 @@ public class Trading extends PluginBase implements Listener {
         imageFolder.mkdirs();*/
 
         saveResource("config.yml");
-        saveResource("buyList.yml");
-        saveResource("sellList.yml");
-        saveResource("customItemNames.yml");
 
-        buyCfg = new Config(new File(getDataFolder(), "buyList.yml"));
         sellCfg = new Config(new File(getDataFolder(), "sellList.yml"));
         customNames = new Config(new File(getDataFolder(), "customItemNames.yml"));
 

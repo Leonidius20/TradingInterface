@@ -1,13 +1,13 @@
-package ua.leonidius.trdinterface.buy;
+package ua.leonidius.trdinterface.buy.edit.categories;
 
-import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
-import cn.nukkit.form.window.FormWindowCustom;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.screens.Screen;
+import ua.leonidius.trdinterface.screens.CustomScreen;
+import ua.leonidius.trdinterface.screens.InfoScreen;
 
 import java.sql.SQLException;
 
@@ -16,23 +16,25 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 08.08.18.
  */
-public class RenameCategoryScreen extends FormWindowCustom implements Screen {
+public class RenameCategoryScreen extends CustomScreen {
 
-    private int shopId, categoryId;
-    private String oldName;
+    private transient int categoryId;
+    private transient String oldName;
 
-    public RenameCategoryScreen(int shopId, int categoryId, String oldName) {
-        super(Message.WDW_RENAME_CATEGORY_TITLE.getText());
+    public RenameCategoryScreen(ScreenManager manager, int categoryId, String oldName) {
+        super(manager, Message.WDW_RENAME_CATEGORY_TITLE.getText());
 
+        this.categoryId = categoryId;
         this.oldName = oldName;
 
         addElement(new ElementInput(Message.WDW_RENAME_CATEGORY_NAME.getText(), "", oldName));
     }
 
+    @Override
+    public void update() {}
+
     public void onResponse(PlayerFormRespondedEvent event) {
         String newName = getResponse().getInputResponse(0);
-
-        Player player = event.getPlayer();
 
         try {
             ShopHelper.renameCategory(categoryId, newName);
@@ -41,11 +43,10 @@ public class RenameCategoryScreen extends FormWindowCustom implements Screen {
                 Message.LOG_CATEGORY_RENAMED.log(event.getPlayer().getName(), oldName, newName);
             }
 
-            player.showFormWindow(new BuyItemSelectorScreen(shopId, categoryId, player.hasPermission("shop.edit")));
+            getScreenManager().back();
         } catch (SQLException e) {
-            Trading.getPlugin().getLogger().error(e.getMessage()); // TODO: remove
-            // TODO: fail screen
-            player.showFormWindow(new BuyItemSelectorScreen(shopId, categoryId, player.hasPermission("shop.edit")));
+            if (settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
         }
     }
 

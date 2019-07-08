@@ -91,7 +91,7 @@ public abstract class ShopHelper {
         return contentBuilder.toString();
     }
 
-    public static String buildItemButtonText(Item item, double price) throws SQLException, IOException {
+    public static String buildItemButtonText(Item item, double price) {
         StringBuilder sb = new StringBuilder();
         sb.append(item.getName());
 
@@ -148,11 +148,20 @@ public abstract class ShopHelper {
         }
     }
 
+    public static String getBuyCategoryName(int categoryId) throws SQLException {
+        String nameQuery = "SELECT name FROM categories WHERE record_id = ?";
+        PreparedStatement nameStatement = Trading.getDbConnection().prepareStatement(nameQuery);
+        nameStatement.setInt(1, categoryId);
+        ResultSet nameResults = nameStatement.executeQuery();
+        nameResults.next();
+        return nameResults.getString("name");
+    }
+
     public static void addBuyItem(int shopId, int categoryId, Item item, double price) throws SQLException, IOException {
         String query = "INSERT INTO buy_items(shop_id, category_id, id, price, nbt) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
         String id = item.getId() + ":" + item.getDamage();
-        byte[] nbtBytes = NBTIO.write(item.getNamedTag());
+        byte[] nbtBytes = item.getNamedTag() == null ? null : NBTIO.write(item.getNamedTag());
         statement.setInt(1, shopId);
         statement.setInt(2, categoryId);
         statement.setString(3, id);

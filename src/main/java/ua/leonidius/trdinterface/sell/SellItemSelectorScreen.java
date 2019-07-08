@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.sell;
+/*package ua.leonidius.trdinterface.sell;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
@@ -15,7 +15,7 @@ import static ua.leonidius.trdinterface.Trading.sellCfg;
 /**
  * Created by Leonidius20 on 07.07.18.
  */
-public class SellItemSelectorScreen extends FormWindowSimple implements Screen {
+/*public class SellItemSelectorScreen extends FormWindowSimple implements Screen {
 
     public SellItemSelectorScreen(PlayerInventory inventory) {
         super(Message.WDW_SELL_SELECT_ITEM.getText(), "");
@@ -47,4 +47,4 @@ public class SellItemSelectorScreen extends FormWindowSimple implements Screen {
         event.getPlayer().showFormWindow(new SellScreen(button.getStringId(), button.getAmount()));
 
     }
-}
+}*/

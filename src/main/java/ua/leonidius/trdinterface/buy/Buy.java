@@ -3,16 +3,16 @@ package ua.leonidius.trdinterface.buy;
 import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
-import cn.nukkit.nbt.NBTIO;
-import cn.nukkit.nbt.tag.CompoundTag;
 import me.onebone.economyapi.EconomyAPI;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
+import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.screens.InfoScreen;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import static ua.leonidius.trdinterface.Trading.settings;
 
@@ -21,24 +21,14 @@ import static ua.leonidius.trdinterface.Trading.settings;
  */
 public abstract class Buy {
 
-    public static void buy(Player player, int amount, int shopId, int categoryId, int itemId) {
+    public static void buy(Player player, ScreenManager manager, int amount, int itemId) {
         try {
-            String query = "SELECT * FROM buy_items WHERE record_id = ?";
-            PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-            statement.setInt(1, itemId);
-            ResultSet itemEntry = statement.executeQuery();
-            itemEntry.next();
-            String id = itemEntry.getString("id");
-            Item item = Item.fromString(id);
-            byte[] nbtBytes = itemEntry.getBytes("nbt");
-            if (nbtBytes != null && nbtBytes.length != 0) {
-                CompoundTag nbt = NBTIO.read(nbtBytes);
-                item.setCompoundTag(nbt);
-            }
+            Map<Item, Double> itemAndPrice = ShopHelper.getItemAndPrice(itemId);
+            Item item = itemAndPrice.keySet().iterator().next();
+            double priceWithoutDiscount = itemAndPrice.get(item);
             item.setCount(amount);
 
             // Getting price with discount applied
-            double priceWithoutDiscount = itemEntry.getDouble("price");
             double price = priceWithoutDiscount; // TODO: apply discount
             double cost = amount * price;
             EconomyAPI.getInstance().reduceMoney(player, cost);
@@ -51,10 +41,11 @@ public abstract class Buy {
                 Message.LOG_BOUGHT.log(player.getName(), amount, name, item.getId() + ":" + item.getDamage(), cost, settings.currency);
             }
 
-            player.showFormWindow(new BuySuccessScreen(amount, name, cost, shopId, categoryId));
+            String message = Message.BUY_SUCCESS.getText(amount, name, cost, Trading.settings.currency);
+            manager.addAndShow(new InfoScreen(manager, message));
         } catch (SQLException | IOException e) {
-            Trading.getPlugin().getLogger().error(e.getMessage());
-            player.showFormWindow(new BuyFailScreen(3, shopId, categoryId));
+            if (settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+            manager.addAndShow(new InfoScreen(manager, Message.ERROR.getText()));
         }
     }
 

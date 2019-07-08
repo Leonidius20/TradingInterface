@@ -2,13 +2,15 @@ package ua.leonidius.trdinterface.buy;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.window.FormWindowSimple;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.buy.edit.categories.AddCategoryScreen;
 import ua.leonidius.trdinterface.elements.CategoryButton;
-import ua.leonidius.trdinterface.screens.MainScreen;
-import ua.leonidius.trdinterface.screens.Screen;
+import ua.leonidius.trdinterface.screens.InfoScreen;
+import ua.leonidius.trdinterface.screens.SimpleScreen;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,41 +18,38 @@ import java.sql.SQLException;
 /**
  * Created by Leonidius20 on 26.06.18.
  */
-public class BuyCategoriesScreen extends FormWindowSimple implements Screen {
+public class BuyCategoriesScreen extends SimpleScreen {
 
-    private int shopId;
-    private boolean hasPermission;
+    private transient int shopId;
 
-    public BuyCategoriesScreen(int shopId, boolean hasPermission) {
-        super(Message.WDW_BUY_CAT_TITLE.getText(), "");
+    public BuyCategoriesScreen(ScreenManager manager, int shopId) throws SQLException {
+        super(manager, Message.WDW_BUY_CAT_TITLE.getText());
 
         this.shopId = shopId;
-        this.hasPermission = hasPermission;
+
+        update();
+    }
+
+    @Override
+    public void update() throws SQLException {
+        getButtons().clear();
+        setContent("");
 
         // Back button
         addButton(new ElementButton(Message.BTN_BACK.getText()));
 
         // Add category button
+        boolean hasPermission = getScreenManager().getPlayer().hasPermission("shop.edit");
         if (hasPermission) addButton(new ElementButton(Message.BTN_ADD_CATEGORY.getText()));
 
-        /*List<Map> categories = (List<Map>)buyCfg.getMapList("shops").get(0).get("categories");
-
-        for (Map category : categories) {
-            addButton(new CategoryButton((String)category.get("name")));
-        }*/
-
-        try {
-            String query = "SELECT * FROM categories WHERE shop_id = ?";
-            PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-            statement.setInt(1, shopId);
-            ResultSet categories = statement.executeQuery();
-            while (categories.next()) {
-                String name = categories.getString("name");
-                int categoryId = categories.getInt("record_id");
-                addButton(new CategoryButton(name, categoryId));
-            }
-        } catch (SQLException e) {
-            Trading.getPlugin().getLogger().error(e.getMessage());
+        String query = "SELECT * FROM categories WHERE shop_id = ?";
+        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
+        statement.setInt(1, shopId);
+        ResultSet categories = statement.executeQuery();
+        while (categories.next()) {
+            String name = categories.getString("name");
+            int categoryId = categories.getInt("record_id");
+            addButton(new CategoryButton(name, categoryId));
         }
 
         if ((getButtons().size() == 1 && !hasPermission) || (getButtons().size() == 2 && hasPermission)) {
@@ -60,18 +59,25 @@ public class BuyCategoriesScreen extends FormWindowSimple implements Screen {
 
     public void onResponse(PlayerFormRespondedEvent event) {
         if (getResponse().getClickedButtonId() == 0) { // Back
-            event.getPlayer().showFormWindow(new MainScreen(shopId));
+            getScreenManager().back();
             return;
         }
 
+        boolean hasPermission = getScreenManager().getPlayer().hasPermission("shop.edit");
         if (hasPermission && getResponse().getClickedButtonId() == 1) { // Add category button
-            event.getPlayer().showFormWindow(new AddCategoryScreen(shopId));
+            getScreenManager().addAndShow(new AddCategoryScreen(getScreenManager(), shopId), true);
             return;
         }
 
         CategoryButton button = (CategoryButton)getResponse().getClickedButton();
 
-        event.getPlayer().showFormWindow(new BuyItemSelectorScreen(shopId, button.getCategoryId(), hasPermission));
+        try {
+            BuyItemSelectorScreen screen = new BuyItemSelectorScreen(getScreenManager(), shopId, button.getCategoryId());
+            getScreenManager().addAndShow(screen);
+        } catch (SQLException | IOException e) {
+            if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
+            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
+        }
     }
 
 }

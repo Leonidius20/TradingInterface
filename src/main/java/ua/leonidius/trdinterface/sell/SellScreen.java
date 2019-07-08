@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.sell;
+/*package ua.leonidius.trdinterface.sell;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementSlider;
@@ -12,7 +12,7 @@ import ua.leonidius.trdinterface.sell.Sell;
 /**
  * Created by Leonidius20 on 09.07.18.
  */
-public class SellScreen extends FormWindowCustom implements Screen {
+/*public class SellScreen extends FormWindowCustom implements Screen {
 
     String id;
 
@@ -27,4 +27,5 @@ public class SellScreen extends FormWindowCustom implements Screen {
         int amount = (int)getResponse().getSliderResponse(0);
         Sell.sellItem(event.getPlayer(), id, amount);
     }
-}
+
+}*/

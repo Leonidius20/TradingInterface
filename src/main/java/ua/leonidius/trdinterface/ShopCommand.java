@@ -30,7 +30,9 @@ public class ShopCommand extends PluginCommand implements CommandExecutor {
         Player player = sender.getServer().getPlayer(sender.getName());
         if (player == null) return false;
 
-        player.showFormWindow(new MainScreen(1));
+        ScreenManager manager = new ScreenManager(player);
+        manager.addAndShow(new MainScreen(manager, 1));
+        //player.showFormWindow(new MainScreen(1));
 
         return true;
     }

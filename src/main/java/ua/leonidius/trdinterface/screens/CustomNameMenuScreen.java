@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.screens;
+/*package ua.leonidius.trdinterface.screens;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
@@ -11,7 +11,7 @@ import ua.leonidius.trdinterface.Trading;
 /**
  * Created by Leonidius20 on 11.08.18.
  */
-public class CustomNameMenuScreen extends FormWindowSimple implements Screen {
+/*public class CustomNameMenuScreen extends FormWindowSimple implements Screen {
 
     String key;
 
@@ -40,4 +40,4 @@ public class CustomNameMenuScreen extends FormWindowSimple implements Screen {
             event.getPlayer().showFormWindow(new DeleteCustomNameScreen(key));
         }
     }
-}
+}*/

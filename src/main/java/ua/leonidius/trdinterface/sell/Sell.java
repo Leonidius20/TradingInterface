@@ -34,7 +34,7 @@ public abstract class Sell {
             Message.LOG_SOLD.log(player.getName(), amount, name, id, cost, settings.currency);
         }
 
-        player.showFormWindow(new SellSuccessScreen(name, amount, cost));
+        //player.showFormWindow(new SellSuccessScreen(name, amount, cost));
     }
 
     public static int getItemCount(PlayerInventory inventory, Item item){

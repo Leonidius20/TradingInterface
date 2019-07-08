@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.screens;
+/*package ua.leonidius.trdinterface.screens;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
@@ -9,7 +9,7 @@ import ua.leonidius.trdinterface.Trading;
 /**
  * Created by Leonidius20 on 11.08.18.
  */
-public class EditCustomNameScreen extends FormWindowCustom implements Screen {
+/*public class EditCustomNameScreen extends FormWindowCustom implements Screen {
 
     String key;
 
@@ -25,4 +25,4 @@ public class EditCustomNameScreen extends FormWindowCustom implements Screen {
         Trading.customNames.save();
         event.getPlayer().showFormWindow(new CustomNameMenuScreen(key));
     }
-}
+}*/
