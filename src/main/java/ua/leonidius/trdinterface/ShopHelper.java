@@ -105,8 +105,9 @@ public abstract class ShopHelper {
     }
 
     private static String getEnchanmentSymbol(Enchantment enchantment) {
-        switch (enchantment.getId()) {
+        switch (enchantment.getId()) { // TODO: complete the list
             case Enchantment.ID_PROTECTION_ALL: // 0
+                return "PA";
             case Enchantment.ID_PROTECTION_FIRE: // 1
             case Enchantment.ID_PROTECTION_FALL: // 2
             case Enchantment.ID_PROTECTION_EXPLOSION:
@@ -119,9 +120,9 @@ public abstract class ShopHelper {
             case Enchantment.ID_DAMAGE_SMITE:
             case Enchantment.ID_DAMAGE_ARTHROPODS: // 11
             case Enchantment.ID_KNOCKBACK:
-                return parseUTF8("\\u2753"); // placeholder
+                return "KB";
             case Enchantment.ID_FIRE_ASPECT:
-                return parseUTF8("\\uD83D\\uDD25"); // fire
+                return "FA";
             case Enchantment.ID_LOOTING:
             case Enchantment.ID_EFFICIENCY: // 15
             case Enchantment.ID_SILK_TOUCH: // 16
@@ -133,9 +134,9 @@ public abstract class ShopHelper {
             case Enchantment.ID_BOW_INFINITY:
             case Enchantment.ID_FORTUNE_FISHING:
             case Enchantment.ID_LURE: // 24
-                return parseUTF8("\\u2753"); // placeholder
+                return "LU";
             case Enchantment.ID_FROST_WALKER:
-                return parseUTF8("\\u2744"); // snowflake
+                return "FW";
             case Enchantment.ID_MENDING:
             case Enchantment.ID_BINDING_CURSE:
             case Enchantment.ID_VANISHING_CURSE:
@@ -144,7 +145,7 @@ public abstract class ShopHelper {
             case Enchantment.ID_TRIDENT_LOYALTY:
             case Enchantment.ID_TRIDENT_CHANNELING:
             default:
-                return parseUTF8("\\u2753"); // placeholder
+                return "UE"; // Unknown Enchantment
         }
     }
 
@@ -187,7 +188,7 @@ public abstract class ShopHelper {
         Enchantment enchantment = Enchantment.get(id).setLevel(level);
         item.addEnchantment(enchantment);
 
-        byte[] newNbtBytes = NBTIO.write(item.getNamedTag());
+        byte[] newNbtBytes = NBTIO.write(item.getNamedTag()); // certainly not null
 
         String query2 = "UPDATE buy_items SET nbt = ? WHERE record_id = ?";
         PreparedStatement statement2 = Trading.getDbConnection().prepareStatement(query2);
@@ -213,7 +214,7 @@ public abstract class ShopHelper {
             }
         }
 
-        byte[] newNbtBytes = NBTIO.write(newItem.getNamedTag());
+        byte[] newNbtBytes = newItem.getNamedTag() == null ? null : NBTIO.write(newItem.getNamedTag());
 
         String query = "UPDATE buy_items SET nbt = ? WHERE record_id = ?";
         PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
@@ -244,61 +245,6 @@ public abstract class ShopHelper {
         statement.setInt(1, shopId);
         statement.setString(2, categoryName);
         statement.executeUpdate();
-    }
-
-    /*
-     * Based on  loadConvert method of java.util.Properties
-     * Stolen from Fromgate's Smiley plugin. Must be re-implemented by me
-     */
-    public static String parseUTF8(String instr) {
-        char [] in = instr.toCharArray();
-        int len = in.length;
-        int off = 0;
-        char[] convtBuf = new char[len];
-        char aChar;
-        char[] out = convtBuf;
-        int outLen = 0;
-        int end = off + len;
-        while (off < end) {
-            aChar = in[off++];
-            if (aChar == '\\') {
-                aChar = in[off++];
-                if(aChar == 'u') {
-                    // Read the xxxx
-                    int value=0;
-                    for (int i=0; i<4; i++) {
-                        aChar = in[off++];
-                        switch (aChar) {
-                            case '0': case '1': case '2': case '3': case '4':
-                            case '5': case '6': case '7': case '8': case '9':
-                                value = (value << 4) + aChar - '0';
-                                break;
-                            case 'a': case 'b': case 'c':
-                            case 'd': case 'e': case 'f':
-                                value = (value << 4) + 10 + aChar - 'a';
-                                break;
-                            case 'A': case 'B': case 'C':
-                            case 'D': case 'E': case 'F':
-
-                                value = (value << 4) + 10 + aChar - 'A';
-                                break;
-                            default:
-                                throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
-                        }
-                    }
-                    out[outLen++] = (char)value;
-                } else {
-                    if (aChar == 't') aChar = '\t';
-                    else if (aChar == 'r') aChar = '\r';
-                    else if (aChar == 'n') aChar = '\n';
-                    else if (aChar == 'f') aChar = '\f';
-                    out[outLen++] = aChar;
-                }
-            } else {
-                out[outLen++] = aChar;
-            }
-        }
-        return new String (out, 0, outLen);
     }
 
 }
