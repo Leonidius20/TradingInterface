@@ -8,6 +8,7 @@ import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.buy.edit.items.DeleteItemScreen;
 import ua.leonidius.trdinterface.buy.edit.items.enchantment.AddEnchantmentScreen;
 import ua.leonidius.trdinterface.buy.edit.items.enchantment.RemoveEnchantmentScreen;
 import ua.leonidius.trdinterface.screens.InfoScreen;
@@ -98,6 +99,14 @@ public class BuyManageItemScreen extends SimpleScreen {
                 }
                 break;
             case 6: // Delete item
+                try {
+                    Item item = ShopHelper.getItem(itemId);
+                    DeleteItemScreen screen = new DeleteItemScreen(getScreenManager(), itemId,
+                            item.getName(), item.getId() + ":" + item.getDamage());
+                    getScreenManager().addAndShow(screen, true);
+                } catch (SQLException | IOException e) {
+                    getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
+                }
                 break;
         }
     }

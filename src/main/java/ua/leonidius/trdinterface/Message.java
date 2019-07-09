@@ -159,6 +159,13 @@ public enum Message {
     WDW_DELETE_CUSTOM_NAME_TITLE ("Deleting custom name"),
     WDW_DELETE_CUSTOM_NAME_CONF ("Are you sure you want to delete a custom name for an item? This action can't be undone."),
 
+    WDW_ADD_ENCHANTMENT_TITLE ("Adding an enchantment"),
+    WDW_ADD_ENCHANTMENT_SELECTOR_HINT ("Select an enchantment:"),
+    WDW_ADD_ENCHANTMENT_LEVEL_HINT ("Select a level (0 to return)"),
+
+    WDW_REMOVE_ENCHANTMENT_TITLE ("Removing enchantments"),
+    WDW_REMOVE_ENCHANTMENT_HINT ("Select an enchantment to remove:"),
+
     // Buy success and fail strings
     BUY_NO_MONEY ("Not enough money to buy this item."),
     BUY_NO_SPACE ("There is no free space in your inventory."),

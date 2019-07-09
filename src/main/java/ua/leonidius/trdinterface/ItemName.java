@@ -1,11 +1,11 @@
-package ua.leonidius.trdinterface;
+/*package ua.leonidius.trdinterface;
 
 import cn.nukkit.item.Item;
 
 /**
  * Created by Leonidius20 on 11.03.17.
  */
-public class ItemName {
+/*public class ItemName {
 
     public static String get (String stringId) {
 
@@ -85,4 +85,4 @@ public class ItemName {
         }
 
     }
-}
+}*/

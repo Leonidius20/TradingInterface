@@ -19,7 +19,7 @@ import java.sql.Statement;
  */
 public class Trading extends PluginBase implements Listener {
 
-    public static Config sellCfg, customNames;
+    public static Config sellCfg;
     private static Trading plugin;
     public static Settings settings;
 
@@ -45,7 +45,6 @@ public class Trading extends PluginBase implements Listener {
         saveResource("config.yml");
 
         sellCfg = new Config(new File(getDataFolder(), "sellList.yml"));
-        customNames = new Config(new File(getDataFolder(), "customItemNames.yml"));
 
         connection = DbLib.getSQLiteConnection(new File(getDataFolder(), "shops.db"));
         try {

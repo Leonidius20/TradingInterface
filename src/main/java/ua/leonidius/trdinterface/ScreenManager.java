@@ -52,6 +52,11 @@ public class ScreenManager {
         showScreen(player, currentScreen);
     }
 
+    public void backTwoScreens() {
+        backStack.pop();
+        back();
+    }
+
     // TODO: maybe add a method that checks if there is a specified screen in the stack and returns to it
 
     public Player getPlayer() {

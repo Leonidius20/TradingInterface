@@ -18,14 +18,14 @@ import java.sql.SQLException;
 
 public class AddEnchantmentScreen extends CustomScreen {
 
-    private int itemId;
+    private transient int itemId;
 
     public AddEnchantmentScreen(ScreenManager manager, int itemId) {
-        super(manager); // TODO: add title
+        super(manager, Message.WDW_ADD_ENCHANTMENT_TITLE.getText());
 
         this.itemId = itemId;
 
-        ElementDropdown dropdown = new ElementDropdown("SELECT ENCHANTMENT"); // TODO: translate
+        ElementDropdown dropdown = new ElementDropdown(Message.WDW_ADD_ENCHANTMENT_SELECTOR_HINT.getText());
 
         for (Enchantment enchantment : Enchantment.getEnchantments()) {
             dropdown.addOption(enchantment.getName());
@@ -33,7 +33,8 @@ public class AddEnchantmentScreen extends CustomScreen {
 
         addElement(dropdown); // 0
 
-        addElement(new ElementSlider("SELECT LEVEL (0 to return)", 0, 5, 1, 0)); // 1
+        addElement(new ElementSlider(Message.WDW_ADD_ENCHANTMENT_LEVEL_HINT.getText(),
+                0, 5, 1, 0)); // 1
     }
 
     @Override

@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import me.onebone.economyapi.EconomyAPI;
-import ua.leonidius.trdinterface.ItemName;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 
@@ -28,7 +27,7 @@ public abstract class Sell {
         EconomyAPI.getInstance().addMoney(player, cost);
 
         // Success
-        String name = ItemName.get(id);
+        String name = item.getName();
 
         if (settings.transactionLogging) {
             Message.LOG_SOLD.log(player.getName(), amount, name, id, cost, settings.currency);

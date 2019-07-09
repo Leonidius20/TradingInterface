@@ -29,6 +29,10 @@ public abstract class ShopHelper {
             item.setCompoundTag(nbt);
         }
         double price = results.getDouble("price");
+
+        results.close();
+        statement.close();
+
         LinkedHashMap<Item, Double> map = new LinkedHashMap<>();
         map.put(item, price);
         return map;
@@ -42,10 +46,15 @@ public abstract class ShopHelper {
         results.next();
         Item item = Item.fromString(results.getString("id"));
         byte[] nbtBytes = results.getBytes("nbt");
+
+        results.close();
+        statement.close();
+
         if (nbtBytes != null && nbtBytes.length != 0) {
             CompoundTag nbt = NBTIO.read(nbtBytes);
             item.setCompoundTag(nbt);
         }
+
         return item;
     }
 
@@ -155,7 +164,12 @@ public abstract class ShopHelper {
         nameStatement.setInt(1, categoryId);
         ResultSet nameResults = nameStatement.executeQuery();
         nameResults.next();
-        return nameResults.getString("name");
+        String name = nameResults.getString("name");
+
+        nameResults.close();
+        nameStatement.close();
+
+        return name;
     }
 
     public static void addBuyItem(int shopId, int categoryId, Item item, double price) throws SQLException, IOException {
@@ -169,6 +183,15 @@ public abstract class ShopHelper {
         statement.setDouble(4, price);
         statement.setBytes(5, nbtBytes);
         statement.executeUpdate();
+        statement.close();
+    }
+
+    public static void deleteBuyItem(int itemId) throws SQLException {
+        String query = "DELETE FROM buy_items WHERE record_id = ?";
+        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
+        statement.setInt(1, itemId);
+        statement.executeUpdate();
+        statement.close();
     }
 
     public static void addBuyEnchantment(int itemId, int id, int level) throws SQLException, IOException {
@@ -230,6 +253,7 @@ public abstract class ShopHelper {
         statement.setString(1, newName);
         statement.setInt(2, categoryId);
         statement.executeUpdate();
+        statement.close();
     }
 
     public static void deleteCategory(int categoryId) throws SQLException {
@@ -237,6 +261,7 @@ public abstract class ShopHelper {
         PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
         statement.setInt(1, categoryId);
         statement.executeUpdate();
+        statement.close();
     }
 
     public static void addCategory(int shopId, String categoryName) throws SQLException {
@@ -245,6 +270,7 @@ public abstract class ShopHelper {
         statement.setInt(1, shopId);
         statement.setString(2, categoryName);
         statement.executeUpdate();
+        statement.close();
     }
 
 }

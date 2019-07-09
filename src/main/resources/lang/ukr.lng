@@ -80,6 +80,14 @@ wdw_edit_custom_name_title: Ред. користув. імені
 wdw_custom_name_hint: "Користув. і'мя предмета:"
 wdw_delete_custom_name_title: Видалення користув. імені
 wdw_delete_custom_name_conf: "Ви впевнені, що хочете видалити користувацьке і'мя предмета? Цю дію неможливо відмінити."
+
+wdw_add_enchantment_title: Додавання зачарувань
+wdw_add_enchantment_selector_hint: "Виберіть зачарування:"
+wdw_add_enchantment_level_hint: Виберіть рівень (0 щоб повернутися)
+
+wdw_remove_enchantment_title: Видалення зачарувань
+wdw_remove_enchantment_hint: "Виберіть зачарування, яке слід видалити:"
+
 buy_no_money: Недостатньо грошей для придбання цього предмета.
 buy_no_space: Недостатньо вільного місця в інвентарі для придбання цього предмета.
 buy_no_space_and_money: Недостатньо грошей і вільного місця в інвентарі для придбання предмета.

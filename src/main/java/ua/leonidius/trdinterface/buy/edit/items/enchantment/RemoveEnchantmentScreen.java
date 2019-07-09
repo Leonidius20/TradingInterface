@@ -19,7 +19,8 @@ public class RemoveEnchantmentScreen extends SimpleScreen {
     private transient int itemId;
 
     public RemoveEnchantmentScreen(ScreenManager manager, int itemId) throws SQLException, IOException {
-        super(manager); // TODO: add title
+        super(manager, Message.WDW_REMOVE_ENCHANTMENT_TITLE.getText(),
+                Message.WDW_REMOVE_ENCHANTMENT_HINT.getText());
 
         this.itemId = itemId;
 

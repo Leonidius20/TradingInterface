@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.elements;
+/*package ua.leonidius.trdinterface.elements;
 
 import cn.nukkit.form.element.ElementButton;
 import ua.leonidius.trdinterface.Trading;
@@ -6,7 +6,7 @@ import ua.leonidius.trdinterface.Trading;
 /**
  * Created by Leonidius20 on 11.08.18.
  */
-public class CustomNameButton extends ElementButton {
+/*public class CustomNameButton extends ElementButton {
 
     public String key;
 
@@ -15,4 +15,4 @@ public class CustomNameButton extends ElementButton {
         this.key = key;
     }
 
-}
+}*/
