@@ -58,7 +58,8 @@ public class Trading extends PluginBase implements Listener {
                     "(record_id INTEGER PRIMARY KEY," +
                     "shop_id INTEGER NOT NULL," +
                     "name TEXT NOT NULL UNIQUE," +
-                    "FOREIGN KEY(shop_id) REFERENCES shops(record_id))";
+                    "FOREIGN KEY(shop_id) REFERENCES shops(record_id)," +
+                    "UNIQUE(shop_id, name))";
             String createBuyItemsTable = "CREATE TABLE IF NOT EXISTS buy_items" +
                     "(record_id INTEGER PRIMARY KEY," +
                     "shop_id INTEGER NOT NULL," +

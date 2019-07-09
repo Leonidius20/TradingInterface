@@ -3,6 +3,7 @@ package ua.leonidius.trdinterface.buy.edit.categories;
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
+import org.sqlite.SQLiteErrorCode;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
@@ -46,7 +47,13 @@ public class AddCategoryScreen extends CustomScreen {
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.WDW_NEW_CATEGORY_SUCCESS.getText()));
         } catch (SQLException e) {
             if (settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
-            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.WDW_NEW_CATEGORY_FAIL.getText()));
+            InfoScreen screen;
+            if (e.getErrorCode() == SQLiteErrorCode.SQLITE_CONSTRAINT.code) {
+                screen = new InfoScreen(getScreenManager(), Message.WDW_NEW_CATEGORY_FAIL.getText());
+            } else {
+                screen = new InfoScreen(getScreenManager(), Message.ERROR.getText());
+            }
+            getScreenManager().addAndShow(screen);
         }
     }
 

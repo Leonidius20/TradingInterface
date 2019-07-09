@@ -67,10 +67,10 @@ public class AddBuyItemScreen extends CustomScreen {
 
             String message = Message.WDW_ADD_BUY_ITEM_SUCCESS.getText(item.getName());
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
-        } catch (SQLException | IOException dbe) {
+        } catch (SQLException dbe) {
             if (settings.debugMode) Trading.getPlugin().getLogger().error(dbe.getMessage());
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException | IOException e) {
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.WDW_INVALID_PARAMS.getText()));
         }
     }
