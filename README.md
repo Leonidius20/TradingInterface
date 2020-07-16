@@ -1,4 +1,6 @@
 # Trading Interface
+![cover](screenshots/cover.png)
+
 Shop system with a graphical interface for [NukkitX][nukkitx] server software for Minecraft Bedrock Edition!
 
 ## Features:
