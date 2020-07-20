@@ -8,7 +8,7 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import com.j256.ormlite.support.ConnectionSource;
 import ru.nukkit.dblib.DbLib;
-import ua.leonidius.trdinterface.screens.Screen;
+import ua.leonidius.trdinterface.views.screens.Screen;
 
 import java.io.File;
 import java.sql.Connection;

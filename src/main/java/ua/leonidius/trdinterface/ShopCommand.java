@@ -6,7 +6,8 @@ import cn.nukkit.command.CommandExecutor;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.PluginCommand;
 import cn.nukkit.plugin.Plugin;
-import ua.leonidius.trdinterface.screens.MainScreen;
+import ua.leonidius.trdinterface.views.ScreenManager;
+import ua.leonidius.trdinterface.views.screens.MainScreen;
 
 /**
  * Created by Leonidius20 on 07.01.18.
