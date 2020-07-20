@@ -12,10 +12,6 @@ public interface Screen {
 
     //void onClose(PlayerFormRespondedEvent event);
 
-    ScreenManager getScreenManager();
-
-    void setScreenManager(ScreenManager manager);
-
     void setIgnoreStack(boolean ignoresStack);
 
     boolean ignoresStack();

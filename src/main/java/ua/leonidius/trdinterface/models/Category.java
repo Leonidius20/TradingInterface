@@ -14,16 +14,16 @@ public class Category {
     public Category() {}
 
     @DatabaseField(generatedId = true, columnName = "record_id")
-    int recordId; // primary key, not null
+    public int recordId; // primary key, not null
 
     @DatabaseField(canBeNull = false, foreign = true, columnName = "shop_id")
-    Shop shop; // must be refreshed before accessing anything other than ID
+    public Shop shop; // must be refreshed before accessing anything other than ID
     // 'foreignAutoRefresh = true' can be set if needed
 
     @DatabaseField(canBeNull = false, unique = true)
-    String name;
+    public String name;
 
     @ForeignCollectionField(columnName = "items")
-    ForeignCollection<BuyableItem> items;
+    public ForeignCollection<BuyableItem> items;
 
 }

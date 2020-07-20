@@ -27,7 +27,7 @@ public class BuyManageItemScreen extends SimpleScreen {
     private transient int itemId;
 
     public BuyManageItemScreen(ScreenManager manager, int itemId) throws SQLException, IOException {
-        super(manager, Message.WDW_EDIT_ITEM_TITLE.getText(), "");
+        super(Message.WDW_EDIT_ITEM_TITLE.getText());
 
         this.itemId = itemId;
 
@@ -48,7 +48,7 @@ public class BuyManageItemScreen extends SimpleScreen {
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        Player player = event.getPlayer();
+        /*Player player = event.getPlayer();
         switch (getResponse().getClickedButtonId()) {
             case 0: // Back
                 getScreenManager().back();
@@ -108,7 +108,7 @@ public class BuyManageItemScreen extends SimpleScreen {
                     getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
                 }
                 break;
-        }
+        }*/
     }
 
 }

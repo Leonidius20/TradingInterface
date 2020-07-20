@@ -13,19 +13,17 @@ public abstract class ModalScreen extends FormWindowModal implements Screen {
         this.manager = manager;
     }
 
-    @Override
     public void setScreenManager(ScreenManager manager) {
         this.manager = manager;
     }
 
-    @Override
     public ScreenManager getScreenManager() {
         return manager;
     }
 
     @Override
-    public void setIgnoreStack(boolean ingoresStack) {
-        this.ignoresStack = ingoresStack;
+    public void setIgnoreStack(boolean ignoresStack) {
+        this.ignoresStack = ignoresStack;
     }
 
     @Override

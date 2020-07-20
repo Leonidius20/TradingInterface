@@ -32,7 +32,7 @@ public class BuyItemSelectorScreen extends SimpleScreen {
     private transient String categoryName;
 
     public BuyItemSelectorScreen(ScreenManager manager, int shopId, int categoryId) throws SQLException, IOException {
-        super(manager); // TODO: title
+        super(); // TODO: title
 
         this.shopId = shopId;
         this.categoryId = categoryId;
@@ -42,7 +42,7 @@ public class BuyItemSelectorScreen extends SimpleScreen {
 
     @Override
     public void update() throws SQLException, IOException {
-        getButtons().clear();
+       /* getButtons().clear();
         setContent("");
 
         // Back button
@@ -77,11 +77,11 @@ public class BuyItemSelectorScreen extends SimpleScreen {
         // If there is only back button
         if ((!hasPermission && getButtons().size() == 1) || (hasPermission && getButtons().size() == 4)) {
             setContent(Message.WDW_BUY_EMPTY_CAT.getText());
-        }
+        }*/
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        Player player = event.getPlayer();
+        /*Player player = event.getPlayer();
         boolean hasPermission = getScreenManager().getPlayer().hasPermission("shop.edit");
 
         if (getResponse().getClickedButtonId() == 0) { // Back button
@@ -146,7 +146,7 @@ public class BuyItemSelectorScreen extends SimpleScreen {
         } catch (SQLException | IOException e) {
             if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-        }
+        }*/
     }
 
 }

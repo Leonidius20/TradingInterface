@@ -1,16 +1,14 @@
 package ua.leonidius.trdinterface.views.elements;
 
-import cn.nukkit.form.element.ElementButton;
-
 /**
  * A button, which represents a category of items and holds an id of the category.
  */
-public class CategoryButton extends ElementButton {
+public class CategoryButton extends CallbackButton {
 
-    private int categoryId;
+    private final int categoryId;
 
-    public CategoryButton(String categoryName, int categoryId) {
-        super(categoryName);
+    public CategoryButton(String categoryName, int categoryId, Callback callback) {
+        super(categoryName, callback);
         this.categoryId = categoryId;
     }
 

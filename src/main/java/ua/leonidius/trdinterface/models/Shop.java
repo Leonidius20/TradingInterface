@@ -30,10 +30,10 @@ public class Shop {
     String name;
 
     @ForeignCollectionField(columnName = "buyable_items_categories")
-    ForeignCollection<Category> buyableItemsCategories;
+    public ForeignCollection<Category> buyableItemsCategories;
     // Do we need columnName here?
 
     @ForeignCollectionField(columnName = "sellable_items")
-    ForeignCollection<SellableItem> sellableItems;
+    public ForeignCollection<SellableItem> sellableItems;
 
 }

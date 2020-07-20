@@ -11,13 +11,13 @@ import ua.leonidius.trdinterface.views.ScreenManager;
 public class InfoScreen extends SimpleScreen {
 
     public InfoScreen(ScreenManager manager, String message) {
-        super(manager, "", message);
+        super("", message);
         addButton(new ElementButton(Message.BTN_BACK.getText()));
     }
 
     @Override
     public void onResponse(PlayerFormRespondedEvent event) {
-        getScreenManager().back();
+        // getScreenManager().back();
     }
 
     @Override

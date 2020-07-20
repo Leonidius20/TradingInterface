@@ -116,7 +116,7 @@ public class Trading extends PluginBase implements Listener {
     // Form response handler
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onFormResponse(PlayerFormRespondedEvent event) {
-        if (event.getResponse() == null) return;
+        if (event.getResponse() == null) return; // onClose()
         if (!(event.getWindow() instanceof Screen)) return;
         ((Screen) event.getWindow()).onResponse(event);
     }
@@ -127,6 +127,10 @@ public class Trading extends PluginBase implements Listener {
 
     public static Connection getDbConnection() {
         return connection;
+    }
+
+    public static ConnectionSource getSource() {
+        return source;
     }
 
 }

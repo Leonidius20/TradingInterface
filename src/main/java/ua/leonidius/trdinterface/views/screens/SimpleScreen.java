@@ -1,36 +1,24 @@
 package ua.leonidius.trdinterface.views.screens;
 
+import cn.nukkit.event.player.PlayerFormRespondedEvent;
+import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.window.FormWindowSimple;
-import ua.leonidius.trdinterface.views.ScreenManager;
+import ua.leonidius.trdinterface.views.elements.CallbackButton;
 
 public abstract class SimpleScreen extends FormWindowSimple implements Screen {
 
-    private transient ScreenManager manager;
     private transient boolean ignoresStack;
 
-    public SimpleScreen(ScreenManager manager) {
+    public SimpleScreen() {
         super("", "");
-        this.manager = manager;
     }
 
-    public SimpleScreen(ScreenManager manager, String title) {
+    public SimpleScreen(String title) {
         super(title, "");
-        this.manager = manager;
     }
 
-    public SimpleScreen(ScreenManager manager, String title, String content) {
+    public SimpleScreen(String title, String content) {
         super(title, content);
-        this.manager = manager;
-    }
-
-    @Override
-    public void setScreenManager(ScreenManager manager) {
-        this.manager = manager;
-    }
-
-    @Override
-    public ScreenManager getScreenManager() {
-        return manager;
     }
 
     /*@Override
@@ -40,8 +28,8 @@ public abstract class SimpleScreen extends FormWindowSimple implements Screen {
     }*/
 
     @Override
-    public void setIgnoreStack(boolean ingoresStack) {
-        this.ignoresStack = ingoresStack;
+    public void setIgnoreStack(boolean ignoresStack) {
+        this.ignoresStack = ignoresStack;
     }
 
     @Override
@@ -49,4 +37,11 @@ public abstract class SimpleScreen extends FormWindowSimple implements Screen {
         return ignoresStack;
     }
 
+    @Override
+    public void onResponse(PlayerFormRespondedEvent event) {
+        ElementButton button = getResponse().getClickedButton();
+        if (button instanceof CallbackButton) {
+            ((CallbackButton) button).executeCallback();
+        }
+    }
 }

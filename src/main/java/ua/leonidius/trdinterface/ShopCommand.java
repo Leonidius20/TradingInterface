@@ -5,17 +5,15 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandExecutor;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.PluginCommand;
-import cn.nukkit.plugin.Plugin;
+import ua.leonidius.trdinterface.controllers.MainController;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.MainScreen;
 
 /**
  * Created by Leonidius20 on 07.01.18.
  */
-public class ShopCommand extends PluginCommand implements CommandExecutor {
+public class ShopCommand extends PluginCommand<Trading> implements CommandExecutor {
 
-    @SuppressWarnings("unchecked")
-    ShopCommand(Plugin owner) {
+    ShopCommand(Trading owner) {
         super("shop", owner);
         setExecutor(this);
         setDescription(Message.CMD_SHOP.getText());
@@ -31,10 +29,9 @@ public class ShopCommand extends PluginCommand implements CommandExecutor {
         Player player = sender.getServer().getPlayer(sender.getName());
         if (player == null) return false;
 
-        ScreenManager manager = new ScreenManager(player);
-        manager.addAndShow(new MainScreen(manager, 1));
-        //player.showFormWindow(new MainScreen(1));
+        new MainController(new ScreenManager(player), 1).showScreen();
 
         return true;
     }
+
 }

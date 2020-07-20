@@ -37,7 +37,6 @@ public class ScreenManager {
      */
     public void addAndShow(Screen screen, boolean ignoreStack) {
         if (currentScreen != null && !currentScreen.ignoresStack()) backStack.push(currentScreen); // saving current window
-        screen.setScreenManager(this);
         screen.setIgnoreStack(ignoreStack);
         currentScreen = screen;
         showScreen(player, screen);

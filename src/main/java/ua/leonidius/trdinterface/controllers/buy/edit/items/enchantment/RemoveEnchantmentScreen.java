@@ -19,7 +19,7 @@ public class RemoveEnchantmentScreen extends SimpleScreen {
     private transient int itemId;
 
     public RemoveEnchantmentScreen(ScreenManager manager, int itemId) throws SQLException, IOException {
-        super(manager, Message.WDW_REMOVE_ENCHANTMENT_TITLE.getText(),
+        super(Message.WDW_REMOVE_ENCHANTMENT_TITLE.getText(),
                 Message.WDW_REMOVE_ENCHANTMENT_HINT.getText());
 
         this.itemId = itemId;
@@ -36,7 +36,7 @@ public class RemoveEnchantmentScreen extends SimpleScreen {
 
     @Override
     public void onResponse(PlayerFormRespondedEvent event) {
-        try {
+        /*try {
             int index = getResponse().getClickedButtonId();
             Item item = ShopHelper.getItem(itemId);
             Enchantment enchantment = item.getEnchantments()[index];
@@ -51,7 +51,7 @@ public class RemoveEnchantmentScreen extends SimpleScreen {
         } catch (SQLException | IOException e) {
             if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-        }
+        }*/
     }
 
 }
