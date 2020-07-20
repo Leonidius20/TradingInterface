@@ -6,6 +6,7 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
+import com.j256.ormlite.support.ConnectionSource;
 import ru.nukkit.dblib.DbLib;
 import ua.leonidius.trdinterface.screens.Screen;
 
@@ -46,7 +47,12 @@ public class Trading extends PluginBase implements Listener {
 
         sellCfg = new Config(new File(getDataFolder(), "sellList.yml"));
 
-        connection = DbLib.getSQLiteConnection(new File(getDataFolder(), "shops.db"));
+        //connection = DbLib.getSQLiteConnection(new File(getDataFolder(), "shops.db"));
+
+        // Getting ORMLite connection
+        ConnectionSource source = DbLib.getConnectionSourceSQLite("shops.db");
+        // maybe it should be SQL and not SQLite?
+
         try {
             Statement createDb = connection.createStatement();
             String createShopsTable = "CREATE TABLE IF NOT EXISTS shops" +

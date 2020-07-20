@@ -12,7 +12,7 @@ import java.util.Stack;
  */
 public class ScreenManager {
 
-    private Player player;
+    private final Player player;
     private Stack<Screen> backStack;
     private Screen currentScreen;
 
@@ -30,7 +30,7 @@ public class ScreenManager {
 
     /**
      *
-     * @param screen
+     * @param screen screen to show
      * @param ignoreStack if true, it wouldn't be possible to return to this screen as it will not be saved in the back stack
      */
     public void addAndShow(Screen screen, boolean ignoreStack) {

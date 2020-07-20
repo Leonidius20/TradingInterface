@@ -1,10 +1,11 @@
-package ua.leonidius.trdinterface.buy;
+package ua.leonidius.trdinterface.buy.categories;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.buy.BuyItemSelectorScreen;
 import ua.leonidius.trdinterface.buy.edit.categories.AddCategoryScreen;
 import ua.leonidius.trdinterface.elements.CategoryButton;
 import ua.leonidius.trdinterface.screens.InfoScreen;

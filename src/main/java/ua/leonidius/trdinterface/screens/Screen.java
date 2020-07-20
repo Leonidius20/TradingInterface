@@ -16,7 +16,7 @@ public interface Screen {
 
     void setScreenManager(ScreenManager manager);
 
-    void setIgnoreStack(boolean ingoresStack);
+    void setIgnoreStack(boolean ignoresStack);
 
     boolean ignoresStack();
 

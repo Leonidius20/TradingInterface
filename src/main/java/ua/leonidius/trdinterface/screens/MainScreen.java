@@ -5,7 +5,7 @@ import cn.nukkit.form.element.ElementButton;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.ScreenManager;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.buy.BuyCategoriesScreen;
+import ua.leonidius.trdinterface.buy.categories.BuyCategoriesScreen;
 
 import java.sql.SQLException;
 
