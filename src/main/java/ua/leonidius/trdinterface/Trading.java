@@ -6,14 +6,20 @@ import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 import ru.nukkit.dblib.DbLib;
+import ua.leonidius.trdinterface.models.BuyableItem;
+import ua.leonidius.trdinterface.models.Category;
+import ua.leonidius.trdinterface.models.SellableItem;
+import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.screens.Screen;
 
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by Leonidius20 on 07.01.18.
@@ -24,7 +30,8 @@ public class Trading extends PluginBase implements Listener {
     private static Trading plugin;
     public static Settings settings;
 
-    private static Connection connection;
+    private static Connection connection; // remove
+    private static ConnectionSource source;
 
     @Override
     public void onEnable() {
@@ -49,12 +56,20 @@ public class Trading extends PluginBase implements Listener {
 
         //connection = DbLib.getSQLiteConnection(new File(getDataFolder(), "shops.db"));
 
-        // Getting ORMLite connection
-        ConnectionSource source = DbLib.getConnectionSourceSQLite("shops.db");
-        // maybe it should be SQL and not SQLite?
+        source = DbLib.getConnectionSource(DbLib.getSqliteUrl(new File(getDataFolder(), "shops.db")), null, null);
 
         try {
-            Statement createDb = connection.createStatement();
+            TableUtils.createTableIfNotExists(source, Shop.class);
+
+            // Creating the default shop (accessed with /shop)
+            Dao<Shop, Integer> shopDao = DaoManager.createDao(source, Shop.class);
+            shopDao.createIfNotExists(Shop.getDefault());
+
+            TableUtils.createTableIfNotExists(source, Category.class);
+            TableUtils.createTableIfNotExists(source, BuyableItem.class);
+            TableUtils.createTableIfNotExists(source, SellableItem.class);
+
+            /*Statement createDb = connection.createStatement();
             String createShopsTable = "CREATE TABLE IF NOT EXISTS shops" +
                     "(record_id INTEGER PRIMARY KEY," +
                     "name TEXT NOT NULL UNIQUE)";
@@ -86,7 +101,7 @@ public class Trading extends PluginBase implements Listener {
             createDb.executeUpdate(createCategoriesTable);
             createDb.executeUpdate(createBuyItemsTable);
             createDb.executeUpdate(createSellItemsTable);
-            createDb.close();
+            createDb.close();*/
         } catch (SQLException e) {
             getLogger().critical(e.getMessage());
             getPluginLoader().disablePlugin(this);
@@ -95,11 +110,7 @@ public class Trading extends PluginBase implements Listener {
 
     @Override
     public void onDisable() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            getLogger().critical(e.getMessage());
-        }
+        source.closeQuietly();
     }
 
     // Form response handler
@@ -107,10 +118,10 @@ public class Trading extends PluginBase implements Listener {
     public void onFormResponse(PlayerFormRespondedEvent event) {
         if (event.getResponse() == null) return;
         if (!(event.getWindow() instanceof Screen)) return;
-        ((Screen)event.getWindow()).onResponse(event);
+        ((Screen) event.getWindow()).onResponse(event);
     }
 
-    public static Trading getPlugin(){
+    public static Trading getPlugin() {
         return plugin;
     }
 

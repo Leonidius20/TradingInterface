@@ -3,16 +3,25 @@ package ua.leonidius.trdinterface.models;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.misc.BaseDaoEnabled;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Domain model for a shop
  */
 @DatabaseTable(tableName = "shops")
-public class Shop extends BaseDaoEnabled {
+public class Shop {
 
     public Shop() {}
+
+    public Shop(String name) {
+        this.name = name;
+    }
+
+    public static Shop getDefault() {
+        Shop defaultShop = new Shop("default");
+        defaultShop.recordId = 1;
+        return defaultShop;
+    }
 
     @DatabaseField(generatedId = true, columnName = "record_id")
     int recordId;
