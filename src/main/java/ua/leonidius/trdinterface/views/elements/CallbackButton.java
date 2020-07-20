@@ -4,7 +4,7 @@ import cn.nukkit.form.element.ElementButton;
 
 public class CallbackButton extends ElementButton {
 
-    private final Callback callback;
+    private final transient Callback callback;
 
     public CallbackButton(String text, Callback callback) {
         super(text);
