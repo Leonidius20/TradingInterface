@@ -50,4 +50,20 @@ public class BuyableItem {
         return item;
     }
 
+    public static BuyableItem fromGameItem(Category category, Item gameItem, double price) {
+        BuyableItem item = new BuyableItem();
+        item.shop = category.shop;
+        item.category = category;
+        item.price = price;
+        item.itemId = gameItem.getId() + ":" + gameItem.getDamage();
+        try {
+            item.nbt = gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag());
+        } catch (IOException e) {
+            if (Trading.settings.debugMode) {
+                Trading.getPlugin().getLogger().error(e.getMessage());
+            }
+        }
+        return item;
+    }
+
 }

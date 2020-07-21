@@ -6,6 +6,7 @@ import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.BaseController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.DeleteCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.RenameCategoryController;
+import ua.leonidius.trdinterface.controllers.buy.items.edit.AddBuyableItemController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -48,9 +49,7 @@ public class BuyableItemsController extends BaseController {
     }
 
     public void addItem() {
-        // TODO
-        /*getScreenManager().addAndShow(new AddBuyItemScreen(getScreenManager(),
-                shopId, categoryId), true);*/
+       new AddBuyableItemController(manager, category).showScreen();
     }
 
     public void buyItem(BuyableItem item) {
