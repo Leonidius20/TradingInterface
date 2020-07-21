@@ -21,6 +21,7 @@ public class ManageBuyableItemController extends BaseController {
     }
 
     public String buildItemDescription() {
+        item.resetGameItem();
         return item.buildDescription();
     }
 
@@ -29,7 +30,7 @@ public class ManageBuyableItemController extends BaseController {
     }
 
     public void editItem() {
-        // TODO: use the same form as creation form
+        new EditBuyableItemController(manager, item).showScreen();
     }
 
     public void editDiscount() {

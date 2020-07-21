@@ -5,18 +5,18 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.BaseController;
 import ua.leonidius.trdinterface.controllers.InfoController;
+import ua.leonidius.trdinterface.controllers.ItemDetailsController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.buy.items.edit.AddBuyableItemScreen;
+import ua.leonidius.trdinterface.views.screens.ItemDetailsEditScreen;
 
 import java.sql.SQLException;
 
 import static ua.leonidius.trdinterface.Trading.settings;
 
-public class AddBuyableItemController extends BaseController {
+public class AddBuyableItemController extends ItemDetailsController {
 
     private final Category category;
 
@@ -27,10 +27,12 @@ public class AddBuyableItemController extends BaseController {
 
     @Override
     public void showScreen() {
-        manager.addAndShow(new AddBuyableItemScreen(this), true);
+        manager.addAndShow(new ItemDetailsEditScreen(this,
+                Message.WDW_ADD_ITEM_TITLE.getText()), true);
     }
 
-    public void addItem(String itemId, String priceS, String customName, String customLore) {
+    @Override
+    public void submitDetails(String itemId, String priceS, String customName, String customLore) {
         Item item;
 
         if (itemId.isEmpty() || (item = Item.fromString(itemId)).getId() == 0) {
@@ -78,10 +80,6 @@ public class AddBuyableItemController extends BaseController {
 
         String message = Message.WDW_ADD_BUY_ITEM_SUCCESS.getText(item.getName());
         new InfoController(manager, message).showScreen();
-    }
-
-    private void showErrorScreen() {
-        new InfoController(manager, Message.ERROR.getText()).showScreen();
     }
 
 }

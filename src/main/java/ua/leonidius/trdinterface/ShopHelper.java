@@ -9,32 +9,8 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public abstract class ShopHelper {
-
-    public static Map<Item, Double> getItemAndPrice(int itemRecordId) throws SQLException, IOException {
-        String query = "SELECT id, price, nbt FROM buy_items WHERE record_id = ?";
-        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-        statement.setInt(1, itemRecordId);
-        ResultSet results = statement.executeQuery();
-        results.next();
-        Item item = Item.fromString(results.getString("id"));
-        byte[] nbtBytes = results.getBytes("nbt");
-        if (nbtBytes != null && nbtBytes.length != 0) {
-            CompoundTag nbt = NBTIO.read(nbtBytes);
-            item.setCompoundTag(nbt);
-        }
-        double price = results.getDouble("price");
-
-        results.close();
-        statement.close();
-
-        LinkedHashMap<Item, Double> map = new LinkedHashMap<>();
-        map.put(item, price);
-        return map;
-    }
 
     public static Item getItem(int itemRecordId) throws SQLException, IOException {
         String query = "SELECT id, nbt FROM buy_items WHERE record_id = ?";
@@ -54,24 +30,6 @@ public abstract class ShopHelper {
         }
 
         return item;
-    }
-
-    public static String buildDescription(int itemRecordId) throws SQLException, IOException {
-        return null;
-    }
-
-    public static void addBuyItem(int shopId, int categoryId, Item item, double price) throws SQLException, IOException {
-        String query = "INSERT INTO buy_items(shop_id, category_id, id, price, nbt) VALUES(?, ?, ?, ?, ?)";
-        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-        String id = item.getId() + ":" + item.getDamage();
-        byte[] nbtBytes = item.getNamedTag() == null ? null : NBTIO.write(item.getNamedTag());
-        statement.setInt(1, shopId);
-        statement.setInt(2, categoryId);
-        statement.setString(3, id);
-        statement.setDouble(4, price);
-        statement.setBytes(5, nbtBytes);
-        statement.executeUpdate();
-        statement.close();
     }
 
     public static void deleteBuyItem(int itemId) throws SQLException {

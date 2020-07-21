@@ -29,14 +29,17 @@ public class BuyableItem {
     Category category;
 
     @DatabaseField(canBeNull = false, columnName = "item_id")
-    String itemId;
+    public String itemId;
 
     @DatabaseField(canBeNull = false)
     public double price;
 
     @DatabaseField(dataType = DataType.BYTE_ARRAY)
-    byte[] nbt;
+    public byte[] nbt;
 
+    /**
+     * Used to cache game item for optimization
+     */
     private Item gameItem = null;
 
     public Item toGameItem() {
@@ -117,6 +120,15 @@ public class BuyableItem {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Deleting the cached version of game item
+     * Used when after a change in an item we need
+     * to update its description in ManageBuyableItemScreen
+     */
+    public void resetGameItem() {
+        gameItem = null;
     }
 
 }

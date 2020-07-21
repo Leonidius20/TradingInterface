@@ -107,7 +107,7 @@ public enum Message {
     WDW_ADD_ITEM_PRICE ("Price per item"),
     WDW_ADD_ITEM_CUSTOM_NAME ("Custom name (optional)"),
     WDW_ADD_ITEM_CUSTOM_LORE ("Custom lore (optional)"),
-    WDW_ADD_ITEM_ENCHANTMENTS ("You will be able to add enchantments to the item later."),
+    WDW_ADD_ITEM_ENCHANTMENTS ("You will be able to edit enchantments later."),
     WDW_ADD_BUY_ITEM_SUCCESS ("You have successfully added %1% to the list of buyable items."),
     WDW_ADD_SELL_ITEM_SUCCESS ("You have successfully added %1% to the list of sellable items."),
     WDW_INVALID_PARAMS ("Invalid parameters."),
