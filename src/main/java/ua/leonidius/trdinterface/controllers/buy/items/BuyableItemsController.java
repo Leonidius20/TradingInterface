@@ -7,6 +7,7 @@ import ua.leonidius.trdinterface.controllers.BaseController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.DeleteCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.RenameCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.items.edit.AddBuyableItemController;
+import ua.leonidius.trdinterface.controllers.buy.items.edit.ManageBuyableItemController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -53,18 +54,13 @@ public class BuyableItemsController extends BaseController {
     }
 
     public void buyItem(BuyableItem item) {
-        // TODO
-        /*if (hasPermission) {
-            try {
-                getScreenManager().addAndShow(new BuyManageItemScreen(getScreenManager(), itemRecordId));
-            } catch (SQLException | IOException e) {
-                if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
-                getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-            }
+        if (showEditingButtons()) { // TODO: check divided permissions
+            new ManageBuyableItemController(manager, item).showScreen();
             return;
         }
 
-        try {
+        // TODO
+        /*try {
             Map<Item, Double> itemAndPrice = ShopHelper.getItemAndPrice(itemRecordId);
             Item item = itemAndPrice.keySet().iterator().next();
             double priceWithoutDiscount = itemAndPrice.get(item);

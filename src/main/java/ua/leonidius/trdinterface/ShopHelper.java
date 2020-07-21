@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static ua.leonidius.trdinterface.Trading.settings;
-
 public abstract class ShopHelper {
 
     public static Map<Item, Double> getItemAndPrice(int itemRecordId) throws SQLException, IOException {
@@ -59,45 +57,7 @@ public abstract class ShopHelper {
     }
 
     public static String buildDescription(int itemRecordId) throws SQLException, IOException {
-        StringBuilder contentBuilder = new StringBuilder();
-
-        Map<Item, Double> itemAndPrice = ShopHelper.getItemAndPrice(itemRecordId);
-        Item item = itemAndPrice.keySet().iterator().next();
-        double priceWithoutDiscount = itemAndPrice.get(item);
-        double price = priceWithoutDiscount; // TODO: apply discount
-
-        contentBuilder.append(Message.WDW_BUY_NAME.getText(item.getName()));
-        if (!item.getCustomName().equals("")) {
-            contentBuilder.append("\n")
-                    .append(Message.WDW_BUY_ORIGINAL_NAME.getText(item.getName(), item.getId(), item.getDamage()));
-        }
-        contentBuilder.append("\n").append(Message.WDW_BUY_PRICE.getText(price, settings.currency));
-            /*if (shopItem.discount != 0) {
-                contentBuilder.append("\n")
-                        .append(Message.WDW_BUY_DISCOUNT.getText(shopItem.discount, shopItem.calculatePrice(), settings.currency));
-            }*/
-        if (item.getLore().length != 0) {
-            StringBuilder loreBuilder = new StringBuilder();
-            int index = -1;
-            for (String line : item.getLore()) {
-                index++;
-                if (index != item.getLore().length - 1) loreBuilder.append(line);
-            }
-            contentBuilder.append("\n")
-                    .append(Message.WDW_BUY_CUSTOM_LORE.getText(loreBuilder.toString()));
-        }
-        Enchantment[] enchantments = item.getEnchantments();
-        if (enchantments != null && enchantments.length != 0) {
-            contentBuilder.append("\n");
-            StringBuilder enchListBuilder = new StringBuilder();
-            for (int i = 0; i < enchantments.length; i++) {
-                Enchantment enchantment = enchantments[i];
-                enchListBuilder.append(enchantment.getName()).append(" ").append(enchantment.getLevel());
-                if (i != enchantments.length - 1) enchListBuilder.append(", ");
-            }
-            contentBuilder.append(Message.WDW_BUY_ENCHANTMENTS.getText(enchListBuilder.toString()));
-        }
-        return contentBuilder.toString();
+        return null;
     }
 
     public static void addBuyItem(int shopId, int categoryId, Item item, double price) throws SQLException, IOException {
