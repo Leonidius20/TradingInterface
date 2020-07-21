@@ -100,64 +100,6 @@ public abstract class ShopHelper {
         return contentBuilder.toString();
     }
 
-    public static String buildItemButtonText(Item item, double price) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(item.getName());
-
-        for (Enchantment enchantment : item.getEnchantments()) {
-            sb.append(getEnchanmentSymbol(enchantment));
-        }
-
-        sb.append("(").append(price).append(settings.currency).append(")");
-
-        return sb.toString();
-    }
-
-    private static String getEnchanmentSymbol(Enchantment enchantment) {
-        switch (enchantment.getId()) { // TODO: complete the list
-            case Enchantment.ID_PROTECTION_ALL: // 0
-                return "PA";
-            case Enchantment.ID_PROTECTION_FIRE: // 1
-            case Enchantment.ID_PROTECTION_FALL: // 2
-            case Enchantment.ID_PROTECTION_EXPLOSION:
-            case Enchantment.ID_PROTECTION_PROJECTILE:
-            case Enchantment.ID_THORNS:
-            case Enchantment.ID_WATER_BREATHING: // 6
-            case Enchantment.ID_WATER_WALKER:
-            case Enchantment.ID_WATER_WORKER: // 8
-            case Enchantment.ID_DAMAGE_ALL:
-            case Enchantment.ID_DAMAGE_SMITE:
-            case Enchantment.ID_DAMAGE_ARTHROPODS: // 11
-            case Enchantment.ID_KNOCKBACK:
-                return "KB";
-            case Enchantment.ID_FIRE_ASPECT:
-                return "FA";
-            case Enchantment.ID_LOOTING:
-            case Enchantment.ID_EFFICIENCY: // 15
-            case Enchantment.ID_SILK_TOUCH: // 16
-            case Enchantment.ID_DURABILITY:
-            case Enchantment.ID_FORTUNE_DIGGING:
-            case Enchantment.ID_BOW_POWER:
-            case Enchantment.ID_BOW_KNOCKBACK:
-            case Enchantment.ID_BOW_FLAME:
-            case Enchantment.ID_BOW_INFINITY:
-            case Enchantment.ID_FORTUNE_FISHING:
-            case Enchantment.ID_LURE: // 24
-                return "LU";
-            case Enchantment.ID_FROST_WALKER:
-                return "FW";
-            case Enchantment.ID_MENDING:
-            case Enchantment.ID_BINDING_CURSE:
-            case Enchantment.ID_VANISHING_CURSE:
-            case Enchantment.ID_TRIDENT_IMPALING:
-            case Enchantment.ID_TRIDENT_RIPTIDE: // 30
-            case Enchantment.ID_TRIDENT_LOYALTY:
-            case Enchantment.ID_TRIDENT_CHANNELING:
-            default:
-                return "UE"; // Unknown Enchantment
-        }
-    }
-
     public static String getBuyCategoryName(int categoryId) throws SQLException {
         String nameQuery = "SELECT name FROM categories WHERE record_id = ?";
         PreparedStatement nameStatement = Trading.getDbConnection().prepareStatement(nameQuery);

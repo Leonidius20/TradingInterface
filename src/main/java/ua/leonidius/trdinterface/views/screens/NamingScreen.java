@@ -12,10 +12,16 @@ public class NamingScreen extends CustomScreen {
 
     private transient final NamingController controller;
 
-    public NamingScreen(NamingController controller, String title, String text) {
+    public NamingScreen(NamingController controller, String title, String label) {
         super(title);
         this.controller = controller;
-        addElement(new ElementInput(text));
+        addElement(new ElementInput(label));
+    }
+
+    public NamingScreen(NamingController controller, String title, String label, String text) {
+        super(title);
+        this.controller = controller;
+        addElement(new ElementInput(label, "", text));
     }
 
     @Override

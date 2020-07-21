@@ -1,7 +1,7 @@
 package ua.leonidius.trdinterface.views.screens;
 
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.views.ScreenManager;
+import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.views.elements.CallbackButton;
 
 /**
@@ -9,9 +9,9 @@ import ua.leonidius.trdinterface.views.elements.CallbackButton;
  */
 public class InfoScreen extends SimpleScreen {
 
-    public InfoScreen(ScreenManager manager, String message) {
-        super("", message);
-        addButton(new CallbackButton(Message.BTN_BACK.getText(), manager::back));
+    public InfoScreen(InfoController controller, String title, String message) {
+        super(title, message);
+        addButton(new CallbackButton(Message.BTN_BACK.getText(), controller::back));
     }
 
     @Override

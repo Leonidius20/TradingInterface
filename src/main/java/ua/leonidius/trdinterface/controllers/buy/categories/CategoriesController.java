@@ -1,5 +1,8 @@
-package ua.leonidius.trdinterface.controllers;
+package ua.leonidius.trdinterface.controllers.buy.categories;
 
+import ua.leonidius.trdinterface.controllers.buy.items.BuyableItemsController;
+import ua.leonidius.trdinterface.controllers.buy.categories.edit.AddCategoryController;
+import ua.leonidius.trdinterface.controllers.BaseController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -34,18 +37,7 @@ public class CategoriesController extends BaseController {
     }
 
     public void selectCategory(Category category) {
-        // TODO
-        /*try {
-            BuyItemSelectorScreen screen = new BuyItemSelectorScreen(getScreenManager(), shopId, button.getCategoryId());
-            getScreenManager().addAndShow(screen);
-        } catch (SQLException | IOException e) {
-            if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
-            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-        }*/
-    }
-
-    public void back() {
-        manager.back();
+        new BuyableItemsController(manager, category).showScreen();
     }
 
 }

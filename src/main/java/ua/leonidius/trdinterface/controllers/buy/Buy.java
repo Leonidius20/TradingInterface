@@ -5,6 +5,7 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import me.onebone.economyapi.EconomyAPI;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.ShopHelper;
 import ua.leonidius.trdinterface.Trading;
@@ -42,10 +43,10 @@ public abstract class Buy {
             }
 
             String message = Message.BUY_SUCCESS.getText(amount, name, cost, Trading.settings.currency);
-            manager.addAndShow(new InfoScreen(manager, message));
+            new InfoController(manager, message).showScreen();
         } catch (SQLException | IOException e) {
             if (settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
-            manager.addAndShow(new InfoScreen(manager, Message.ERROR.getText()));
+            new InfoController(manager, Message.ERROR.getText()).showScreen();
         }
     }
 

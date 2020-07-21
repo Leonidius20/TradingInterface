@@ -3,6 +3,7 @@ package ua.leonidius.trdinterface.controllers;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.controllers.buy.categories.CategoriesController;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.MainScreen;

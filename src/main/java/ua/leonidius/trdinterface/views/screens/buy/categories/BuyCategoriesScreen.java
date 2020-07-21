@@ -1,7 +1,7 @@
 package ua.leonidius.trdinterface.views.screens.buy.categories;
 
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.controllers.CategoriesController;
+import ua.leonidius.trdinterface.controllers.buy.categories.CategoriesController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.elements.CallbackButton;
 import ua.leonidius.trdinterface.views.screens.SimpleScreen;
@@ -27,22 +27,22 @@ public class BuyCategoriesScreen extends SimpleScreen {
         // Back button
         addButton(new CallbackButton(Message.BTN_BACK.getText(), controller::back));
 
-        boolean showEditingButtons = controller.showEditingButtons();
-
-        if (showEditingButtons) {
+        if (controller.showEditingButtons()) {
             addButton(new CallbackButton(Message.BTN_ADD_CATEGORY.getText(),
                     controller::addCategory));
         }
 
-        for (Category category : controller.fetchCategories()) {
-            addButton(new CallbackButton(category.name,
-                    () -> controller.selectCategory(category)));
+        Category[] categories = controller.fetchCategories();
+
+        if (categories.length == 0) {
+            setContent(Message.WDW_BUY_NO_CATEGORIES.getText());
+        } else {
+            for (Category category : controller.fetchCategories()) {
+                addButton(new CallbackButton(category.name,
+                        () -> controller.selectCategory(category)));
+            }
         }
 
-        if ((getButtons().size() == 1 && !showEditingButtons)
-                || (getButtons().size() == 2 && showEditingButtons)) {
-            setContent(Message.WDW_BUY_NO_CATEGORIES.getText());
-        }
     }
 
 }

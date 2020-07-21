@@ -15,7 +15,7 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 10.08.18.
  */
-public class DeleteItemScreen extends ModalScreen {
+/*public class DeleteItemScreen extends ModalScreen {
 
     private transient int recordId;
     private String itemName, itemId;
@@ -52,4 +52,4 @@ public class DeleteItemScreen extends ModalScreen {
         }
     }
 
-}
+}*/

@@ -1,14 +1,15 @@
-package ua.leonidius.trdinterface.controllers;
+package ua.leonidius.trdinterface.controllers.buy.categories.edit;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import org.sqlite.SQLiteErrorCode;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.controllers.InfoController;
+import ua.leonidius.trdinterface.controllers.NamingController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.InfoScreen;
 import ua.leonidius.trdinterface.views.screens.NamingScreen;
 
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ public class AddCategoryController extends NamingController {
 
     private final Shop shop;
 
-    AddCategoryController(ScreenManager manager, Shop shop) {
+    public AddCategoryController(ScreenManager manager, Shop shop) {
         super(manager);
         this.shop = shop;
     }
@@ -41,8 +42,8 @@ public class AddCategoryController extends NamingController {
                 Message.LOG_CATEGORY_ADDED.log(manager.getPlayer().getName(), name);
             }
 
-            // TODO: replace with InfoController
-            manager.addAndShow(new InfoScreen(manager, Message.WDW_NEW_CATEGORY_SUCCESS.getText()));
+            new InfoController(manager, Message.WDW_SUCCESS_TITLE.getText(),
+                    Message.WDW_NEW_CATEGORY_SUCCESS.getText()).showScreen();
 
         } catch (SQLException e) {
             if (Trading.settings.debugMode) {
@@ -50,14 +51,13 @@ public class AddCategoryController extends NamingController {
                 Trading.getPlugin().getLogger().error("Error code: " + e.getErrorCode());
             }
 
-            // TODO: replace with InfoController
-            InfoScreen screen;
+            InfoController controller;
             if (e.getErrorCode() == SQLiteErrorCode.SQLITE_CONSTRAINT.code) {
-                screen = new InfoScreen(manager, Message.WDW_NEW_CATEGORY_FAIL.getText());
+                controller = new InfoController(manager, Message.WDW_NEW_CATEGORY_FAIL.getText());
             } else {
-                screen = new InfoScreen(manager, Message.ERROR.getText());
+                controller = new InfoController(manager, Message.ERROR.getText());
             }
-            manager.addAndShow(screen);
+            controller.showScreen();
         }
     }
 

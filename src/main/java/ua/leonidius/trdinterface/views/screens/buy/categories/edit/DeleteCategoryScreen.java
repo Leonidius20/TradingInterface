@@ -15,7 +15,8 @@ import static ua.leonidius.trdinterface.Trading.settings;
 /**
  * Created by Leonidius20 on 08.08.18.
  */
-public class DeleteCategoryScreen extends ModalScreen {
+
+/*public class DeleteCategoryScreen extends ModalScreen {
 
     private transient int categoryId;
     private transient String categoryName;
@@ -33,7 +34,7 @@ public class DeleteCategoryScreen extends ModalScreen {
     public void update() {}
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        if (getResponse().getClickedButtonId() != 0) { // Negative button clicked
+        /*if (getResponse().getClickedButtonId() != 0) { // Negative button clicked
             getScreenManager().back();
             return;
         }
@@ -52,4 +53,4 @@ public class DeleteCategoryScreen extends ModalScreen {
         }
     }
 
-}
+}*/
