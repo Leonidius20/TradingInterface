@@ -59,35 +59,7 @@ public class BuyableItemsController extends BaseController {
             return;
         }
 
-        // TODO
-        /*try {
-            Map<Item, Double> itemAndPrice = ShopHelper.getItemAndPrice(itemRecordId);
-            Item item = itemAndPrice.keySet().iterator().next();
-            double priceWithoutDiscount = itemAndPrice.get(item);
-
-            // Checking if there is enough place in inventory and money
-            double price = priceWithoutDiscount; // TODO: account for discount
-            int maxByMoney = Buy.getMaxByMoney(player, price);
-            int maxByInventory = Buy.getMaxByInventory(player, item);
-
-            if (maxByMoney == 0 && maxByInventory == 0) {
-                String message = Message.BUY_NO_SPACE_AND_MONEY.getText();
-                getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
-            } else if (maxByMoney == 0) {
-                String message = Message.BUY_NO_MONEY.getText();
-                getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
-            } else if (maxByInventory == 0) {
-                String message = Message.BUY_NO_SPACE.getText();
-                getScreenManager().addAndShow(new InfoScreen(getScreenManager(), message));
-            } else {
-                int maxAmount = Math.min(maxByInventory, maxByMoney);
-                BuySelectAmountScreen screen = new BuySelectAmountScreen(getScreenManager(), itemRecordId, maxAmount);
-                getScreenManager().addAndShow(screen, true);
-            }
-        } catch (SQLException | IOException e) {
-            if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
-            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-        }*/
+        new BuyAmountSelectorController(manager, item).showScreen();
     }
 
     public String buildItemButtonText(BuyableItem item) {

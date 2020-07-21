@@ -1,14 +1,18 @@
 package ua.leonidius.trdinterface.models;
 
 import cn.nukkit.item.Item;
+import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 
 import java.io.IOException;
+
+import static ua.leonidius.trdinterface.Trading.settings;
 
 @DatabaseTable(tableName = "buyable_items")
 public class BuyableItem {
@@ -33,7 +37,11 @@ public class BuyableItem {
     @DatabaseField(dataType = DataType.BYTE_ARRAY)
     byte[] nbt;
 
+    private Item gameItem = null;
+
     public Item toGameItem() {
+        if (gameItem != null) return gameItem;
+
         Item item = Item.fromString(itemId);
         if (nbt != null) {
             try {
@@ -47,7 +55,8 @@ public class BuyableItem {
                 }
             }
         }
-        return item;
+
+        return gameItem = item;
     }
 
     public static BuyableItem fromGameItem(Category category, Item gameItem, double price) {
@@ -64,6 +73,50 @@ public class BuyableItem {
             }
         }
         return item;
+    }
+
+    public String buildDescription() {
+        StringBuilder sb = new StringBuilder();
+
+        Item gameItem = toGameItem();
+
+        // TODO: apply discount to price
+
+        sb.append(Message.WDW_BUY_NAME.getText(gameItem.getName()));
+        sb.append("\n");
+
+        Item pureItem = Item.fromString(gameItem.getId() + ":" + gameItem.getDamage());
+        sb.append(Message.WDW_BUY_ORIGINAL_NAME.getText(pureItem.getName(),
+                gameItem.getId(), gameItem.getDamage()));
+
+        sb.append("\n").append(Message.WDW_BUY_PRICE.getText(price, settings.currency));
+
+        /*if (shopItem.discount != 0) {
+            sb.append("\n")
+                    .append(Message.WDW_BUY_DISCOUNT.getText(shopItem.discount, shopItem.calculatePrice(), settings.currency));
+        }*/
+
+        if (gameItem.getLore() != null && gameItem.getLore().length != 0) {
+            StringBuilder loreBuilder = new StringBuilder();
+            for (String line : gameItem.getLore()) {
+                loreBuilder.append(line).append("\n");
+            }
+            sb.append("\n").append(Message.WDW_BUY_CUSTOM_LORE.getText(loreBuilder.toString()));
+        }
+
+        Enchantment[] enchantments = gameItem.getEnchantments();
+        if (enchantments != null && enchantments.length != 0) {
+            sb.append("\n");
+            StringBuilder eListBuilder = new StringBuilder();
+            for (int i = 0; i < enchantments.length; i++) {
+                Enchantment enchantment = enchantments[i];
+                eListBuilder.append(enchantment.getName()).append(" ").append(enchantment.getLevel());
+                if (i != enchantments.length - 1) eListBuilder.append(", ");
+            }
+            sb.append(Message.WDW_BUY_ENCHANTMENTS.getText(eListBuilder.toString()));
+        }
+
+        return sb.toString();
     }
 
 }

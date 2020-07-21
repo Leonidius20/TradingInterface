@@ -68,6 +68,7 @@ public enum Message {
     WDW_BUY_ENCHANTMENTS ("Enchantments: %1%"),
     WDW_BUY_ENCHANTMENTS_ABSENT ("none"),
     WDW_BUY_AMOUNT ("Select amount"),
+    WDW_SELECT_ZERO_TO_RETURN("Select zero to return to the previous screen."),
 
     // Sell item selector window
     WDW_SELL_SELECT_ITEM ("Select an item to sell"),
