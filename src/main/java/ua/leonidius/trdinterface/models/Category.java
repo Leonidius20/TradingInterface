@@ -13,6 +13,11 @@ public class Category {
 
     public Category() {}
 
+    public Category(Shop shop, String name) {
+        this.shop = shop;
+        this.name = name;
+    }
+
     @DatabaseField(generatedId = true, columnName = "record_id")
     public int recordId; // primary key, not null
 
@@ -23,7 +28,7 @@ public class Category {
     @DatabaseField(canBeNull = false, unique = true)
     public String name;
 
-    @ForeignCollectionField(columnName = "items")
+    @ForeignCollectionField(columnName = "items", foreignFieldName = "category")
     public ForeignCollection<BuyableItem> items;
 
 }

@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy;
+package ua.leonidius.trdinterface.views.screens.buy.items;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementLabel;
@@ -19,8 +19,8 @@ public class BuySelectAmountScreen extends CustomScreen {
     private transient int itemId;
 
     public BuySelectAmountScreen(ScreenManager manager, int itemId, int maxAmount) throws SQLException, IOException {
-        //super(Message.WDW_BUY_TITLE.getText(name));
-        super(manager); // TODO: title
+        //super(Message.WDW_BUY_TITLE.getText(itemName));
+        super("ff"); // TODO: title
 
         this.itemId = itemId;
 
@@ -32,14 +32,14 @@ public class BuySelectAmountScreen extends CustomScreen {
     public void update() {}
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        int amount = (int)getResponse().getSliderResponse(1);
+        /*int amount = (int)getResponse().getSliderResponse(1);
 
         if (amount == 0) { // Back
             getScreenManager().back();
             return;
         }
 
-        Buy.buy(event.getPlayer(), getScreenManager(), amount, itemId);
+        Buy.buy(event.getPlayer(), getScreenManager(), amount, itemId);*/
     }
 
 }

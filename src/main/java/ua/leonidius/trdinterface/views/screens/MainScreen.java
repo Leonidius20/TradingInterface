@@ -17,6 +17,8 @@ public class MainScreen extends SimpleScreen {
             //addButton(new ElementButton(Message.MENU_EDIT_SELL_LIST.getText()));
             addButton(new ElementButton(Message.MENU_CUSTOM_NAMES.getText()));
         }*/
+
+        // TODO: add converter button
     }
 
     @Override

@@ -1,27 +1,11 @@
-package ua.leonidius.trdinterface.controllers.buy;
+package ua.leonidius.trdinterface.views.screens.buy.items;
 
-import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.item.Item;
-import cn.nukkit.nbt.NBTIO;
-import cn.nukkit.nbt.tag.CompoundTag;
-import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.ShopHelper;
-import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.buy.edit.categories.DeleteCategoryScreen;
-import ua.leonidius.trdinterface.controllers.buy.edit.categories.RenameCategoryScreen;
-import ua.leonidius.trdinterface.controllers.buy.edit.items.AddBuyItemScreen;
-import ua.leonidius.trdinterface.views.elements.ItemButton;
-import ua.leonidius.trdinterface.views.screens.InfoScreen;
 import ua.leonidius.trdinterface.views.screens.SimpleScreen;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * Created by Leonidius20 on 26.06.18.
@@ -41,7 +25,7 @@ public class BuyItemSelectorScreen extends SimpleScreen {
     }
 
     @Override
-    public void update() throws SQLException, IOException {
+    public void update() {
        /* getButtons().clear();
         setContent("");
 

@@ -9,13 +9,12 @@ import ua.leonidius.trdinterface.views.screens.MainScreen;
 
 import java.sql.SQLException;
 
-public class MainController {
+public class MainController extends BaseController {
 
     private Shop shop;
-    private final ScreenManager manager;
 
     public MainController(ScreenManager manager, int shopId) {
-        this.manager = manager;
+        super(manager);
         try {
             Dao<Shop, Integer> shopDao = DaoManager.createDao(Trading.getSource(), Shop.class);
             this.shop = shopDao.queryForId(shopId);
@@ -26,6 +25,7 @@ public class MainController {
         }
     }
 
+    @Override
     public void showScreen() {
         manager.addAndShow(new MainScreen(this));
     }

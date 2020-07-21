@@ -7,7 +7,7 @@ import ua.leonidius.trdinterface.views.elements.CallbackButton;
 
 public abstract class SimpleScreen extends FormWindowSimple implements Screen {
 
-    private transient boolean ignoresStack;
+    private transient boolean ignoresStack = false;
 
     public SimpleScreen() {
         super("", "");

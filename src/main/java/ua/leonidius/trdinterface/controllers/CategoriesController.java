@@ -3,18 +3,18 @@ package ua.leonidius.trdinterface.controllers;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.buy.BuyCategoriesScreen;
+import ua.leonidius.trdinterface.views.screens.buy.categories.BuyCategoriesScreen;
 
-public class CategoriesController {
+public class CategoriesController extends BaseController {
 
     private final Shop shop;
-    private final ScreenManager manager;
 
     public CategoriesController(ScreenManager manager, Shop shop) {
-        this.manager = manager;
+        super(manager);
         this.shop = shop;
     }
 
+    @Override
     public void showScreen() {
         manager.addAndShow(new BuyCategoriesScreen(this));
     }
@@ -26,16 +26,14 @@ public class CategoriesController {
 
     public Category[] fetchCategories() {
         Category[] categories = new Category[0];
-        shop.buyableItemsCategories.toArray(categories);
-        return categories;
+        return shop.buyableItemsCategories.toArray(categories);
     }
 
     public void addCategory() {
-        // TODO
-        //manager.addAndShow(new AddCategoryScreen(getScreenManager(), shopId), true);
+        new AddCategoryController(manager, shop).showScreen();
     }
 
-    public void selectCategory(int categoryId) {
+    public void selectCategory(Category category) {
         // TODO
         /*try {
             BuyItemSelectorScreen screen = new BuyItemSelectorScreen(getScreenManager(), shopId, button.getCategoryId());

@@ -6,7 +6,7 @@ import ua.leonidius.trdinterface.views.ScreenManager;
 public abstract class ModalScreen extends FormWindowModal implements Screen {
 
     private transient ScreenManager manager;
-    private transient boolean ignoresStack;
+    private transient boolean ignoresStack = false;
 
     public ModalScreen(ScreenManager manager, String title, String content, String trueButtonText, String falseButtonText) {
         super(title, content, trueButtonText, falseButtonText);

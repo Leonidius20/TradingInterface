@@ -16,6 +16,6 @@ public interface Screen {
 
     boolean ignoresStack();
 
-    void update() throws Exception;
+    void update();
 
 }

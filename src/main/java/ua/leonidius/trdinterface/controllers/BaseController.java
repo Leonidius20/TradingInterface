@@ -1,13 +1,15 @@
 package ua.leonidius.trdinterface.controllers;
 
-import ua.leonidius.trdinterface.views.screens.Screen;
+import ua.leonidius.trdinterface.views.ScreenManager;
 
-public abstract class BaseController<V extends Screen> {
+public abstract class BaseController {
 
-    V view;
+    protected final ScreenManager manager;
 
-    BaseController(V view) {
-        this.view = view;
+    BaseController(ScreenManager manager) {
+        this.manager = manager;
     }
+
+    public abstract void showScreen();
 
 }

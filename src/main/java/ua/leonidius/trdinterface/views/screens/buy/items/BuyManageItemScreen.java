@@ -1,22 +1,13 @@
-package ua.leonidius.trdinterface.controllers.buy;
+package ua.leonidius.trdinterface.views.screens.buy.items;
 
-import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.item.Item;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.ShopHelper;
-import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.buy.edit.items.DeleteItemScreen;
-import ua.leonidius.trdinterface.controllers.buy.edit.items.enchantment.AddEnchantmentScreen;
-import ua.leonidius.trdinterface.controllers.buy.edit.items.enchantment.RemoveEnchantmentScreen;
-import ua.leonidius.trdinterface.views.screens.InfoScreen;
 import ua.leonidius.trdinterface.views.screens.SimpleScreen;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * This screen is shown to players who have permissions to manage the shop. It allows to select an action
@@ -43,8 +34,8 @@ public class BuyManageItemScreen extends SimpleScreen {
     }
 
     @Override
-    public void update() throws SQLException, IOException {
-        setContent(ShopHelper.buildDescription(itemId));
+    public void update() {
+        //setContent(ShopHelper.buildDescription(itemId));
     }
 
     public void onResponse(PlayerFormRespondedEvent event) {

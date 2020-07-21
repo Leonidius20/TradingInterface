@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.views.screens.buy;
+package ua.leonidius.trdinterface.views.screens.buy.categories;
 
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.CategoriesController;
@@ -36,7 +36,7 @@ public class BuyCategoriesScreen extends SimpleScreen {
 
         for (Category category : controller.fetchCategories()) {
             addButton(new CallbackButton(category.name,
-                    () -> controller.selectCategory(category.recordId)));
+                    () -> controller.selectCategory(category)));
         }
 
         if ((getButtons().size() == 1 && !showEditingButtons)

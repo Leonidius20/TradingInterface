@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.edit.items.enchantment;
+package ua.leonidius.trdinterface.views.screens.buy.items.edit.enchantment;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
@@ -21,7 +21,7 @@ public class AddEnchantmentScreen extends CustomScreen {
     private transient int itemId;
 
     public AddEnchantmentScreen(ScreenManager manager, int itemId) {
-        super(manager, Message.WDW_ADD_ENCHANTMENT_TITLE.getText());
+        super(Message.WDW_ADD_ENCHANTMENT_TITLE.getText());
 
         this.itemId = itemId;
 
@@ -42,7 +42,7 @@ public class AddEnchantmentScreen extends CustomScreen {
 
     @Override
     public void onResponse(PlayerFormRespondedEvent event) {
-        Player player = event.getPlayer();
+        /*Player player = event.getPlayer();
 
         int enchantmentLevel = (int)getResponse().getSliderResponse(1);
 
@@ -68,6 +68,8 @@ public class AddEnchantmentScreen extends CustomScreen {
             if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
         }
+
+         */
     }
 
 }

@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.edit.items.enchantment;
+package ua.leonidius.trdinterface.views.screens.buy.items.edit.enchantment;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;

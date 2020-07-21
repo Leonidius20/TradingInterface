@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.edit.items;
+package ua.leonidius.trdinterface.views.screens.buy.items.edit;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
@@ -24,7 +24,7 @@ public class AddBuyItemScreen extends CustomScreen {
     private transient int shopId, categoryId;
 
     public AddBuyItemScreen(ScreenManager manager, int shopId, int categoryId) {
-        super(manager, Message.WDW_ADD_ITEM_TITLE.getText());
+        super(Message.WDW_ADD_ITEM_TITLE.getText());
 
         this.shopId = shopId;
         this.categoryId = categoryId;
@@ -40,7 +40,7 @@ public class AddBuyItemScreen extends CustomScreen {
     public void update() {}
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        try {
+        /*try {
             Item item = Item.fromString(getResponse().getInputResponse(0));
 
             double price = Double.parseDouble(getResponse().getInputResponse(1).replace(",", "."));
@@ -72,7 +72,7 @@ public class AddBuyItemScreen extends CustomScreen {
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
         } catch (NumberFormatException | IOException e) {
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.WDW_INVALID_PARAMS.getText()));
-        }
+        }*/
     }
 
 }

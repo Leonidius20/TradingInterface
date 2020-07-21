@@ -29,11 +29,11 @@ public class Shop {
     @DatabaseField(canBeNull = false, unique = true)
     String name;
 
-    @ForeignCollectionField(columnName = "buyable_items_categories")
+    @ForeignCollectionField(columnName = "buyable_items_categories", foreignFieldName = "shop")
     public ForeignCollection<Category> buyableItemsCategories;
     // Do we need columnName here?
 
-    @ForeignCollectionField(columnName = "sellable_items")
+    @ForeignCollectionField(columnName = "sellable_items", foreignFieldName = "shop")
     public ForeignCollection<SellableItem> sellableItems;
 
 }

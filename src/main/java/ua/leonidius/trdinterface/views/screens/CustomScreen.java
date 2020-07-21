@@ -1,29 +1,17 @@
 package ua.leonidius.trdinterface.views.screens;
 
 import cn.nukkit.form.window.FormWindowCustom;
-import ua.leonidius.trdinterface.views.ScreenManager;
 
 public abstract class CustomScreen extends FormWindowCustom implements Screen {
 
-    private transient ScreenManager manager;
-    private transient boolean ignoresStack;
+    private transient boolean ignoresStack = false;
 
-    public CustomScreen(ScreenManager manager) {
+    public CustomScreen() {
         super("");
-        this.manager = manager;
     }
 
-    public CustomScreen(ScreenManager manager, String title) {
+    public CustomScreen(String title) {
         super(title);
-        this.manager = manager;
-    }
-
-    public void setScreenManager(ScreenManager manager) {
-        this.manager = manager;
-    }
-
-    public ScreenManager getScreenManager() {
-        return manager;
     }
 
     @Override

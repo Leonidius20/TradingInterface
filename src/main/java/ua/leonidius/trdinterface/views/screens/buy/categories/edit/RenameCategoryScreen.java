@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.edit.categories;
+package ua.leonidius.trdinterface.views.screens.buy.categories.edit;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
@@ -22,7 +22,7 @@ public class RenameCategoryScreen extends CustomScreen {
     private transient String oldName;
 
     public RenameCategoryScreen(ScreenManager manager, int categoryId, String oldName) {
-        super(manager, Message.WDW_RENAME_CATEGORY_TITLE.getText());
+        super(Message.WDW_RENAME_CATEGORY_TITLE.getText());
 
         this.categoryId = categoryId;
         this.oldName = oldName;
@@ -34,7 +34,7 @@ public class RenameCategoryScreen extends CustomScreen {
     public void update() {}
 
     public void onResponse(PlayerFormRespondedEvent event) {
-        String newName = getResponse().getInputResponse(0);
+        /*String newName = getResponse().getInputResponse(0);
 
         try {
             ShopHelper.renameCategory(categoryId, newName);
@@ -47,7 +47,7 @@ public class RenameCategoryScreen extends CustomScreen {
         } catch (SQLException e) {
             if (settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
             getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-        }
+        }*/
     }
 
 }

@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.edit.items;
+package ua.leonidius.trdinterface.views.screens.buy.items.edit;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import ua.leonidius.trdinterface.Message;
