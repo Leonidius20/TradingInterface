@@ -4,6 +4,7 @@ import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.BaseController;
+import ua.leonidius.trdinterface.controllers.buy.categories.edit.DeleteCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.RenameCategoryController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
@@ -43,10 +44,7 @@ public class BuyableItemsController extends BaseController {
     }
 
     public void deleteCategory() {
-        // TODO: also make sure that all the items from it are deleted
-       /* setIgnoreStack(true); // When the category is deleted, we want to return to BuyCategoriesScreen
-        getScreenManager().addAndShow(new DeleteCategoryScreen(getScreenManager(),
-                categoryName, categoryId), true);*/
+        new DeleteCategoryController(manager, category).showScreen();
     }
 
     public void addItem() {

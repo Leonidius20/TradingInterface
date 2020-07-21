@@ -2,17 +2,17 @@ package ua.leonidius.trdinterface.views.screens;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.window.FormWindowModal;
+import ua.leonidius.trdinterface.Message;
 
-public abstract class ModalScreen extends FormWindowModal implements Screen {
+public class ModalScreen extends FormWindowModal implements Screen {
 
     private transient boolean ignoresStack = true;
     private transient final Callback trueCallback;
     private transient final Callback falseCallback;
 
     public ModalScreen(String title, String content,
-                       String trueButtonText, Callback trueCallback,
-                       String falseButtonText, Callback falseCallback) {
-        super(title, content, trueButtonText, falseButtonText);
+                       Callback trueCallback,Callback falseCallback) {
+        super(title, content, Message.BTN_YES.getText(), Message.BTN_NO.getText());
         this.trueCallback = trueCallback;
         this.falseCallback = falseCallback;
     }
@@ -33,6 +33,9 @@ public abstract class ModalScreen extends FormWindowModal implements Screen {
             trueCallback.call();
         } else falseCallback.call();
     }
+
+    @Override
+    public void update() {}
 
     public interface Callback {
         void call();

@@ -100,20 +100,6 @@ public abstract class ShopHelper {
         return contentBuilder.toString();
     }
 
-    public static String getBuyCategoryName(int categoryId) throws SQLException {
-        String nameQuery = "SELECT name FROM categories WHERE record_id = ?";
-        PreparedStatement nameStatement = Trading.getDbConnection().prepareStatement(nameQuery);
-        nameStatement.setInt(1, categoryId);
-        ResultSet nameResults = nameStatement.executeQuery();
-        nameResults.next();
-        String name = nameResults.getString("name");
-
-        nameResults.close();
-        nameStatement.close();
-
-        return name;
-    }
-
     public static void addBuyItem(int shopId, int categoryId, Item item, double price) throws SQLException, IOException {
         String query = "INSERT INTO buy_items(shop_id, category_id, id, price, nbt) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
@@ -185,32 +171,6 @@ public abstract class ShopHelper {
         PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
         statement.setBytes(1, newNbtBytes);
         statement.setInt(2, itemId);
-        statement.executeUpdate();
-        statement.close();
-    }
-
-    public static void renameCategory(int categoryId, String newName) throws SQLException {
-        String query = "UPDATE categories SET name = ? WHERE record_id = ?";
-        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-        statement.setString(1, newName);
-        statement.setInt(2, categoryId);
-        statement.executeUpdate();
-        statement.close();
-    }
-
-    public static void deleteCategory(int categoryId) throws SQLException {
-        String query = "DELETE FROM categories WHERE record_id = ?";
-        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-        statement.setInt(1, categoryId);
-        statement.executeUpdate();
-        statement.close();
-    }
-
-    public static void addCategory(int shopId, String categoryName) throws SQLException {
-        String query = "INSERT INTO categories(shop_id, name) VALUES(?, ?)";
-        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-        statement.setInt(1, shopId);
-        statement.setString(2, categoryName);
         statement.executeUpdate();
         statement.close();
     }

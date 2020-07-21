@@ -98,7 +98,7 @@ public enum Message {
 
     // Category deletion window
     WDW_DELETE_CATEGORY_TITLE ("Deleting category"),
-    WDW_DELETE_CATEGORY_CONF ("Are you sure you want to delete %1% category? This action can't be undone."),
+    WDW_DELETE_CATEGORY_CONF ("Are you sure you want to delete %1% category? All of the items in this category will be deleted as well. This action cannot be undone."),
 
     // Adding item windows
     WDW_ADD_ITEM_TITLE ("Adding item"),
