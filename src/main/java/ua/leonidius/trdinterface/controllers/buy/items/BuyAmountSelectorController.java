@@ -8,6 +8,7 @@ import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.AmountSelectorController;
 import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.models.BuyableItem;
+import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.AmountSelectorScreen;
 
@@ -38,7 +39,7 @@ public class BuyAmountSelectorController extends AmountSelectorController {
             int maxAmount = Math.min(maxByInventory, maxByMoney);
             manager.addAndShow(new AmountSelectorScreen(this,
                     Message.WDW_BUY_TITLE.getText(item.toGameItem().getName()),
-                    item.buildDescription(), maxAmount), true);
+                    buildItemDescription(), maxAmount), true);
         }
     }
 
@@ -61,6 +62,16 @@ public class BuyAmountSelectorController extends AmountSelectorController {
 
         showInfoScreen(Message.BUY_SUCCESS.getText(amount, gameItem.getName(),
                 cost, Trading.settings.currency));
+    }
+
+    @Override
+    public boolean isBuy() {
+        return true;
+    }
+
+    @Override
+    protected ShopItem getItem() {
+        return item;
     }
 
     private int getMaxByMoney(double priceWithDiscount) {

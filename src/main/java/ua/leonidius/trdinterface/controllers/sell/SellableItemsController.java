@@ -36,7 +36,7 @@ public class SellableItemsController extends ItemsListController {
 
     @Override
     public void selectItem(ShopItem item) {
-        // TODO:
+        new SellAmountSelectorController(manager, (SellableItem) item).showScreen();
     }
 
     @Override
