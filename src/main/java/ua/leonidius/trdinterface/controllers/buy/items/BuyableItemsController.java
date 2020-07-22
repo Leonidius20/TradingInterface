@@ -67,7 +67,7 @@ public class BuyableItemsController extends BaseController {
 
         StringBuilder sb = new StringBuilder();
         sb.append(gameItem.getName());
-        sb.append(" (").append(item.price)
+        sb.append(" (").append(item.getPrice())
                 .append(Trading.settings.currency).append(")");
 
         if (gameItem.hasEnchantments()) {

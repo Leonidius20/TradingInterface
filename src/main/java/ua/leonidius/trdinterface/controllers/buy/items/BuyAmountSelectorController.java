@@ -23,7 +23,7 @@ public class BuyAmountSelectorController extends AmountSelectorController {
     @Override
     public void showScreen() {
         // Checking if there is enough place in inventory and money
-        double price = item.price; // TODO: account for discount
+        double price = item.getPrice(); // TODO: account for discount
 
         int maxByMoney = getMaxByMoney(price);
         int maxByInventory = getMaxByInventory();
@@ -44,7 +44,7 @@ public class BuyAmountSelectorController extends AmountSelectorController {
 
     @Override
     public void selectAmount(int amount) {
-        double price = item.price; // TODO: apply discount
+        double price = item.getPrice(); // TODO: apply discount
         double cost = amount * price;
 
         Item gameItem = item.toGameItem();

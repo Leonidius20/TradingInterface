@@ -14,8 +14,6 @@ import ua.leonidius.trdinterface.views.screens.ItemDetailsEditScreen;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static ua.leonidius.trdinterface.Trading.settings;
-
 public class EditBuyableItemController extends ItemDetailsController {
 
     private final BuyableItem item;
@@ -37,7 +35,7 @@ public class EditBuyableItemController extends ItemDetailsController {
 
         manager.addAndShow(new ItemDetailsEditScreen(this,
                 Message.WDW_EDIT_ITEM_TITLE.getText(),
-                item.itemId, String.valueOf(item.price),
+                item.getItemId(), String.valueOf(item.getPrice()),
                 item.toGameItem().getCustomName(),
                 customLoreBuilder.toString()));
     }
@@ -51,11 +49,11 @@ public class EditBuyableItemController extends ItemDetailsController {
             showErrorScreen();
             return;
         }
-        item.itemId = itemId;
+        item.setItemId(itemId);
 
-        double oldPrice = item.price;
+        double oldPrice = item.getPrice();
         try {
-            item.price = Double.parseDouble(priceS.replace(",", "."));
+            item.setPrice(Double.parseDouble(priceS.replace(",", ".")));
         } catch (NumberFormatException e) {
             showErrorScreen();
             return;
@@ -68,7 +66,7 @@ public class EditBuyableItemController extends ItemDetailsController {
             gameItem.setLore(customLore.split("\n"));
 
         try {
-            item.nbt = gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag());
+            item.setNbt(gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag()));
         } catch (IOException e) {
             if (Trading.settings.debugMode) {
                 Trading.getPlugin().getLogger().error(e.getMessage());
@@ -90,8 +88,8 @@ public class EditBuyableItemController extends ItemDetailsController {
             Message.LOG_BUY_ITEM_EDITED.log(manager.getPlayer(),
                     gameItem.getName(),
                     gameItem.getId() + ":" + gameItem.getDamage(),
-                    item.price, settings.currency,
-                    oldPrice, settings.currency);
+                    item.getPrice(), Trading.settings.currency,
+                    oldPrice, Trading.settings.currency);
             // TODO: check if there's a way to optimize double currency
         }
 

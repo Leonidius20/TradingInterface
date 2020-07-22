@@ -1,11 +1,9 @@
-package ua.leonidius.trdinterface.controllers.buy.items.edit;
+package ua.leonidius.trdinterface.controllers;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.InfoController;
-import ua.leonidius.trdinterface.controllers.ModalController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.ShopItem;
@@ -14,11 +12,11 @@ import ua.leonidius.trdinterface.views.screens.ModalScreen;
 
 import java.sql.SQLException;
 
-public class DeleteItemController<ItemModel extends ShopItem> extends ModalController {
+public class DeleteItemController extends ModalController {
 
-    private final ItemModel item;
+    private final ShopItem item;
 
-    public DeleteItemController(ScreenManager manager, ItemModel item) {
+    public DeleteItemController(ScreenManager manager, ShopItem item) {
         super(manager);
         this.item = item;
     }
@@ -58,11 +56,16 @@ public class DeleteItemController<ItemModel extends ShopItem> extends ModalContr
         }
 
         if (Trading.settings.editLogging) {
-            Message.LOG_BUY_ITEM_DELETED.log(manager.getPlayer().getName(),
+            if (item instanceof BuyableItem) {
+                Message.LOG_BUY_ITEM_DELETED.log(manager.getPlayer().getName(),
+                        itemName, itemId);
+            } else Message.LOG_SELL_ITEM_DELETED.log(manager.getPlayer().getName(),
                     itemName, itemId);
+
         }
 
-        manager.backTwoScreens();
+        if (item instanceof BuyableItem) manager.backTwoScreens();
+        else manager.back();
     }
 
 }
