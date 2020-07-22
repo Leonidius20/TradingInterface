@@ -1,19 +1,20 @@
 package ua.leonidius.trdinterface.controllers.buy.items;
 
-import cn.nukkit.item.Item;
-import cn.nukkit.utils.TextFormat;
-import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.BaseController;
+import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.controllers.ItemsListController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.DeleteCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.RenameCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.items.edit.AddBuyableItemController;
 import ua.leonidius.trdinterface.controllers.buy.items.edit.ManageBuyableItemController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
+import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.buy.items.BuyableItemsScreen;
+import ua.leonidius.trdinterface.views.screens.ItemsListScreen;
 
-public class BuyableItemsController extends BaseController {
+import java.util.LinkedHashMap;
+
+public class BuyableItemsController extends ItemsListController {
 
     private final Category category;
 
@@ -24,18 +25,21 @@ public class BuyableItemsController extends BaseController {
 
     @Override
     public void showScreen() {
-        manager.addAndShow(new BuyableItemsScreen(this));
-    }
+        LinkedHashMap<String, ItemsListScreen.ButtonCallback> buttons =
+                new LinkedHashMap<>();
 
-    public String getCategoryName() {
-        return category.name;
-    }
-
-    public boolean showEditingButtons() {
         // TODO: check divided permissions
-        return manager.getPlayer().hasPermission("shop.edit");
+        if (manager.getPlayer().hasPermission("shop.edit")) {
+            buttons.put(Message.BTN_RENAME_CATEGORY.getText(), this::renameCategory);
+            buttons.put(Message.BTN_DELETE_CATEGORY.getText(), this::deleteCategory);
+            buttons.put(Message.BTN_ADD_ITEM.getText(), this::addItem);
+        }
+
+        manager.addAndShow(new ItemsListScreen(this,
+                Message.WDW_BUY_EMPTY_CAT.getText(), buttons));
     }
 
+    @Override
     public BuyableItem[] fetchItems() {
         BuyableItem[] items = new BuyableItem[0];
         return category.items.toArray(items);
@@ -53,26 +57,25 @@ public class BuyableItemsController extends BaseController {
        new AddBuyableItemController(manager, category).showScreen();
     }
 
-    public void buyItem(BuyableItem item) {
-        if (showEditingButtons()) { // TODO: check divided permissions
-            new ManageBuyableItemController(manager, item).showScreen();
+    @Override
+    public String getTitle() {
+        return category.name;
+    }
+
+    @Override
+    public void selectItem(ShopItem item) {
+        // TODO: check divided permissions
+        if (manager.getPlayer().hasPermission("shop.edit")) {
+            new ManageBuyableItemController(manager, (BuyableItem) item).showScreen();
             return;
         }
 
-        new BuyAmountSelectorController(manager, item).showScreen();
+        new BuyAmountSelectorController(manager, (BuyableItem) item).showScreen();
     }
 
-    public String buildItemButtonText(BuyableItem item) {
-        Item gameItem = item.toGameItem();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(gameItem.getName());
-        sb.append(" (").append(item.getPrice())
-                .append(Trading.settings.currency).append(")");
-
-        if (gameItem.hasEnchantments()) {
-            return TextFormat.colorize(TextFormat.DARK_PURPLE.getChar(), sb.toString());
-        } else return sb.toString();
+    @Override
+    public boolean isBuyable() {
+        return true;
     }
 
 }

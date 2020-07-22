@@ -4,6 +4,7 @@ import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.MainController;
 import ua.leonidius.trdinterface.views.elements.CallbackButton;
 
+// TODO: may be replaced with generic ButtonsScreen
 public class MainScreen extends SimpleScreen {
 
     public MainScreen(MainController controller) {

@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.buy.categories.CategoriesController;
+import ua.leonidius.trdinterface.controllers.sell.SellableItemsController;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.MainScreen;
@@ -36,7 +37,7 @@ public class MainController extends BaseController {
     }
 
     public void sell() {
-        // TODO
+        new SellableItemsController(manager, shop).showScreen();
     }
 
 }
