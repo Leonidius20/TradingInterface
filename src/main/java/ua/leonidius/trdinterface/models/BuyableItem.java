@@ -12,10 +12,8 @@ import ua.leonidius.trdinterface.Trading;
 
 import java.io.IOException;
 
-import static ua.leonidius.trdinterface.Trading.settings;
-
 @DatabaseTable(tableName = "buyable_items")
-public class BuyableItem {
+public class BuyableItem implements ShopItem {
 
     public BuyableItem() {}
 
@@ -92,7 +90,8 @@ public class BuyableItem {
         sb.append(Message.WDW_BUY_ORIGINAL_NAME.getText(pureItem.getName(),
                 gameItem.getId(), gameItem.getDamage()));
 
-        sb.append("\n").append(Message.WDW_BUY_PRICE.getText(price, settings.currency));
+        sb.append("\n").append(Message.WDW_BUY_PRICE.getText(price,
+                Trading.settings.currency));
 
         /*if (shopItem.discount != 0) {
             sb.append("\n")
@@ -129,6 +128,16 @@ public class BuyableItem {
      */
     public void resetGameItem() {
         gameItem = null;
+    }
+
+    @Override
+    public String getName() {
+        return toGameItem().getName();
+    }
+
+    @Override
+    public String getItemId() {
+        return itemId;
     }
 
 }

@@ -46,7 +46,7 @@ public class ManageBuyableItemController extends BaseController {
     }
 
     public void deleteItem() {
-
+        new DeleteItemController<>(manager, item).showScreen();
     }
 
 }

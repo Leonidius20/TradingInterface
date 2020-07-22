@@ -5,15 +5,15 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.BaseController;
 import ua.leonidius.trdinterface.controllers.InfoController;
+import ua.leonidius.trdinterface.controllers.ModalController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ModalScreen;
 
 import java.sql.SQLException;
 
-public class DeleteCategoryController extends BaseController {
+public class DeleteCategoryController extends ModalController {
 
     private final Category category;
 
@@ -27,10 +27,11 @@ public class DeleteCategoryController extends BaseController {
         manager.addAndShow(new ModalScreen(Message.WDW_DELETE_CATEGORY_TITLE.getText(),
                 Message.WDW_DELETE_CATEGORY_CONF.getText(
                         TextFormat.colorize(TextFormat.BOLD.getChar(), category.name)),
-                this::deleteCategory, manager::back));
+                        this), true);
     }
 
-    private void deleteCategory() {
+    @Override
+    public void onPositiveResponse() {
         try {
             category.items.clear();
 

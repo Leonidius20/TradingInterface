@@ -32,14 +32,6 @@ public abstract class ShopHelper {
         return item;
     }
 
-    public static void deleteBuyItem(int itemId) throws SQLException {
-        String query = "DELETE FROM buy_items WHERE record_id = ?";
-        PreparedStatement statement = Trading.getDbConnection().prepareStatement(query);
-        statement.setInt(1, itemId);
-        statement.executeUpdate();
-        statement.close();
-    }
-
     public static void addBuyEnchantment(int itemId, int id, int level) throws SQLException, IOException {
         String query1 = "SELECT id, nbt FROM buy_items WHERE record_id = ?";
         PreparedStatement statement1 = Trading.getDbConnection().prepareStatement(query1);
