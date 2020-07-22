@@ -172,6 +172,7 @@ public enum Message {
     BUY_NO_SPACE ("There is no free space in your inventory."),
     BUY_NO_SPACE_AND_MONEY ("There is no free space in your inventory and there is not enough money to buy this item."),
     ERROR ("An error occurred."),
+    ERROR_DESC("An error occurred: %1%"),
     BUY_SUCCESS ("You have successfully bought %1%x %2% for %3%%4%."),
 
     // Sell success string
@@ -192,6 +193,7 @@ public enum Message {
     LOG_DISCOUNT_DELETED ("User %1% has deleted the discount for %2% (ID: %3%)."),
 
     LOG_SELL_ITEM_ADDED ("User %1% has added %2% (ID: %3%) to the list of sellable items, price: %4%%5%."),
+    LOG_SELL_ITEM_ADDED_WITH_CUSTOM_NAME("User %1% has added %2% (original name: %3%, ID: %4%) to the list of sellable items, price: %5%%6%."),
     LOG_SELL_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of sellable items."),
     LOG_SELL_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for selling, new price: %4%%5%, old price: %6%%7%."),
 

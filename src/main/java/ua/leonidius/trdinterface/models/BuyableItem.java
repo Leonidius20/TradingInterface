@@ -1,13 +1,8 @@
 package ua.leonidius.trdinterface.models;
 
-import cn.nukkit.item.Item;
-import cn.nukkit.nbt.NBTIO;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import ua.leonidius.trdinterface.Trading;
-
-import java.io.IOException;
 
 @DatabaseTable(tableName = "buyable_items")
 public class BuyableItem extends ShopItem {
@@ -18,10 +13,10 @@ public class BuyableItem extends ShopItem {
     private int recordId;
 
     @DatabaseField(canBeNull = false, foreign = true, columnName = "shop_id")
-    Shop shop;
+    private Shop shop;
 
     @DatabaseField(canBeNull = false, foreign = true, columnName = "category_id")
-    Category category;
+    private Category category;
 
     @DatabaseField(canBeNull = false, columnName = "item_id")
     private String itemId;
@@ -31,23 +26,6 @@ public class BuyableItem extends ShopItem {
 
     @DatabaseField(dataType = DataType.BYTE_ARRAY)
     private byte[] nbt;
-
-    public static BuyableItem fromGameItem(Category category, Item gameItem, double price) {
-        BuyableItem item = new BuyableItem();
-        item.shop = category.shop;
-        item.category = category;
-        item.price = price;
-        item.itemId = gameItem.getId() + ":" + gameItem.getDamage();
-        try {
-            // TODO: maybe replace with getCompoundTag() with returns byte[]
-            item.nbt = gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag());
-        } catch (IOException e) {
-            if (Trading.settings.debugMode) {
-                Trading.getPlugin().getLogger().error(e.getMessage());
-            }
-        }
-        return item;
-    }
 
     @Override
     protected int getRecordId() {
@@ -82,6 +60,15 @@ public class BuyableItem extends ShopItem {
     @Override
     public void setNbt(byte[] nbt) {
         this.nbt = nbt;
+    }
+
+    @Override
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }

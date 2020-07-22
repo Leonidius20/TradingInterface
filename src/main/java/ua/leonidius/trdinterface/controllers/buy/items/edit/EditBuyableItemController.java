@@ -6,7 +6,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.ItemDetailsController;
+import ua.leonidius.trdinterface.controllers.ItemDetailsEditController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ItemDetailsEditScreen;
@@ -14,7 +14,7 @@ import ua.leonidius.trdinterface.views.screens.ItemDetailsEditScreen;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class EditBuyableItemController extends ItemDetailsController {
+public class EditBuyableItemController extends ItemDetailsEditController {
 
     private final BuyableItem item;
 

@@ -4,17 +4,17 @@ import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.controllers.ItemDetailsController;
+import ua.leonidius.trdinterface.controllers.ItemDetailsEditController;
 
 public class ItemDetailsEditScreen extends CustomScreen {
 
-    private final transient ItemDetailsController controller;
+    private final transient ItemDetailsEditController controller;
 
-    public ItemDetailsEditScreen(ItemDetailsController controller, String title) {
+    public ItemDetailsEditScreen(ItemDetailsEditController controller, String title) {
         this(controller, title, "", "", "", "");
     }
 
-    public ItemDetailsEditScreen(ItemDetailsController controller, String title,
+    public ItemDetailsEditScreen(ItemDetailsEditController controller, String title,
                                  String itemId, String price,
                                  String customName, String customLore) {
         super(title);

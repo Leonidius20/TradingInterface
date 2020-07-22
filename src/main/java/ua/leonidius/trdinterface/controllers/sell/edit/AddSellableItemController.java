@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.items.edit;
+package ua.leonidius.trdinterface.controllers.sell.edit;
 
 import cn.nukkit.item.Item;
 import com.j256.ormlite.dao.Dao;
@@ -7,20 +7,20 @@ import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.controllers.ItemDetailsEditController;
-import ua.leonidius.trdinterface.models.BuyableItem;
-import ua.leonidius.trdinterface.models.Category;
+import ua.leonidius.trdinterface.models.SellableItem;
+import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ItemDetailsEditScreen;
 
 import java.sql.SQLException;
 
-public class AddBuyableItemController extends ItemDetailsEditController {
+public class AddSellableItemController extends ItemDetailsEditController {
 
-    private final Category category;
+    private final Shop shop;
 
-    public AddBuyableItemController(ScreenManager manager, Category category) {
+    public AddSellableItemController(ScreenManager manager, Shop shop) {
         super(manager);
-        this.category = category;
+        this.shop = shop;
     }
 
     @Override
@@ -31,19 +31,18 @@ public class AddBuyableItemController extends ItemDetailsEditController {
 
     @Override
     public void submitDetails(String itemId, String priceS, String customName, String customLore) {
-        BuyableItem item = new BuyableItem();
-        item.setShop(category.shop);
-        item.setCategory(category);
+        SellableItem item = new SellableItem();
+        item.setShop(shop);
 
         try {
-            BuyableItem.populate(item, itemId, priceS, customName, customLore);
+            SellableItem.populate(item, itemId, priceS, customName, customLore);
         } catch (IllegalArgumentException e) {
             showErrorScreen(e.getMessage());
         }
 
         try {
-            Dao<BuyableItem, Integer> itemDao =
-                    DaoManager.createDao(Trading.getSource(), BuyableItem.class);
+            Dao<SellableItem, Integer> itemDao =
+                    DaoManager.createDao(Trading.getSource(), SellableItem.class);
             itemDao.create(item);
         } catch (SQLException e) {
             if (Trading.settings.debugMode)
@@ -54,10 +53,12 @@ public class AddBuyableItemController extends ItemDetailsEditController {
 
         if (Trading.settings.editLogging) {
             if (customName == null || customName.equals("")) {
-                Message.LOG_BUY_ITEM_ADDED.log(manager.getPlayer().getName(), item.getName(),
-                        item.getItemId(), item.getPrice(), Trading.settings.currency);
+                Message.LOG_SELL_ITEM_ADDED.log(manager.getPlayer().getName(),
+                        item.getName(), item.getItemId(),
+                        item.getPrice(), Trading.settings.currency);
             } else {
-                Message.LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME.log(manager.getPlayer().getName(), customName,
+                Message.LOG_SELL_ITEM_ADDED_WITH_CUSTOM_NAME.log(
+                        manager.getPlayer().getName(), customName,
                         Item.fromString(item.getItemId()).getName(),
                         item.getItemId(), item.getPrice(),
                         Trading.settings.currency);
@@ -65,7 +66,7 @@ public class AddBuyableItemController extends ItemDetailsEditController {
         }
 
         new InfoController(manager, Message.WDW_SUCCESS_TITLE.getText(),
-                Message.WDW_ADD_BUY_ITEM_SUCCESS.getText(item.getName()))
+                Message.WDW_ADD_SELL_ITEM_SUCCESS.getText(item.getName()))
                 .showScreen();
     }
 

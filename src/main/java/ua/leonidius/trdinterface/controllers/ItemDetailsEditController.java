@@ -3,9 +3,9 @@ package ua.leonidius.trdinterface.controllers;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.views.ScreenManager;
 
-public abstract class ItemDetailsController extends BaseController {
+public abstract class ItemDetailsEditController extends BaseController {
 
-    public ItemDetailsController(ScreenManager manager) {
+    public ItemDetailsEditController(ScreenManager manager) {
         super(manager);
     }
 
@@ -14,6 +14,11 @@ public abstract class ItemDetailsController extends BaseController {
 
     protected void showErrorScreen() {
         new InfoController(manager, Message.ERROR.getText()).showScreen();
+    }
+
+    protected void showErrorScreen(String message) {
+        new InfoController(manager, Message.ERROR_DESC.getText(message))
+                .showScreen();
     }
 
 }

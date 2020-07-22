@@ -23,6 +23,8 @@ public abstract class ShopItem {
 
     public abstract void setNbt(byte[] nbt);
 
+    public abstract void setShop(Shop shop);
+
     /**
      * Used to cache game item for optimization
      */
@@ -57,6 +59,48 @@ public abstract class ShopItem {
      */
     public void resetGameItem() {
         gameItem = null;
+    }
+
+    /**
+     * Used to populate the model with item_id, price and nbt
+     * This method doesn't change shop and category (they
+     * have to be populated separately)
+     * @param item item to populate
+     * @param <T> BuyableItem or SellableItem
+     */
+    public static <T extends ShopItem> void populate(T item, String itemId, String priceS,
+                                                     String customName, String customLore)
+            throws IllegalArgumentException {
+        Item gameItem;
+
+        if (itemId.isEmpty() || (gameItem = Item.fromString(itemId)).getId() == 0) {
+            throw new IllegalArgumentException("Please fill in all of the required parameters");
+        }
+
+        double price;
+        try {
+            price = Double.parseDouble(priceS.replace(",", "."));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Incorrect price"); // TODO: translate and show
+        }
+
+        if (customName != null && !customName.isEmpty())
+            gameItem.setCustomName(customName);
+
+        if (customLore != null && !customLore.isEmpty())
+            gameItem.setLore(customLore.split("\n"));
+
+        item.setItemId(itemId);
+        item.setPrice(price);
+        try {
+            // TODO: maybe replace with getCompoundTag() with returns byte[]
+            item.setNbt(gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag()));
+        } catch (IOException e) {
+            if (Trading.settings.debugMode) {
+                Trading.getPlugin().getLogger().error(e.getMessage());
+                throw new IllegalArgumentException("Incorrect NBT");
+            }
+        }
     }
 
     public String getName() {

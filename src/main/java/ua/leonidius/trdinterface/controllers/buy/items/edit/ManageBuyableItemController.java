@@ -1,13 +1,13 @@
 package ua.leonidius.trdinterface.controllers.buy.items.edit;
 
-import ua.leonidius.trdinterface.controllers.BaseController;
 import ua.leonidius.trdinterface.controllers.DeleteItemController;
+import ua.leonidius.trdinterface.controllers.ItemDetailsViewController;
 import ua.leonidius.trdinterface.controllers.buy.items.BuyAmountSelectorController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.buy.items.ManageBuyableItemScreen;
 
-public class ManageBuyableItemController extends BaseController {
+public class ManageBuyableItemController extends ItemDetailsViewController {
 
     private final BuyableItem item;
 
@@ -21,9 +21,14 @@ public class ManageBuyableItemController extends BaseController {
         manager.addAndShow(new ManageBuyableItemScreen(this));
     }
 
-    public String buildItemDescription() {
-        item.resetGameItem();
-        return item.buildDescription();
+    @Override
+    public boolean isBuy() {
+        return true;
+    }
+
+    @Override
+    protected BuyableItem getItem() {
+        return item;
     }
 
     public void buyItem() {

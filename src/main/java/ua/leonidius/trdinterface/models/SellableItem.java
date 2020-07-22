@@ -57,4 +57,9 @@ public class SellableItem extends ShopItem {
         this.nbt = nbt;
     }
 
+    @Override
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
 }
