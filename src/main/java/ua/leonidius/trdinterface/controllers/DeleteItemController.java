@@ -48,10 +48,7 @@ public class DeleteItemController extends ModalController {
                 itemDao.delete((SellableItem) item);
             }
         } catch (SQLException e) {
-            if (Trading.settings.debugMode) {
-                Trading.getPlugin().getLogger().error(e.getMessage());
-            }
-            new InfoController(manager, Message.ERROR.getText()).showScreen();
+            handleException(e);
             return;
         }
 

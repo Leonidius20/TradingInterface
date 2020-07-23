@@ -38,6 +38,8 @@ public class AddBuyableItemController extends ItemDetailsEditController {
         try {
             BuyableItem.populate(item, itemId, priceS, customName, customLore);
         } catch (IllegalArgumentException e) {
+            // we don't want this to be printed to console,
+            // that's why we don't use handleException()
             showErrorScreen(e.getMessage());
             return;
         }
@@ -47,9 +49,7 @@ public class AddBuyableItemController extends ItemDetailsEditController {
                     DaoManager.createDao(Trading.getSource(), BuyableItem.class);
             itemDao.create(item);
         } catch (SQLException e) {
-            if (Trading.settings.debugMode)
-                Trading.getPlugin().getLogger().error(e.getMessage());
-            showErrorScreen();
+            handleException(e);
             return;
         }
 

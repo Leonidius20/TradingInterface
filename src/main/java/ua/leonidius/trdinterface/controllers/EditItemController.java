@@ -53,9 +53,7 @@ public class EditItemController extends ItemDetailsEditController {
         try {
             item.update();
         } catch (SQLException e) {
-            if (Trading.settings.debugMode)
-                Trading.getPlugin().getLogger().error(e.getMessage());
-            showErrorScreen();
+            handleException(e);
             return;
         }
 

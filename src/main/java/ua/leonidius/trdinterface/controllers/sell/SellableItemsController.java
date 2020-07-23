@@ -5,14 +5,13 @@ import com.j256.ormlite.dao.CloseableIterator;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.ItemsListController;
 import ua.leonidius.trdinterface.controllers.sell.edit.EditSellableItemsController;
+import ua.leonidius.trdinterface.models.EnchantmentWrapper;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
@@ -47,10 +46,14 @@ public class SellableItemsController extends ItemsListController {
     public SellableItem[] fetchItems() {
         LinkedList<SellableItem> items = new LinkedList<>();
         CloseableIterator<SellableItem> iterator = shop.sellableItems.closeableIterator();
+        // TODO: optimize
         while (iterator.hasNext()) {
             SellableItem item = iterator.next();
-            if (manager.getPlayer().getInventory().contains(item.toGameItem())) {
-                items.add(item);
+            for (int i = 0; i < 36; i++) {
+                Item itemInSlot = manager.getPlayer().getInventory().getItem(i);
+                if (itemsEqual(itemInSlot, item.toGameItem())) {
+                    items.add(item);
+                }
             }
         }
         return items.toArray(new SellableItem[0]);
@@ -70,8 +73,8 @@ public class SellableItemsController extends ItemsListController {
         return item1.getId() == item2.getId()
                 && item1.getDamage() == item2.getDamage()
                 && item1.getCustomName().equals(item2.getCustomName())
-                && new HashSet<>(Arrays.asList(item1.getEnchantments()))
-                .equals(new HashSet<>(Arrays.asList(item2.getEnchantments())));
+                && EnchantmentWrapper.getWrappers(item1.getEnchantments()).equals(
+                EnchantmentWrapper.getWrappers(item2.getEnchantments()));
     }
 
 }
