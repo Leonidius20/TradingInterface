@@ -35,7 +35,7 @@ public class EditSellableItemsController extends ItemsListController {
 
     @Override
     public void selectItem(ShopItem item) {
-        // TODO
+        new ManageSellableItemController(manager, (SellableItem) item).showScreen();
     }
 
     private void addItem() {

@@ -5,7 +5,7 @@ import ua.leonidius.trdinterface.controllers.ItemDetailsViewController;
 import ua.leonidius.trdinterface.controllers.buy.items.BuyAmountSelectorController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.buy.items.ManageBuyableItemScreen;
+import ua.leonidius.trdinterface.views.screens.buy.items.edit.ManageBuyableItemScreen;
 
 public class ManageBuyableItemController extends ItemDetailsViewController {
 
@@ -43,11 +43,7 @@ public class ManageBuyableItemController extends ItemDetailsViewController {
 
     }
 
-    public void addEnchantment() {
-
-    }
-
-    public void removeEnchantment() {
+    public void manageEnchantments() {
 
     }
 

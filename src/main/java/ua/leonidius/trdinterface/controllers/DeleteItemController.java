@@ -65,7 +65,7 @@ public class DeleteItemController extends ModalController {
         }
 
         if (item instanceof BuyableItem) manager.backTwoScreens();
-        else manager.back();
+        else manager.backTwoScreens();
     }
 
 }

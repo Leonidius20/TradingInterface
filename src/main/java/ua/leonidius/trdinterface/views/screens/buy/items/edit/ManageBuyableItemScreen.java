@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.views.screens.buy.items;
+package ua.leonidius.trdinterface.views.screens.buy.items.edit;
 
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.buy.items.edit.ManageBuyableItemController;
@@ -25,10 +25,8 @@ public class ManageBuyableItemScreen extends SimpleScreen {
                 controller::editItem));
         addButton(new CallbackButton(Message.BTN_EDIT_DISCOUNT.getText(),
                 controller::editDiscount));
-        addButton(new CallbackButton(Message.BTN_ADD_ENCHANTMENT.getText(),
-                controller::addEnchantment));
-        addButton(new CallbackButton(Message.BTN_REMOVE_ENCHANTMENT.getText(),
-                controller::removeEnchantment));
+        addButton(new CallbackButton(Message.BTN_MANAGE_ENCHANTMENTS.getText(),
+                controller::manageEnchantments));
         addButton(new CallbackButton(Message.BTN_DELETE_ITEM.getText(),
                 controller::deleteItem));
 

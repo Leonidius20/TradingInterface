@@ -85,7 +85,6 @@ public enum Message {
     // Category creation window
     WDW_NEW_CATEGORY ("Creating a new category"),
     WDW_NEW_CATEGORY_NAME ("Choose a name:"),
-    //WDW_NEW_CATEGORY_ID ("Choose a unique ID (string):"),
     WDW_NEW_CATEGORY_FAIL ("A category with such a name already exists."),
     WDW_NEW_CATEGORY_SUCCESS ("A new category has been created successfully."),
 
@@ -129,8 +128,9 @@ public enum Message {
 
     // BuyManageItemScreen
     BTN_BUY_ITEM ("Buy this item"),
-    BTN_ADD_ENCHANTMENT ("Add enchantment"),
-    BTN_REMOVE_ENCHANTMENT ("Remove enchantment"),
+    BTN_MANAGE_ENCHANTMENTS("Manage enchantments"),
+    BTN_ADD_ENCHANTMENT ("+ Add enchantment"),
+    // BTN_REMOVE_ENCHANTMENT ("Remove enchantment"),
 
     // Item deletion windows
     WDW_DELETE_ITEM_TITLE ("Deleting item"),
@@ -187,7 +187,17 @@ public enum Message {
     LOG_BUY_ITEM_ADDED ("User %1% has added %2% (ID: %3%) to the list of buyable items, price: %4%%5%."),
     LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME ("User %1% has added %2% (original name: %3%, ID: %4%) to the list of buyable items, price: %5%%6%."),
     LOG_BUY_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of buyable items."),
-    LOG_BUY_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for buying, new price: %4%%5%, old price: %6%%7%."),
+
+    // the next line was edited in 2.0.0
+    LOG_BUY_ITEM_EDITED ("User %1% has modified the buyable item %2%: %3%."),
+
+    LOG_EDITED_ID("changed id from %1% to %2%"),
+    LOG_EDITED_NAME("changed name from %1% to %2%"),
+    LOG_EDITED_PRICE("changed price from %1%%2% to %3%%2%"),
+    LOG_EDITED_LORE("changed lore from %1% to %2%"),
+    LOG_ADDED_LORE("added a lore (%1%)"),
+
+    // LOG_BUY_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for buying, new price: %4%%5%, old price: %6%%7%."),
 
     LOG_DISCOUNT_ADDED ("User %1% has added %2%% discount for %3% (ID: %4%)."),
     LOG_DISCOUNT_EDITED ("User %1% has changed the discount for %2% (ID: %3%), new discount: %4%%, old discount: %5%%."),
@@ -196,7 +206,9 @@ public enum Message {
     LOG_SELL_ITEM_ADDED ("User %1% has added %2% (ID: %3%) to the list of sellable items, price: %4%%5%."),
     LOG_SELL_ITEM_ADDED_WITH_CUSTOM_NAME("User %1% has added %2% (original name: %3%, ID: %4%) to the list of sellable items, price: %5%%6%."),
     LOG_SELL_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of sellable items."),
-    LOG_SELL_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for selling, new price: %4%%5%, old price: %6%%7%."),
+
+    // the next line was edited in 2.0.0
+    LOG_SELL_ITEM_EDITED ("User %1% has modified the sellable item %2%: %3%."),
 
     LOG_BUY_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%:%6%)"),
     LOG_SELL_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%:%6%)"),
