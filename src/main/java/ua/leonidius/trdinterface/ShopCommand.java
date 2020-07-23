@@ -5,8 +5,13 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandExecutor;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.PluginCommand;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.controllers.MainController;
+import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
+
+import java.sql.SQLException;
 
 /**
  * Created by Leonidius20 on 07.01.18.
@@ -29,7 +34,15 @@ public class ShopCommand extends PluginCommand<Trading> implements CommandExecut
         Player player = sender.getServer().getPlayer(sender.getName());
         if (player == null) return false;
 
-        new MainController(new ScreenManager(player), 1).showScreen();
+        try {
+            Dao<Shop, Integer> shopDao = DaoManager.createDao(Trading.getSource(), Shop.class);
+            Shop shop = shopDao.queryForId(1); // default shop has record_id = 1
+            new MainController(new ScreenManager(player), shop).showScreen();
+        } catch (SQLException e) {
+            // TODO: show an error screen
+            Trading.getPlugin().getLogger().debug(e.getMessage());
+            if (Trading.settings.debugMode) e.printStackTrace();
+        }
 
         return true;
     }

@@ -92,8 +92,8 @@ public abstract class ShopItem {
 
         item.setItemId(itemId);
         item.setPrice(price);
+
         try {
-            // TODO: maybe replace with getCompoundTag() with returns byte[]
             item.setNbt(gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag()));
         } catch (IOException e) {
             if (Trading.settings.debugMode) {

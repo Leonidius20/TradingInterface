@@ -73,9 +73,4 @@ public class BuyableItemsController extends ItemsListController {
         new BuyAmountSelectorController(manager, (BuyableItem) item).showScreen();
     }
 
-    @Override
-    public boolean isBuyable() {
-        return true;
-    }
-
 }

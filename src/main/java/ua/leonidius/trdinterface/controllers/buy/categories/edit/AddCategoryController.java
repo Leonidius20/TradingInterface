@@ -42,9 +42,7 @@ public class AddCategoryController extends NamingController {
                 Message.LOG_CATEGORY_ADDED.log(manager.getPlayer().getName(), name);
             }
 
-            new InfoController(manager, Message.WDW_SUCCESS_TITLE.getText(),
-                    Message.WDW_NEW_CATEGORY_SUCCESS.getText()).showScreen();
-
+            manager.back();
         } catch (SQLException e) {
             if (Trading.settings.debugMode) {
                 Trading.getPlugin().getLogger().error(e.getMessage());

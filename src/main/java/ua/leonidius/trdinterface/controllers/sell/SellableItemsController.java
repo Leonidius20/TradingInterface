@@ -1,14 +1,18 @@
 package ua.leonidius.trdinterface.controllers.sell;
 
+import cn.nukkit.item.Item;
 import com.j256.ormlite.dao.CloseableIterator;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.ItemsListController;
+import ua.leonidius.trdinterface.controllers.sell.edit.EditSellableItemsController;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ItemsListScreen;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
@@ -58,12 +62,16 @@ public class SellableItemsController extends ItemsListController {
     }
 
     public void editList() {
-        // TODO: open a list with all available items
+        new EditSellableItemsController(manager, shop).showScreen();
     }
 
-    @Override
-    public boolean isBuyable() {
-        return false;
+    // maybe we will need this in case enchantments don't compare properly
+    private static boolean itemsEqual(Item item1, Item item2) {
+        return item1.getId() == item2.getId()
+                && item1.getDamage() == item2.getDamage()
+                && item1.getCustomName().equals(item2.getCustomName())
+                && new HashSet<>(Arrays.asList(item1.getEnchantments()))
+                .equals(new HashSet<>(Arrays.asList(item2.getEnchantments())));
     }
 
 }

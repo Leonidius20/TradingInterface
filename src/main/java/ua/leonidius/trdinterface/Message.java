@@ -75,6 +75,7 @@ public enum Message {
     WDW_SELL_NOTHING ("You have nothing to sell."),
     BTN_ITEM_SELL ("%1% (x%2%)"),
 
+
     // Sell window
     WDW_SELL_TITLE ("Selling %1%"),
 

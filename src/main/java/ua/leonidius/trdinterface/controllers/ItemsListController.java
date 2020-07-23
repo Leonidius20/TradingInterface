@@ -23,11 +23,6 @@ public abstract class ItemsListController extends BaseController {
      */
     public abstract String getTitle();
 
-    /**
-     * @return whether this is a BuyableItemsController or SellableItemsController
-     */
-    public abstract boolean isBuyable();
-
     public String buildItemButtonText(ShopItem item) {
         Item gameItem = item.toGameItem();
 
