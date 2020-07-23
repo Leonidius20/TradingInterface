@@ -1,11 +1,11 @@
-package ua.leonidius.trdinterface.controllers.buy.items.edit;
+package ua.leonidius.trdinterface.controllers;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.ItemDetailsEditController;
 import ua.leonidius.trdinterface.models.BuyableItem;
+import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ItemDetailsEditScreen;
@@ -14,31 +14,22 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-// TODO: make it a universal buyable/sellable controller
-public class EditBuyableItemController extends ItemDetailsEditController {
+public class EditItemController extends ItemDetailsEditController {
 
-    private final BuyableItem item;
+    private final ShopItem item;
 
-    public EditBuyableItemController(ScreenManager manager, BuyableItem item) {
+    public EditItemController(ScreenManager manager, ShopItem item) {
         super(manager);
         this.item = item;
     }
 
     @Override
     public void showScreen() {
-        StringBuilder customLoreBuilder = new StringBuilder();
-        String[] lore = item.toGameItem().getLore();
-
-        for (int i = 0; i < lore.length; i++) {
-            customLoreBuilder.append(lore[i]);
-            if (i != lore.length - 1) customLoreBuilder.append("\n");
-        }
-
         manager.addAndShow(new ItemDetailsEditScreen(this,
                 Message.WDW_EDIT_ITEM_TITLE.getText(),
                 item.getItemId(), String.valueOf(item.getPrice()),
                 item.toGameItem().getCustomName(),
-                customLoreBuilder.toString()));
+                arrayToString(item.toGameItem().getLore())));
     }
 
     @Override
@@ -63,9 +54,15 @@ public class EditBuyableItemController extends ItemDetailsEditController {
         }
 
         try {
-            Dao<BuyableItem, Integer> itemDao =
-                    DaoManager.createDao(Trading.getSource(), BuyableItem.class);
-            itemDao.update(item);
+            if (item instanceof BuyableItem) {
+                Dao<BuyableItem, Integer> itemDao =
+                        DaoManager.createDao(Trading.getSource(), BuyableItem.class);
+                itemDao.update((BuyableItem) item);
+            } else {
+                Dao<SellableItem, Integer> itemDao =
+                        DaoManager.createDao(Trading.getSource(), SellableItem.class);
+                itemDao.update((SellableItem) item);
+            }
         } catch (SQLException e) {
             if (Trading.settings.debugMode)
                 Trading.getPlugin().getLogger().error(e.getMessage());
@@ -91,8 +88,14 @@ public class EditBuyableItemController extends ItemDetailsEditController {
                 } else changes.add(Message.LOG_EDITED_LORE.getText(oldLore, newLore));
             }
 
-            Message.LOG_BUY_ITEM_EDITED.log(manager.getPlayer().getName(),
-                    oldName, listToString(changes));
+            if (item instanceof BuyableItem) {
+                Message.LOG_BUY_ITEM_EDITED.log(manager.getPlayer().getName(),
+                        oldName, listToString(changes));
+            } else {
+                Message.LOG_SELL_ITEM_EDITED.log(manager.getPlayer().getName(),
+                        oldName, listToString(changes));
+            }
+
         }
 
         manager.back();

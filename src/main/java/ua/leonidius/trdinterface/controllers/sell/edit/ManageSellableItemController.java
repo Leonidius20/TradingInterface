@@ -1,6 +1,7 @@
 package ua.leonidius.trdinterface.controllers.sell.edit;
 
 import ua.leonidius.trdinterface.controllers.DeleteItemController;
+import ua.leonidius.trdinterface.controllers.EditItemController;
 import ua.leonidius.trdinterface.controllers.ItemDetailsViewController;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -31,7 +32,7 @@ public class ManageSellableItemController extends ItemDetailsViewController {
     }
 
     public void editItem() {
-        // TODO
+        new EditItemController(manager, item).showScreen();
     }
 
     public void manageEnchantments() {

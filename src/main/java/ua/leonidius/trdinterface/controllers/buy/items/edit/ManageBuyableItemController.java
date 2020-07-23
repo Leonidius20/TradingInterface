@@ -1,6 +1,7 @@
 package ua.leonidius.trdinterface.controllers.buy.items.edit;
 
 import ua.leonidius.trdinterface.controllers.DeleteItemController;
+import ua.leonidius.trdinterface.controllers.EditItemController;
 import ua.leonidius.trdinterface.controllers.ItemDetailsViewController;
 import ua.leonidius.trdinterface.controllers.buy.items.BuyAmountSelectorController;
 import ua.leonidius.trdinterface.models.BuyableItem;
@@ -36,7 +37,7 @@ public class ManageBuyableItemController extends ItemDetailsViewController {
     }
 
     public void editItem() {
-        new EditBuyableItemController(manager, item).showScreen();
+        new EditItemController(manager, item).showScreen();
     }
 
     public void editDiscount() {
