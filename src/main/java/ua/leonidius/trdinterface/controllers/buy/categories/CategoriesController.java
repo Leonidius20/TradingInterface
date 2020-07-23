@@ -1,14 +1,17 @@
 package ua.leonidius.trdinterface.controllers.buy.categories;
 
-import ua.leonidius.trdinterface.controllers.buy.items.BuyableItemsController;
+import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.controllers.ListController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.AddCategoryController;
-import ua.leonidius.trdinterface.controllers.BaseController;
+import ua.leonidius.trdinterface.controllers.buy.items.BuyableItemsController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.buy.categories.BuyCategoriesScreen;
+import ua.leonidius.trdinterface.views.screens.ListScreen;
 
-public class CategoriesController extends BaseController {
+import java.util.LinkedHashMap;
+
+public class CategoriesController extends ListController<Category> {
 
     private final Shop shop;
 
@@ -19,7 +22,16 @@ public class CategoriesController extends BaseController {
 
     @Override
     public void showScreen() {
-        manager.addAndShow(new BuyCategoriesScreen(this));
+        LinkedHashMap<String, ListScreen.ButtonCallback> buttons =
+                new LinkedHashMap<>();
+
+        // TODO: check divided permissions
+        if (manager.getPlayer().hasPermission("shop.edit")) {
+            buttons.put(Message.BTN_ADD_CATEGORY.getText(), this::addCategory);
+        }
+
+        manager.addAndShow(new ListScreen<>(this,
+                Message.WDW_BUY_NO_CATEGORIES.getText(), buttons));
     }
 
     public boolean showEditingButtons() {
@@ -27,16 +39,28 @@ public class CategoriesController extends BaseController {
         return manager.getPlayer().hasPermission("shop.edit");
     }
 
-    public Category[] fetchCategories() {
+    @Override
+    public Category[] fetchItems() {
         Category[] categories = new Category[0];
         return shop.buyableItemsCategories.toArray(categories);
+    }
+
+    @Override
+    public String buildItemButtonText(Category category) {
+        return category.name;
+    }
+
+    @Override
+    public String getTitle() {
+        return Message.WDW_BUY_CAT_TITLE.getText();
     }
 
     public void addCategory() {
         new AddCategoryController(manager, shop).showScreen();
     }
 
-    public void selectCategory(Category category) {
+    @Override
+    public void selectItem(Category category) {
         new BuyableItemsController(manager, category).showScreen();
     }
 

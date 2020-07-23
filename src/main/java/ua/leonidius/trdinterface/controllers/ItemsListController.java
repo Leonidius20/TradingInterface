@@ -6,23 +6,13 @@ import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 
-public abstract class ItemsListController extends BaseController {
+public abstract class ItemsListController extends ListController<ShopItem> {
 
     public ItemsListController(ScreenManager manager) {
         super(manager);
     }
 
-    public abstract void selectItem(ShopItem item);
-
-    public abstract ShopItem[] fetchItems();
-
-    /**
-     * Called in ItemListScreen's update() to refresh title
-     * (e.g. after buyable items category rename)
-     * @return title
-     */
-    public abstract String getTitle();
-
+    @Override
     public String buildItemButtonText(ShopItem item) {
         Item gameItem = item.toGameItem();
 

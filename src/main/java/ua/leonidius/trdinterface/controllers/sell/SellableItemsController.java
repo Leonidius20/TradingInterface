@@ -9,7 +9,7 @@ import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.ItemsListScreen;
+import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -27,14 +27,14 @@ public class SellableItemsController extends ItemsListController {
 
     @Override
     public void showScreen() {
-        LinkedHashMap<String, ItemsListScreen.ButtonCallback> buttons =
+        LinkedHashMap<String, ListScreen.ButtonCallback> buttons =
                 new LinkedHashMap<>();
 
         if (manager.getPlayer().hasPermission("shop.edit")) {
             buttons.put(Message.MENU_EDIT_SELL_LIST.getText(), this::editList);
         }
 
-        manager.addAndShow(new ItemsListScreen(this,
+        manager.addAndShow(new ListScreen<>(this,
                 Message.WDW_SELL_NOTHING.getText(), buttons));
     }
 

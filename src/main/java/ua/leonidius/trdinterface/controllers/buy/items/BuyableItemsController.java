@@ -10,7 +10,7 @@ import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.ItemsListScreen;
+import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.util.LinkedHashMap;
 
@@ -25,7 +25,7 @@ public class BuyableItemsController extends ItemsListController {
 
     @Override
     public void showScreen() {
-        LinkedHashMap<String, ItemsListScreen.ButtonCallback> buttons =
+        LinkedHashMap<String, ListScreen.ButtonCallback> buttons =
                 new LinkedHashMap<>();
 
         // TODO: check divided permissions
@@ -35,7 +35,7 @@ public class BuyableItemsController extends ItemsListController {
             buttons.put(Message.BTN_ADD_ITEM.getText(), this::addItem);
         }
 
-        manager.addAndShow(new ItemsListScreen(this,
+        manager.addAndShow(new ListScreen<>(this,
                 Message.WDW_BUY_EMPTY_CAT.getText(), buttons));
     }
 
