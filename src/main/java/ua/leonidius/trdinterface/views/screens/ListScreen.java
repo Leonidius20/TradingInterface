@@ -13,14 +13,30 @@ public class ListScreen<T> extends SimpleScreen {
 
     private final transient ListController<T> controller;
     private final transient String emptyContent;
+    private final transient String notEmptyContent;
     private final transient Map<String, ButtonCallback> additionalButtons;
 
     public ListScreen(ListController<T> controller,
                       String emptyContent,
                       Map<String, ButtonCallback> additionalButtons) {
+        this(controller, emptyContent, "", additionalButtons);
+    }
+
+    /**
+     * A screen that allows to choose an item from a provided list of items.
+     * Parameter T represents the type of items in the list.
+     * @param controller Controller for this screen
+     * @param emptyContent Text to show if the list is empty
+     * @param notEmptyContent Text to show if the list is not empty
+     * @param additionalButtons Action buttons to show on top of the list
+     */
+    public ListScreen(ListController<T> controller,
+                      String emptyContent, String notEmptyContent,
+                      Map<String, ButtonCallback> additionalButtons) {
         super(controller.getTitle());
         this.controller = controller;
         this.emptyContent = emptyContent;
+        this.notEmptyContent = notEmptyContent;
         this.additionalButtons = additionalButtons;
         update();
     }
@@ -30,7 +46,6 @@ public class ListScreen<T> extends SimpleScreen {
         setTitle(controller.getTitle());
 
         getButtons().clear();
-        setContent("");
 
         // Back button
         addButton(new CallbackButton(Message.BTN_BACK.getText(), controller::back));
@@ -48,6 +63,7 @@ public class ListScreen<T> extends SimpleScreen {
                 addButton(new CallbackButton(controller.buildItemButtonText(item),
                         () -> controller.selectItem(item)));
             }
+            setContent(notEmptyContent);
         }
 
     }

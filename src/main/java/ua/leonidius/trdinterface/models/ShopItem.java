@@ -6,6 +6,7 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import ua.leonidius.trdinterface.Trading;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public abstract class ShopItem {
 
@@ -106,5 +107,7 @@ public abstract class ShopItem {
     public String getName() {
         return toGameItem().getName();
     }
+
+    public abstract void update() throws SQLException;
 
 }

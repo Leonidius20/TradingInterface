@@ -1,29 +1,21 @@
 package ua.leonidius.trdinterface.views.screens.buy.items.edit.enchantment;
 
-import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementSlider;
-import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
+import ua.leonidius.trdinterface.AddEnchantmentController;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.ShopHelper;
-import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.views.screens.CustomScreen;
-import ua.leonidius.trdinterface.views.screens.InfoScreen;
-
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class AddEnchantmentScreen extends CustomScreen {
 
-    private transient int itemId;
+    private transient final AddEnchantmentController controller;
 
-    public AddEnchantmentScreen(ScreenManager manager, int itemId) {
+    public AddEnchantmentScreen(AddEnchantmentController controller) {
         super(Message.WDW_ADD_ENCHANTMENT_TITLE.getText());
 
-        this.itemId = itemId;
+        this.controller = controller;
 
         ElementDropdown dropdown = new ElementDropdown(Message.WDW_ADD_ENCHANTMENT_SELECTOR_HINT.getText());
 
@@ -42,34 +34,16 @@ public class AddEnchantmentScreen extends CustomScreen {
 
     @Override
     public void onResponse(PlayerFormRespondedEvent event) {
-        /*Player player = event.getPlayer();
-
-        int enchantmentLevel = (int)getResponse().getSliderResponse(1);
+        int enchantmentLevel = (int) getResponse().getSliderResponse(1);
 
         if (enchantmentLevel == 0) { // Going back
-            getScreenManager().back();
+            controller.back();
             return;
         }
 
         int enchantmentId = getResponse().getDropdownResponse(0).getElementID();
 
-        try {
-            ShopHelper.addBuyEnchantment(itemId, enchantmentId, enchantmentLevel);
-
-            if (Trading.settings.editLogging) {
-                String enchName = Enchantment.get(enchantmentId).getName();
-                Item item = ShopHelper.getItem(itemId);
-                Message.LOG_BUY_ENCHANTMENT_ADDED.log(player, enchName, enchantmentLevel,
-                        item.getName(), item.getId(), item.getDamage());
-            }
-
-            getScreenManager().back();
-        } catch (SQLException | IOException e) {
-            if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
-            getScreenManager().addAndShow(new InfoScreen(getScreenManager(), Message.ERROR.getText()));
-        }
-
-         */
+        controller.selectEnchantment(enchantmentId, enchantmentLevel);
     }
 
 }

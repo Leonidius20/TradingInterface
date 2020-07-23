@@ -1,11 +1,8 @@
 package ua.leonidius.trdinterface.controllers;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.models.BuyableItem;
-import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ItemDetailsEditScreen;
@@ -54,15 +51,7 @@ public class EditItemController extends ItemDetailsEditController {
         }
 
         try {
-            if (item instanceof BuyableItem) {
-                Dao<BuyableItem, Integer> itemDao =
-                        DaoManager.createDao(Trading.getSource(), BuyableItem.class);
-                itemDao.update((BuyableItem) item);
-            } else {
-                Dao<SellableItem, Integer> itemDao =
-                        DaoManager.createDao(Trading.getSource(), SellableItem.class);
-                itemDao.update((SellableItem) item);
-            }
+            item.update();
         } catch (SQLException e) {
             if (Trading.settings.debugMode)
                 Trading.getPlugin().getLogger().error(e.getMessage());
@@ -103,6 +92,7 @@ public class EditItemController extends ItemDetailsEditController {
 
     /**
      * Joins an array of strings into a string, divided by line break
+     *
      * @param array array of strings
      * @return resulting string
      */
@@ -117,6 +107,7 @@ public class EditItemController extends ItemDetailsEditController {
 
     /**
      * Joins a list of strings into a string, divided by commas
+     *
      * @param list list of strings
      * @return resulting string
      */

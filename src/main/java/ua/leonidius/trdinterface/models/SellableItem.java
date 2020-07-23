@@ -1,11 +1,18 @@
 package ua.leonidius.trdinterface.models;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import ua.leonidius.trdinterface.Trading;
+
+import java.sql.SQLException;
 
 @DatabaseTable(tableName = "sellable_items")
 public class SellableItem extends ShopItem {
+
+    public SellableItem() {}
 
     @DatabaseField(generatedId = true, columnName = "record_id")
     private int recordId;
@@ -62,4 +69,10 @@ public class SellableItem extends ShopItem {
         this.shop = shop;
     }
 
+    @Override
+    public void update() throws SQLException {
+        Dao<SellableItem, Integer> itemDao =
+                DaoManager.createDao(Trading.getSource(), SellableItem.class);
+        itemDao.update(this);
+    }
 }

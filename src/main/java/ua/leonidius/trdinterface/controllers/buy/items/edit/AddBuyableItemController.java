@@ -39,6 +39,7 @@ public class AddBuyableItemController extends ItemDetailsEditController {
             BuyableItem.populate(item, itemId, priceS, customName, customLore);
         } catch (IllegalArgumentException e) {
             showErrorScreen(e.getMessage());
+            return;
         }
 
         try {

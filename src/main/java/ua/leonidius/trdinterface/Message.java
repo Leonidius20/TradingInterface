@@ -165,8 +165,14 @@ public enum Message {
     WDW_ADD_ENCHANTMENT_SELECTOR_HINT ("Select an enchantment:"),
     WDW_ADD_ENCHANTMENT_LEVEL_HINT ("Select a level (0 to return)"),
 
-    WDW_REMOVE_ENCHANTMENT_TITLE ("Removing enchantments"),
-    WDW_REMOVE_ENCHANTMENT_HINT ("Select an enchantment to remove:"),
+    // WDW_REMOVE_ENCHANTMENT_HINT ("Select an enchantment to remove:"),
+
+    WDW_MANAGE_ENCHANTMENTS_TITLE("Managing enchantments on %1%"),
+    WDW_MANAGE_ENCHANTMENTS_TEXT("Select an enchantment from the list to remove it or press \"+ Add enchantment\" to add one."),
+    WDW_MANAGE_ENCHANTMENTS_EMPTY("There are no enchantments on this item"),
+
+    WDW_REMOVE_ENCHANTMENT_TITLE ("Removing an enchantment"),
+    WDW_REMOVE_ENCHANTMENT_CONF("Are you sure you want to remove %1% from %2%?"),
 
     // Buy success and fail strings
     BUY_NO_MONEY ("Not enough money to buy this item."),
@@ -210,9 +216,10 @@ public enum Message {
     // the next line was edited in 2.0.0
     LOG_SELL_ITEM_EDITED ("User %1% has modified the sellable item %2%: %3%."),
 
-    LOG_BUY_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%:%6%)"),
-    LOG_SELL_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%:%6%)"),
-    LOG_BUY_ENCHANTMENT_REMOVED ("User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%:%6%)"),
+    LOG_BUY_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%)"),
+    LOG_SELL_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%)"),
+    LOG_BUY_ENCHANTMENT_REMOVED ("User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%)"),
+    LOG_SELL_ENCHANTMENT_REMOVED ("User %1% has removed %2% %3% enchantment from a sellable item %4% (%5%)"),
 
     // Transaction logs
     LOG_BOUGHT ("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),
