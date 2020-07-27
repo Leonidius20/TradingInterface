@@ -4,8 +4,8 @@ import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementSlider;
 import cn.nukkit.item.enchantment.Enchantment;
-import ua.leonidius.trdinterface.AddEnchantmentController;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.controllers.AddEnchantmentController;
 import ua.leonidius.trdinterface.views.screens.CustomScreen;
 
 public class AddEnchantmentScreen extends CustomScreen {

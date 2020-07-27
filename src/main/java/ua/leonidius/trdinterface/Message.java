@@ -14,7 +14,11 @@ import java.text.DecimalFormat;
 
 import static ua.leonidius.trdinterface.Trading.settings;
 
-
+/**
+ * Enum for localization.
+ * Was initially created by fromgate
+ * github.com/fromgate
+ */
 public enum Message {
 
     //LNG_LOAD_FAIL("Failed to load languages from file. Default message used"),

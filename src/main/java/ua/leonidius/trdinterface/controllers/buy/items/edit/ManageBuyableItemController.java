@@ -42,7 +42,7 @@ public class ManageBuyableItemController extends ItemDetailsViewController {
     }
 
     public void editDiscount() {
-
+        // TODO
     }
 
     public void manageEnchantments() {

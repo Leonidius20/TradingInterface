@@ -1,7 +1,6 @@
 package ua.leonidius.trdinterface.controllers;
 
 import cn.nukkit.item.enchantment.Enchantment;
-import ua.leonidius.trdinterface.AddEnchantmentController;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;

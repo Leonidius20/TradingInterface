@@ -1,7 +1,6 @@
 package ua.leonidius.trdinterface.views.screens;
 
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
-import ua.leonidius.trdinterface.views.ScreenManager;
 
 /**
  * Created by Leonidius20 on 04.07.18.

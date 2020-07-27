@@ -1,9 +1,10 @@
-package ua.leonidius.trdinterface;
+package ua.leonidius.trdinterface.controllers;
 
 import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.nbt.NBTIO;
-import ua.leonidius.trdinterface.controllers.BaseController;
+import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;

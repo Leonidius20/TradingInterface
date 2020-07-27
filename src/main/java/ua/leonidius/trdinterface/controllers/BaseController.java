@@ -26,22 +26,18 @@ public abstract class BaseController {
         new InfoController(manager, Message.ERROR_DESC.getText(message)).showScreen();
     }
 
-    protected void handleException(Exception e) {
-        handleException(e, false);
-    }
-
     /**
+     * Prints exception info to console if debug mode is on
+     * and shows an error screen to the user
      *
      * @param e exception to handle
-     * @param showMessage whether to show exception message in InfoScreen
      */
-    protected void handleException(Exception e, boolean showMessage) {
+    protected void handleException(Exception e) {
         if (Trading.settings.debugMode) {
             Trading.getPlugin().getLogger().error(e.getMessage());
             e.printStackTrace();
         }
-        if (showMessage) showErrorScreen(e.getMessage());
-        else showErrorScreen();
+        showErrorScreen();
     }
 
 }
