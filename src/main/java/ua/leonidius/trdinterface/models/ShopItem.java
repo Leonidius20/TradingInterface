@@ -105,6 +105,7 @@ public abstract class ShopItem {
     }
 
     public String getName() {
+        // TODO: custom names
         return toGameItem().getName();
     }
 

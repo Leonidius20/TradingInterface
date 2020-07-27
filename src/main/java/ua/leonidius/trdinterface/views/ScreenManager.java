@@ -2,9 +2,6 @@ package ua.leonidius.trdinterface.views;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.window.FormWindow;
-import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.views.screens.Screen;
 
 import java.util.Stack;
@@ -48,14 +45,7 @@ public class ScreenManager {
     public void back() {
         if (backStack.empty()) return;
         currentScreen = backStack.pop();
-        // TODO: probably should move try/catch to controllers?
-        // but we will need to copy-paste try-catch to every controller
-        try {
-            currentScreen.update();
-        } catch (Exception e) {
-            if (Trading.settings.debugMode) Trading.getPlugin().getLogger().error(e.getMessage());
-            new InfoController(this, Message.ERROR.getText()).showScreen();
-        }
+        currentScreen.update();
         showScreen(player, currentScreen);
     }
 
