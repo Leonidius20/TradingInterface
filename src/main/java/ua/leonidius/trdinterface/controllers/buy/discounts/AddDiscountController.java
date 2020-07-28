@@ -1,44 +1,40 @@
-/*package ua.leonidius.trdinterface.controllers.buy.edit.items;
+package ua.leonidius.trdinterface.controllers.buy.discounts;
 
-import cn.nukkit.event.player.PlayerFormRespondedEvent;
-import cn.nukkit.form.element.ElementInput;
-import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.utils.ConfigSection;
-import ua.leonidius.trdinterface.ItemName;
-import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.views.screens.Screen;
+import ua.leonidius.trdinterface.controllers.BaseController;
+import ua.leonidius.trdinterface.models.BuyableItem;
+import ua.leonidius.trdinterface.models.Discount;
+import ua.leonidius.trdinterface.views.ScreenManager;
+import ua.leonidius.trdinterface.views.screens.buy.items.edit.AddDiscountScreen;
 
-import static ua.leonidius.trdinterface.Trading.buyCfg;
-import static ua.leonidius.trdinterface.Trading.settings;
+public class AddDiscountController extends BaseController {
 
-/**
- * Created by Leonidius20 on 10.08.18.
- */
-/*public class EditDiscountScreen extends FormWindowCustom implements Screen {
+    private final BuyableItem item;
 
-    String categoryId, key;
-    boolean discountExisted;
-
-    public EditDiscountScreen(String categoryId, String key) {
-        super(Message.WDW_EDIT_DISCOUNT_TITLE.getText());
-
-        this.categoryId = categoryId;
-        this.key = key;
-
-        ConfigSection itemSection = buyCfg.getSection(categoryId).getSection("items").getSection(key);
-
-        if (itemSection.exists("discount")) {
-            discountExisted = true;
-            String discount = itemSection.getString("discount");
-            addElement(new ElementInput(Message.WDW_EDIT_DISCOUNT_HINT.getText(), "", discount));
-        } else {
-            discountExisted = false;
-            addElement(new ElementInput(Message.WDW_EDIT_DISCOUNT_HINT.getText()));
-        }
+    public AddDiscountController(ScreenManager manager, BuyableItem item) {
+        super(manager);
+        this.item = item;
     }
 
-    public void onResponse(PlayerFormRespondedEvent event) {
-        try {
+    @Override
+    public void showScreen() {
+        manager.addAndShow(new AddDiscountScreen(this));
+    }
+
+    /**
+     * Adding a temporary discount to a buyable item
+     *
+     * @param percentS   string with the discount's size in percents
+     * @param durationS  string with the discount's duration in units, defined
+     *                   by the 'multiplier' parameter
+     * @param multiplier defines units, in which the discount's duration is
+     *                   measured, duration * multiplier = duration in seconds
+     */
+    public void addDiscount(String percentS, String durationS, int multiplier) {
+        Discount discount = new Discount();
+
+
+
+        /*try {
             // For logging
             int oldDiscount = 0;
             if (discountExisted) {
@@ -80,7 +76,7 @@ import static ua.leonidius.trdinterface.Trading.settings;
             event.getPlayer().showFormWindow(new BuyManageItemScreen(categoryId, key));
         } catch (Exception e) {
             event.getPlayer().showFormWindow(new EditDiscountFailScreen(categoryId, key, EditDiscountFailScreen.invalidParams));
-        }
+        }*/
     }
 
-}*/
+}

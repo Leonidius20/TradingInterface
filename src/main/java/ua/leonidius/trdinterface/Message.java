@@ -131,25 +131,28 @@ public enum Message {
     // BuyManageItemScreen
     BTN_BUY_ITEM ("Buy this item"),
     BTN_MANAGE_ENCHANTMENTS("Manage enchantments"),
-    BTN_ADD_ENCHANTMENT ("+ Add enchantment"),
+    BTN_ADD_ENCHANTMENT("+ Add enchantment"),
     // BTN_REMOVE_ENCHANTMENT ("Remove enchantment"),
 
     // Item deletion windows
-    WDW_DELETE_ITEM_TITLE ("Deleting item"),
-    WDW_DELETE_BUY_ITEM_CONF ("Are you sure you want to delete %1% from the list of buyable items? This action can't be undone."),
-    WDW_DELETE_SELL_ITEM_CONF ("Are you sure you want to delete %1% from the list of sellable items? This action can't be undone."),
+    WDW_DELETE_ITEM_TITLE("Deleting item"),
+    WDW_DELETE_BUY_ITEM_CONF("Are you sure you want to delete %1% from the list of buyable items? This action can't be undone."),
+    WDW_DELETE_SELL_ITEM_CONF("Are you sure you want to delete %1% from the list of sellable items? This action can't be undone."),
 
     // Discount editing window
-    WDW_EDIT_DISCOUNT_TITLE ("Editing discount"),
-    WDW_EDIT_DISCOUNT_HINT ("Enter discount (in percents). Type 0 to remove discount."),
-    WDW_EDIT_DISCOUNT_MORE_THAN_100 ("Discount can't be bigger than 100%."),
+    // EDITED IN 2.0.0!
+    WDW_EDIT_DISCOUNT_TITLE("Adding discount"),
+    WDW_EDIT_DISCOUNT_HINT("Enter discount in percents (0 to return):"),
+    WDW_EDIT_DISCOUNT_DURATION("Enter discount duration (numerical value):"),
+    // end of edited stuff
+    WDW_EDIT_DISCOUNT_MORE_THAN_100("Discount can't be bigger than 100%."),
 
     // Custom names list window
-    WDW_CUSTOM_NAMES_HINT ("You can add a custom name to an item. It will appear instead of the original one."),
-    WDW_CUSTOM_NAME_TITLE ("Custom item name"),
+    WDW_CUSTOM_NAMES_HINT("You can add a custom name to an item. It will appear instead of the original one."),
+    WDW_CUSTOM_NAME_TITLE("Custom item name"),
 
     // Custom name editing menu
-    WDW_CUSTOM_NAME_INFO ("Item's ID: %1%\nOriginal name: %2%\nCustom name: %3%"),
+    WDW_CUSTOM_NAME_INFO("Item's ID: %1%\nOriginal name: %2%\nCustom name: %3%"),
 
     // Custom name adding window
     WDW_ADD_CUSTOM_NAME_TITLE ("Adding custom name"),
