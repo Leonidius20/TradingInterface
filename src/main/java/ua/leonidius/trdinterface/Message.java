@@ -81,24 +81,24 @@ public enum Message {
 
 
     // Sell window
-    WDW_SELL_TITLE ("Selling %1%"),
+    WDW_SELL_TITLE("Selling %1%"),
 
     // Categories list window
-    BTN_ADD_CATEGORY ("+ Add category"),
+    BTN_ADD_CATEGORY("+ Add category"),
 
     // Category creation window
-    WDW_NEW_CATEGORY ("Creating a new category"),
-    WDW_NEW_CATEGORY_NAME ("Choose a name:"),
-    WDW_NEW_CATEGORY_FAIL ("A category with such a name already exists."),
-    WDW_NEW_CATEGORY_SUCCESS ("A new category has been created successfully."),
+    WDW_NEW_CATEGORY("Creating a new category"),
+    WDW_NEW_CATEGORY_NAME("Choose a name (leave blank to return):"),
+    WDW_NEW_CATEGORY_FAIL("A category with such a name already exists."),
+    WDW_NEW_CATEGORY_SUCCESS("A new category has been created successfully."),
 
     // Category renaming window
-    WDW_RENAME_CATEGORY_TITLE ("Renaming category"),
-    WDW_RENAME_CATEGORY_NAME ("Choose a new name:"),
+    WDW_RENAME_CATEGORY_TITLE("Renaming category"),
+    WDW_RENAME_CATEGORY_NAME("Choose a new name:"),
 
     // Category editing window
-    BTN_RENAME_CATEGORY ("* Rename category"),
-    BTN_DELETE_CATEGORY ("* Delete category"),
+    BTN_RENAME_CATEGORY("* Rename category"),
+    BTN_DELETE_CATEGORY("* Delete category"),
     BTN_ADD_ITEM ("+ Add item"),
 
     // Category deletion window

@@ -2,6 +2,8 @@ package ua.leonidius.trdinterface.utils;
 
 import cn.nukkit.item.Item;
 
+import java.util.Arrays;
+
 public abstract class ItemCompare {
 
     /**
@@ -15,7 +17,8 @@ public abstract class ItemCompare {
     public static boolean equals(Item item1, Item item2) {
         boolean initialTest = item1.getId() == item2.getId()
                 && item1.getDamage() == item2.getDamage()
-                && item1.getCustomName().equals(item2.getCustomName());
+                && item1.getCustomName().equals(item2.getCustomName())
+                && Arrays.equals(item1.getLore(), item2.getLore());
         if (!initialTest) return false;
 
         EnchantmentWrapper[] wrappers1 = EnchantmentWrapper.getWrappers(item1);
