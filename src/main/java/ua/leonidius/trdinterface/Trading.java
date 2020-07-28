@@ -87,4 +87,8 @@ public class Trading extends PluginBase implements Listener {
         return source;
     }
 
+    public static Settings getSettings() {
+        return settings;
+    }
+
 }

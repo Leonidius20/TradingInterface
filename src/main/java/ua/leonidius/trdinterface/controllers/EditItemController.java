@@ -1,5 +1,6 @@
 package ua.leonidius.trdinterface.controllers;
 
+import cn.nukkit.item.enchantment.Enchantment;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.models.BuyableItem;
@@ -35,8 +36,10 @@ public class EditItemController extends ItemDetailsEditController {
         String oldName = item.getName();
         double oldPrice = item.getPrice();
         String oldLore = arrayToString(item.toGameItem().getLore());
+        Enchantment[] oldEnchantments = item.toGameItem().getEnchantments();
 
-        ShopItem.populate(item, itemId, priceS, customName, customLore);
+        ShopItem.populate(item, itemId, priceS, customName,
+                customLore, oldEnchantments);
 
         // so that item.getName(), item.getLore() return updated info
         item.resetGameItem();

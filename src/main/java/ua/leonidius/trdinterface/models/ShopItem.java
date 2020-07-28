@@ -1,6 +1,7 @@
 package ua.leonidius.trdinterface.models;
 
 import cn.nukkit.item.Item;
+import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import ua.leonidius.trdinterface.Trading;
@@ -62,15 +63,22 @@ public abstract class ShopItem {
         gameItem = null;
     }
 
+    public static <T extends ShopItem> void populate(T item, String itemId, String priceS,
+                                                     String customName, String customLore) {
+        populate(item, itemId, priceS, customName, customLore, new Enchantment[0]);
+    }
+
     /**
      * Used to populate the model with item_id, price and nbt
      * This method doesn't change shop and category (they
      * have to be populated separately)
+     *
      * @param item item to populate
-     * @param <T> BuyableItem or SellableItem
+     * @param <T>  BuyableItem or SellableItem
      */
     public static <T extends ShopItem> void populate(T item, String itemId, String priceS,
-                                                     String customName, String customLore)
+                                                     String customName, String customLore,
+                                                     Enchantment[] enchantments)
             throws IllegalArgumentException {
         Item gameItem;
 
@@ -90,6 +98,8 @@ public abstract class ShopItem {
 
         if (customLore != null && !customLore.isEmpty())
             gameItem.setLore(customLore.split("\n"));
+
+        gameItem.addEnchantment(enchantments);
 
         item.setItemId(itemId);
         item.setPrice(price);

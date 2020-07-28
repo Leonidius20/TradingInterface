@@ -8,6 +8,7 @@ import ua.leonidius.trdinterface.controllers.AmountSelectorController;
 import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.ShopItem;
+import ua.leonidius.trdinterface.utils.ItemCompare;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.AmountSelectorScreen;
 
@@ -63,12 +64,10 @@ public class SellAmountSelectorController extends AmountSelectorController {
 
     public int getMaxAmount() {
         int amount = 0;
-        for (int i=0; i < 36; i++){
+        for (int i = 0; i < 36; i++) {
             Item itemInSlot = manager.getPlayer().getInventory().getItem(i);
-            if (itemInSlot.getId() == item.toGameItem().getId()
-                    && itemInSlot.getDamage() == item.toGameItem().getDamage()
-                    && itemInSlot.getCompoundTag() == item.getNbt()) {
-                amount = amount + itemInSlot.getCount();
+            if (ItemCompare.equals(itemInSlot, item.toGameItem())) {
+                amount += itemInSlot.getCount();
             }
         }
         return amount;

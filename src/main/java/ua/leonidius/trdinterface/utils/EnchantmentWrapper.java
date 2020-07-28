@@ -1,8 +1,7 @@
-package ua.leonidius.trdinterface.models;
+package ua.leonidius.trdinterface.utils;
 
+import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
-
-import java.util.HashSet;
 
 public class EnchantmentWrapper {
 
@@ -29,12 +28,13 @@ public class EnchantmentWrapper {
                 enchantment.getLevel() == that.enchantment.getLevel();
     }
 
-    public static HashSet<EnchantmentWrapper> getWrappers(Enchantment[] enchantments) {
-        HashSet<EnchantmentWrapper> set = new HashSet<>();
-        for (Enchantment e : enchantments) {
-            set.add(new EnchantmentWrapper(e));
+    public static EnchantmentWrapper[] getWrappers(Item item) {
+        Enchantment[] enchantments = item.getEnchantments();
+        EnchantmentWrapper[] wrappers = new EnchantmentWrapper[enchantments.length];
+        for (int i = 0; i < enchantments.length; i++) {
+            wrappers[i] = new EnchantmentWrapper(enchantments[i]);
         }
-        return set;
+        return wrappers;
     }
 
 }

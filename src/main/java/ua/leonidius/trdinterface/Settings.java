@@ -14,7 +14,6 @@ public class Settings extends SimpleConfig {
         currency = EconomyAPI.getInstance().getMonetaryUnit();
     }
 
-    //general
     @Path(value = "save-translation")
     public boolean save_translation = false;
 
@@ -31,5 +30,9 @@ public class Settings extends SimpleConfig {
     public boolean debugMode = false;
 
     public String currency;
+
+    public boolean debugActive() {
+        return debugMode;
+    }
 
 }

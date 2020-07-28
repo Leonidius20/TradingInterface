@@ -5,10 +5,10 @@ import com.j256.ormlite.dao.CloseableIterator;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.ItemsListController;
 import ua.leonidius.trdinterface.controllers.sell.edit.EditSellableItemsController;
-import ua.leonidius.trdinterface.models.EnchantmentWrapper;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.models.ShopItem;
+import ua.leonidius.trdinterface.utils.ItemCompare;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
@@ -51,7 +51,7 @@ public class SellableItemsController extends ItemsListController {
             SellableItem item = iterator.next();
             for (int i = 0; i < 36; i++) {
                 Item itemInSlot = manager.getPlayer().getInventory().getItem(i);
-                if (itemsEqual(itemInSlot, item.toGameItem())) {
+                if (ItemCompare.equals(itemInSlot, item.toGameItem())) {
                     items.add(item);
                 }
             }
@@ -66,15 +66,6 @@ public class SellableItemsController extends ItemsListController {
 
     public void editList() {
         new EditSellableItemsController(manager, shop).showScreen();
-    }
-
-    // maybe we will need this in case enchantments don't compare properly
-    private static boolean itemsEqual(Item item1, Item item2) {
-        return item1.getId() == item2.getId()
-                && item1.getDamage() == item2.getDamage()
-                && item1.getCustomName().equals(item2.getCustomName())
-                && EnchantmentWrapper.getWrappers(item1.getEnchantments()).equals(
-                EnchantmentWrapper.getWrappers(item2.getEnchantments()));
     }
 
 }
