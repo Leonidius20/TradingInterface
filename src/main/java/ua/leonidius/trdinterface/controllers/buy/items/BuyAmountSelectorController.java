@@ -53,15 +53,15 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         EconomyAPI.getInstance().reduceMoney(manager.getPlayer(), cost);
         manager.getPlayer().getInventory().addItem(gameItem);
 
-        if (Trading.settings.transactionLogging) {
+        if (Trading.getSettings().logTransactions()) {
             Message.LOG_BOUGHT.log(manager.getPlayer().getName(),
                     amount, gameItem.getName(),
                     gameItem.getId() + ":" + gameItem.getDamage(),
-                    cost, Trading.settings.currency);
+                    cost, Trading.getSettings().getCurrency());
         }
 
         showInfoScreen(Message.BUY_SUCCESS.getText(amount, gameItem.getName(),
-                cost, Trading.settings.currency));
+                cost, Trading.getSettings().getCurrency()));
     }
 
     @Override

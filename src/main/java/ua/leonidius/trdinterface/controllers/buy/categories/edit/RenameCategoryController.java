@@ -4,7 +4,6 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.controllers.NamingController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -38,16 +37,13 @@ public class RenameCategoryController extends NamingController {
             category.name = name;
             categoryDao.update(category);
 
-            if (Trading.settings.editLogging) {
+            if (Trading.getSettings().logEdits()) {
                 Message.LOG_CATEGORY_RENAMED.log(manager.getPlayer().getName(), oldName, name);
             }
 
             manager.back();
         } catch (SQLException e) {
-            if (Trading.settings.debugMode) {
-                Trading.getPlugin().getLogger().error(e.getMessage());
-            }
-            new InfoController(manager, "", Message.ERROR.getText());
+            handleException(e);
         }
     }
 

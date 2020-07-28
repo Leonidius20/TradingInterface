@@ -38,18 +38,16 @@ public class AddCategoryController extends NamingController {
             Category newCategory = new Category(shop, name);
             categoryDao.create(newCategory);
 
-            if (Trading.settings.editLogging) {
+            if (Trading.getSettings().logEdits()) {
                 Message.LOG_CATEGORY_ADDED.log(manager.getPlayer().getName(), name);
             }
 
             manager.back();
         } catch (SQLException e) {
-            if (Trading.settings.debugMode) {
-                Trading.getPlugin().getLogger().error(e.getMessage());
-                Trading.getPlugin().getLogger().error("Error code: " + e.getErrorCode());
-            }
+            Trading.handleException(e);
 
             InfoController controller;
+            // TODO: test this
             if (e.getErrorCode() == SQLiteErrorCode.SQLITE_CONSTRAINT.code) {
                 controller = new InfoController(manager, Message.WDW_NEW_CATEGORY_FAIL.getText());
             } else {

@@ -12,8 +12,6 @@ import ua.leonidius.trdinterface.utils.ItemCompare;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.AmountSelectorScreen;
 
-import static ua.leonidius.trdinterface.Trading.settings;
-
 public class SellAmountSelectorController extends AmountSelectorController {
 
     private final SellableItem item;
@@ -41,15 +39,15 @@ public class SellAmountSelectorController extends AmountSelectorController {
         EconomyAPI.getInstance().addMoney(manager.getPlayer(), cost);
 
         // Success
-        if (Trading.settings.transactionLogging) {
+        if (Trading.getSettings().logTransactions()) {
             Message.LOG_SOLD.log(manager.getPlayer().getName(), amount,
                     gameItem.getName(), item.getItemId(),
-                    cost, settings.currency);
+                    cost, Trading.getSettings().getCurrency());
         }
 
         new InfoController(manager, Message.WDW_SUCCESS_TITLE.getText(),
                 Message.SELL_SUCCESS.getText(amount, gameItem.getName(),
-                        cost, Trading.settings.currency)).showScreen();
+                        cost, Trading.getSettings().getCurrency())).showScreen();
     }
 
     @Override

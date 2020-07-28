@@ -35,7 +35,7 @@ public abstract class ItemDetailsViewController extends BaseController {
                 gameItem.getId(), gameItem.getDamage()));
 
         sb.append("\n").append(Message.WDW_BUY_PRICE.getText(getItem().getPrice(),
-                Trading.settings.currency));
+                Trading.getSettings().getCurrency()));
 
         if (isBuy()) {
             /*if (shopItem.discount != 0) {

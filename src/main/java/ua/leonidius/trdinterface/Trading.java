@@ -25,7 +25,7 @@ import java.sql.SQLException;
 public class Trading extends PluginBase implements Listener {
 
     private static Trading plugin;
-    public static Settings settings;
+    private static Settings settings;
 
     private static ConnectionSource source;
 
@@ -89,6 +89,18 @@ public class Trading extends PluginBase implements Listener {
 
     public static Settings getSettings() {
         return settings;
+    }
+
+    /**
+     * Prints exception details to the console.
+     *
+     * @param e exception to handle
+     */
+    public static void handleException(Exception e) {
+        if (getSettings().debugActive()) {
+            getPlugin().getLogger().debug(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

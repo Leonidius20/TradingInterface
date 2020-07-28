@@ -11,28 +11,54 @@ public class Settings extends SimpleConfig {
 
     public Settings(Plugin plugin) {
         super(plugin);
+    }
+
+    @Override
+    public boolean load() {
+        boolean result = super.load();
         currency = EconomyAPI.getInstance().getMonetaryUnit();
+        return result;
     }
 
     @Path(value = "save-translation")
-    public boolean save_translation = false;
+    private boolean save_translation = false;
 
     @Path(value = "language")
-    public String language = "default";
+    private String language = "default";
 
     @Path(value = "edit-logging")
-    public boolean editLogging = true;
+    private boolean editLogging = true;
 
     @Path(value = "transaction-logging")
-    public boolean transactionLogging = false;
+    private boolean transactionLogging = false;
 
     @Path(value = "debug")
-    public boolean debugMode = false;
+    private boolean debugMode = false;
 
-    public String currency;
+    private String currency;
+
+    public boolean saveLanguageFile() {
+        return save_translation;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public boolean logEdits() {
+        return editLogging;
+    }
+
+    public boolean logTransactions() {
+        return transactionLogging;
+    }
 
     public boolean debugActive() {
         return debugMode;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 
 }

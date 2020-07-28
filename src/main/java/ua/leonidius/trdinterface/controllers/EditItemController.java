@@ -60,14 +60,14 @@ public class EditItemController extends ItemDetailsEditController {
             return;
         }
 
-        if (Trading.settings.editLogging) {
+        if (Trading.getSettings().logEdits()) {
             LinkedList<String> changes = new LinkedList<>();
             if (!item.getItemId().equals(oldId)) {
                 changes.add(Message.LOG_EDITED_ID.getText(oldId, item.getItemId()));
             }
             if (item.getPrice() != oldPrice) {
                 changes.add(Message.LOG_EDITED_PRICE.getText(oldPrice,
-                        Trading.settings.currency, item.getPrice()));
+                        Trading.getSettings().getCurrency(), item.getPrice()));
             }
             if (!item.getName().equals(oldName)) {
                 changes.add(Message.LOG_EDITED_NAME.getText(oldName, item.getName()));

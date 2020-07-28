@@ -52,7 +52,7 @@ public class DeleteItemController extends ModalController {
             return;
         }
 
-        if (Trading.settings.editLogging) {
+        if (Trading.getSettings().logEdits()) {
             if (item instanceof BuyableItem) {
                 Message.LOG_BUY_ITEM_DELETED.log(manager.getPlayer().getName(),
                         itemName, itemId);

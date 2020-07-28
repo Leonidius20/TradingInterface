@@ -5,7 +5,6 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.controllers.ModalController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -41,10 +40,7 @@ public class DeleteCategoryController extends ModalController {
 
             manager.backTwoScreens();
         } catch (SQLException e) {
-            if (Trading.settings.debugMode) {
-                Trading.getPlugin().getLogger().error(e.getMessage());
-            }
-            new InfoController(manager, Message.ERROR.toString()).showScreen();
+            handleException(e);
         }
     }
 

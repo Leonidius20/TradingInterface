@@ -26,6 +26,13 @@ public class DeleteEnchantmentController extends ModalController {
     }
 
     @Override
+    public void showScreen() {
+        manager.addAndShow(new ModalScreen(Message.WDW_REMOVE_ENCHANTMENT_TITLE.getText(),
+                Message.WDW_REMOVE_ENCHANTMENT_CONF.getText(getName(), item.getName()),
+                this), true);
+    }
+
+    @Override
     public void onPositiveResponse() {
         Item oldGameItem = item.toGameItem();
         Item newGameItem = Item.fromString(item.getItemId());
@@ -51,7 +58,7 @@ public class DeleteEnchantmentController extends ModalController {
             return;
         }
 
-        if (Trading.settings.editLogging) {
+        if (Trading.getSettings().logEdits()) {
             if (item instanceof BuyableItem) {
                 Message.LOG_BUY_ENCHANTMENT_REMOVED.log(manager.getPlayer().getName(),
                         enchantment.getName(), enchantment.getLevel(),
@@ -64,13 +71,6 @@ public class DeleteEnchantmentController extends ModalController {
         }
 
         manager.back();
-    }
-
-    @Override
-    public void showScreen() {
-        manager.addAndShow(new ModalScreen(Message.WDW_REMOVE_ENCHANTMENT_TITLE.getText(),
-                Message.WDW_REMOVE_ENCHANTMENT_CONF.getText(getName(), item.getName()),
-                this), true);
     }
 
     /**

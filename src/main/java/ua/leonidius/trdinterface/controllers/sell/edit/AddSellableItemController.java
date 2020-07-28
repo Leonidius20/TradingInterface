@@ -52,17 +52,17 @@ public class AddSellableItemController extends ItemDetailsEditController {
             return;
         }
 
-        if (Trading.settings.editLogging) {
+        if (Trading.getSettings().logEdits()) {
             if (customName == null || customName.equals("")) {
                 Message.LOG_SELL_ITEM_ADDED.log(manager.getPlayer().getName(),
                         item.getName(), item.getItemId(),
-                        item.getPrice(), Trading.settings.currency);
+                        item.getPrice(), Trading.getSettings().getCurrency());
             } else {
                 Message.LOG_SELL_ITEM_ADDED_WITH_CUSTOM_NAME.log(
                         manager.getPlayer().getName(), customName,
                         Item.fromString(item.getItemId()).getName(),
                         item.getItemId(), item.getPrice(),
-                        Trading.settings.currency);
+                        Trading.getSettings().getCurrency());
             }
         }
 

@@ -12,8 +12,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 
-import static ua.leonidius.trdinterface.Trading.settings;
-
 /**
  * Enum for localization.
  * Was initially created by fromgate
@@ -328,10 +326,10 @@ public enum Message {
 
     public static void init(PluginBase plg) {
         plugin = plg;
-        language = settings.language;
+        language = Trading.getSettings().getLanguage();
         if (language.equalsIgnoreCase("default")) language = Server.getInstance().getLanguage().getLang();
         else if (language.length() > 3) language = language.substring(0, 3);
-        saveLanguage = settings.save_translation;
+        saveLanguage = Trading.getSettings().saveLanguageFile();
 
         initMessages();
         if (saveLanguage) saveMessages();

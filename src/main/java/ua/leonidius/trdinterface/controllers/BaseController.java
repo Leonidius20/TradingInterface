@@ -33,10 +33,7 @@ public abstract class BaseController {
      * @param e exception to handle
      */
     protected void handleException(Exception e) {
-        if (Trading.settings.debugMode) {
-            Trading.getPlugin().getLogger().error(e.getMessage());
-            e.printStackTrace();
-        }
+        Trading.handleException(e);
         showErrorScreen();
     }
 

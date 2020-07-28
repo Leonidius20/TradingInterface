@@ -19,7 +19,7 @@ public abstract class ItemsListController extends ListController<ShopItem> {
         StringBuilder sb = new StringBuilder();
         sb.append(gameItem.getName());
         sb.append(" (").append(item.getPrice())
-                .append(Trading.settings.currency).append(")");
+                .append(Trading.getSettings().getCurrency()).append(")");
 
         if (gameItem.hasEnchantments()) {
             return TextFormat.colorize(TextFormat.DARK_PURPLE.getChar(), sb.toString());
