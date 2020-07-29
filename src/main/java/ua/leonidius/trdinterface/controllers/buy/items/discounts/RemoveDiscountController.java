@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.discounts;
+package ua.leonidius.trdinterface.controllers.buy.items.discounts;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;

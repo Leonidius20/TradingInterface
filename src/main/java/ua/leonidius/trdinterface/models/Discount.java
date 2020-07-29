@@ -31,4 +31,8 @@ public class Discount {
         return percent;
     }
 
+    public long getEndTime() {
+        return endTime;
+    }
+
 }

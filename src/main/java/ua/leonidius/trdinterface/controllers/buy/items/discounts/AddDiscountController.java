@@ -1,4 +1,4 @@
-package ua.leonidius.trdinterface.controllers.buy.discounts;
+package ua.leonidius.trdinterface.controllers.buy.items.discounts;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -7,36 +7,13 @@ import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.BaseController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Discount;
+import ua.leonidius.trdinterface.utils.TimeUnit;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.buy.items.edit.AddDiscountScreen;
 
 import java.sql.SQLException;
 
 public class AddDiscountController extends BaseController {
-
-    public enum TimeUnit {
-        MINUTES(60, Message.MINUTES.getText()),
-        HOURS(60 * 60, Message.HOURS.getText()),
-        DAYS(24 * 60 * 60, Message.DAYS.getText()),
-        MONTHS(30 * 24 * 60 * 60, Message.MONTHS.getText());
-
-        private final long multiplier;
-        private final String name;
-
-        TimeUnit(long multiplier, String name) {
-            this.multiplier = multiplier;
-            this.name = name;
-        }
-
-        public long getMultiplier() {
-            return multiplier;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-    }
 
     private final BuyableItem item;
 
@@ -89,7 +66,7 @@ public class AddDiscountController extends BaseController {
             if (Trading.getSettings().logEdits()) {
                 Message.LOG_DISCOUNT_ADDED.log(manager.getPlayer().getName(),
                         percent, item.getName(),
-                        item.getItemId(), duration, unit.name);
+                        item.getItemId(), duration, unit.getName());
             }
 
             manager.back();

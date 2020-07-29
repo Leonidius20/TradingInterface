@@ -68,7 +68,7 @@ public enum Message {
     WDW_BUY_ORIGINAL_NAME("Original name: %1% (%2%:%3%)"),
     WDW_BUY_PRICE("Price: %1%%2% per item"),
     // edited in 2.0.0
-    WDW_BUY_DISCOUNT("Discount: %1%%"),
+    WDW_BUY_DISCOUNT("Discount: %1% percent, time left: %2%"),
     WDW_BUY_ORIGINAL_PRICE("Price without the discount: %1%%2%"),
     // end of edited stuff
     WDW_BUY_CUSTOM_LORE("Lore: %1%"),
@@ -238,10 +238,12 @@ public enum Message {
     LOG_SOLD("Player %1% have sold %2%x %3% (ID: %4%) for %5%%6%."),
 
     // time units
+    SECONDS("seconds"),
     MINUTES("minutes"),
     HOURS("hours"),
     DAYS("days"),
-    MONTHS("months");
+    MONTHS("months"),
+    INFINITY("infinity");
 
     private static String language = "english";
     private static char c1; //= 'a';

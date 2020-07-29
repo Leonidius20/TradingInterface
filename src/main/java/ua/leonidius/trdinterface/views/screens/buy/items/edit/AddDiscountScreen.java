@@ -4,7 +4,8 @@ import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.controllers.buy.discounts.AddDiscountController;
+import ua.leonidius.trdinterface.controllers.buy.items.discounts.AddDiscountController;
+import ua.leonidius.trdinterface.utils.TimeUnit;
 import ua.leonidius.trdinterface.views.screens.CustomScreen;
 
 import java.util.LinkedList;
@@ -24,7 +25,7 @@ public class AddDiscountScreen extends CustomScreen {
         this.controller = controller;
 
         LinkedList<String> durationUnits = new LinkedList<>();
-        for (AddDiscountController.TimeUnit unit : controller.getTimeUnits()) {
+        for (TimeUnit unit : controller.getTimeUnits()) {
             durationUnits.add(unit.getName());
         }
 
@@ -43,8 +44,7 @@ public class AddDiscountScreen extends CustomScreen {
         String percentS = getResponse().getInputResponse(0);
         String durationS = getResponse().getInputResponse(1);
         int unitIndex = getResponse().getDropdownResponse(2).getElementID();
-        AddDiscountController.TimeUnit unit =
-                AddDiscountController.TimeUnit.values()[unitIndex];
+        TimeUnit unit = TimeUnit.values()[unitIndex];
         controller.addDiscount(percentS, durationS, unit);
     }
 
