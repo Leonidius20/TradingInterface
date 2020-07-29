@@ -5,6 +5,7 @@ import ua.leonidius.trdinterface.controllers.EditItemController;
 import ua.leonidius.trdinterface.controllers.ItemDetailsViewController;
 import ua.leonidius.trdinterface.controllers.ManageEnchantmentsController;
 import ua.leonidius.trdinterface.controllers.buy.discounts.AddDiscountController;
+import ua.leonidius.trdinterface.controllers.buy.discounts.RemoveDiscountController;
 import ua.leonidius.trdinterface.controllers.buy.items.BuyAmountSelectorController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -46,7 +47,7 @@ public class ManageBuyableItemController extends ItemDetailsViewController {
     }
 
     public void removeDiscount() {
-        // TODO
+        new RemoveDiscountController(manager, item).showScreen();
     }
 
     public void manageEnchantments() {

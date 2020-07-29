@@ -151,6 +151,7 @@ public enum Message {
     WDW_EDIT_DISCOUNT_HINT("Enter discount in percents (0 to return):"),
     WDW_EDIT_DISCOUNT_DURATION("Enter discount duration (numerical value):"),
     WDW_EDIT_DISCOUNT_MORE_THAN_100("Discount can't be bigger than 100% or less than 0%."),
+    WDW_REMOVE_DISCOUNT_CONF("Are you sure you want to remove a %1% percent discount from %2%?"), // added in 2.0.0
     // end of edited stuff
 
     // Custom names list window
