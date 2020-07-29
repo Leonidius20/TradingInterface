@@ -35,7 +35,8 @@ public class BuyableItem extends ShopItem {
     @DatabaseField(dataType = DataType.BYTE_ARRAY)
     private byte[] nbt;
 
-    @ForeignCollectionField(columnName = "discounts", foreignFieldName = "item")
+    @ForeignCollectionField(columnName = "discounts", foreignFieldName = "item",
+            eager = true)
     private ForeignCollection<Discount> discount;
 
     @Override
@@ -75,6 +76,16 @@ public class BuyableItem extends ShopItem {
             Trading.printException(e);
         }
         return result;
+    }
+
+    public void removeDiscount() {
+        Discount d = getDiscount();
+        if (d == null) return;
+        discount.remove(d);
+    }
+
+    public void addDiscount(Discount d) {
+        discount.add(d);
     }
 
     @Override

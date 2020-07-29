@@ -8,6 +8,7 @@ import ua.leonidius.trdinterface.controllers.buy.items.edit.AddBuyableItemContro
 import ua.leonidius.trdinterface.controllers.buy.items.edit.ManageBuyableItemController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
+import ua.leonidius.trdinterface.models.Discount;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
@@ -41,8 +42,19 @@ public class BuyableItemsController extends ItemsListController {
 
     @Override
     public BuyableItem[] fetchItems() {
-        BuyableItem[] items = new BuyableItem[0];
-        return category.items.toArray(items);
+        BuyableItem[] items = category.items.toArray(new BuyableItem[0]);
+
+        for (BuyableItem item : items) {
+            Discount discount = item.getDiscount();
+            if (discount == null) continue;
+            // for infinite discounts, copied from old yaml configs
+            if (discount.getEndTime() == -1) continue;
+            if (discount.getEndTime() <= (System.currentTimeMillis() / 1000)) {
+                item.removeDiscount();
+            }
+        }
+
+        return items;
     }
 
     public void renameCategory() {

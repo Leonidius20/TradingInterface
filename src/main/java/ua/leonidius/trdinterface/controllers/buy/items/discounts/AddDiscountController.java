@@ -1,7 +1,5 @@
 package ua.leonidius.trdinterface.controllers.buy.items.discounts;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.BaseController;
@@ -10,8 +8,6 @@ import ua.leonidius.trdinterface.models.Discount;
 import ua.leonidius.trdinterface.utils.TimeUnit;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.buy.items.edit.AddDiscountScreen;
-
-import java.sql.SQLException;
 
 public class AddDiscountController extends BaseController {
 
@@ -58,10 +54,7 @@ public class AddDiscountController extends BaseController {
 
             Discount discount = new Discount(item, percent, endTime);
 
-            Dao<Discount, Integer> discountDao =
-                    DaoManager.createDao(Trading.getSource(), Discount.class);
-
-            discountDao.create(discount);
+            item.addDiscount(discount);
 
             if (Trading.getSettings().logEdits()) {
                 Message.LOG_DISCOUNT_ADDED.log(manager.getPlayer().getName(),
@@ -72,54 +65,7 @@ public class AddDiscountController extends BaseController {
             manager.back();
         } catch (NumberFormatException e) {
             showErrorScreen(Message.WDW_INVALID_PARAMS.getText());
-        } catch (SQLException e) {
-            handleException(e);
         }
-
-
-        /*try {
-            // For logging
-            int oldDiscount = 0;
-            if (discountExisted) {
-                oldDiscount = buyCfg.getSection(categoryId).getSection("items").getSection(key).getInt("discount");
-            }
-            String playerName = event.getPlayer().getName();
-            String id = key.replace("-", ":");
-
-            int discount = Integer.parseInt(getResponse().getInputResponse(0));
-
-            if (discount > 100) {
-                event.getPlayer().showFormWindow(new EditDiscountFailScreen(categoryId, key, EditDiscountFailScreen.moreThan100));
-                return;
-            }
-
-            if (discount == 0) {
-                buyCfg.getSection(categoryId).getSection("items").getSection(key).remove("discount");
-
-                // Logging
-                if (settings.editLogging && discountExisted) {
-                    Message.LOG_DISCOUNT_DELETED.log(playerName, ItemName.get(id), id);
-                }
-
-            } else {
-                buyCfg.getSection(categoryId).getSection("items").getSection(key).set("discount", discount);
-
-                // logging
-                if (settings.editLogging) {
-                    if (discountExisted) {
-                        Message.LOG_DISCOUNT_EDITED.log(playerName, ItemName.get(id), id, discount, oldDiscount);
-                    } else {
-                        Message.LOG_DISCOUNT_ADDED.log(playerName, discount, ItemName.get(id), id);
-                    }
-                }
-            }
-
-            buyCfg.save();
-
-            event.getPlayer().showFormWindow(new BuyManageItemScreen(categoryId, key));
-        } catch (Exception e) {
-            event.getPlayer().showFormWindow(new EditDiscountFailScreen(categoryId, key, EditDiscountFailScreen.invalidParams));
-        }*/
     }
 
     /**
