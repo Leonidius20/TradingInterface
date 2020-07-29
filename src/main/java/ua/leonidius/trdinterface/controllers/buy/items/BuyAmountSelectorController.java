@@ -65,11 +65,6 @@ public class BuyAmountSelectorController extends AmountSelectorController {
     }
 
     @Override
-    public boolean isBuy() {
-        return true;
-    }
-
-    @Override
     protected ShopItem getItem() {
         return item;
     }

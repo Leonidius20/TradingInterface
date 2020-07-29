@@ -14,8 +14,10 @@ import java.text.DecimalFormat;
 
 /**
  * Enum for localization.
- * Was initially created by fromgate
- * github.com/fromgate
+ * The localization logic was initially created by
+ * fromgate (github.com/fromgate)
+ *
+ * @author fromgate, Leonidius20
  */
 public enum Message {
 
@@ -56,26 +58,29 @@ public enum Message {
     WDW_BUY_NO_CATEGORIES ("There are no categories of goods in the shop. In order to use the shop, there must be at least one category."),
 
     // Buy item selector window
-    WDW_BUY_EMPTY_CAT ("There are no items in this category."),
-    BTN_ITEM_BUY ("%1% (%2%%3%)"),
-    BTN_ITEM_BUY_SALE ("%1% (%2%%3%) &c-%4%%!"),
+    WDW_BUY_EMPTY_CAT("There are no items in this category."),
+    BTN_ITEM_BUY("%1% (%2%%3%)"),
+    BTN_ITEM_BUY_SALE("%1% (%2%%3%) &c-%4%%!"),
 
     // Buy window & BuyManageItemScreen
-    WDW_BUY_TITLE ("Buying %1%"),
-    WDW_BUY_NAME ("Name: %1%"),
-    WDW_BUY_ORIGINAL_NAME ("Original name: %1% (%2%:%3%)"),
-    WDW_BUY_PRICE ("Price: %1%%2% per item"),
-    WDW_BUY_DISCOUNT ("Discount: %1%%\nPrice with discount: %2%%3%"),
-    WDW_BUY_CUSTOM_LORE ("Lore: %1%"),
-    WDW_BUY_ENCHANTMENTS ("Enchantments: %1%"),
-    WDW_BUY_ENCHANTMENTS_ABSENT ("none"),
-    WDW_BUY_AMOUNT ("Select amount"),
+    WDW_BUY_TITLE("Buying %1%"),
+    WDW_BUY_NAME("Name: %1%"),
+    WDW_BUY_ORIGINAL_NAME("Original name: %1% (%2%:%3%)"),
+    WDW_BUY_PRICE("Price: %1%%2% per item"),
+    // edited in 2.0.0
+    WDW_BUY_DISCOUNT("Discount: %1%%"),
+    WDW_BUY_ORIGINAL_PRICE("Price without the discount: %1%%2%"),
+    // end of edited stuff
+    WDW_BUY_CUSTOM_LORE("Lore: %1%"),
+    WDW_BUY_ENCHANTMENTS("Enchantments: %1%"),
+    WDW_BUY_ENCHANTMENTS_ABSENT("none"),
+    WDW_BUY_AMOUNT("Select amount"),
     WDW_SELECT_ZERO_TO_RETURN("Select zero to return to the previous screen."),
 
     // Sell item selector window
-    WDW_SELL_SELECT_ITEM ("Select an item to sell"),
-    WDW_SELL_NOTHING ("You have nothing to sell."),
-    BTN_ITEM_SELL ("%1% (x%2%)"),
+    WDW_SELL_SELECT_ITEM("Select an item to sell"),
+    WDW_SELL_NOTHING("You have nothing to sell."),
+    BTN_ITEM_SELL("%1% (x%2%)"),
 
 
     // Sell window
@@ -116,20 +121,21 @@ public enum Message {
     WDW_ITEM_ALREADY_EXISTS ("This item is already on the list."),
 
     // Item editing windows
-    WDW_EDIT_ITEM_TITLE ("Editing item"),
+    WDW_EDIT_ITEM_TITLE("Editing item"),
     //BUY_ITEM_INFO ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%"),
     //BUY_ITEM_INFO_DISC ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%\nPrice with discount: %5%%6%"),
-    SELL_ITEM_INFO ("Item: %1%\nPrice: %2%%3%"),
-    BTN_EDIT_ITEM ("* Edit item"),
-    BTN_DELETE_ITEM ("* Delete item"),
-    BTN_EDIT_DISCOUNT ("* Edit discount"),
-    BTN_ADD_DISCOUNT ("+ Add discount"),
+    SELL_ITEM_INFO("Item: %1%\nPrice: %2%%3%"),
+    BTN_EDIT_ITEM("* Edit item"),
+    BTN_DELETE_ITEM("* Delete item"),
+    // BTN_EDIT_DISCOUNT ("* Edit discount"),
+    BTN_ADD_DISCOUNT("+ Add discount"),
+    BTN_REMOVE_DISCOUNT("* Remove discount"), // new in 2.0.0
 
     // AddEnchantmentFailScreen
     WDW_ADD_ENCHANTMENT_FAIL("Failed to add enchantment."),
 
     // BuyManageItemScreen
-    BTN_BUY_ITEM ("Buy this item"),
+    BTN_BUY_ITEM("Buy this item"),
     BTN_MANAGE_ENCHANTMENTS("Manage enchantments"),
     BTN_ADD_ENCHANTMENT("+ Add enchantment"),
     // BTN_REMOVE_ENCHANTMENT ("Remove enchantment"),
@@ -144,8 +150,8 @@ public enum Message {
     WDW_EDIT_DISCOUNT_TITLE("Adding discount"),
     WDW_EDIT_DISCOUNT_HINT("Enter discount in percents (0 to return):"),
     WDW_EDIT_DISCOUNT_DURATION("Enter discount duration (numerical value):"),
+    WDW_EDIT_DISCOUNT_MORE_THAN_100("Discount can't be bigger than 100% or less than 0%."),
     // end of edited stuff
-    WDW_EDIT_DISCOUNT_MORE_THAN_100("Discount can't be bigger than 100%."),
 
     // Custom names list window
     WDW_CUSTOM_NAMES_HINT("You can add a custom name to an item. It will appear instead of the original one."),
@@ -200,7 +206,7 @@ public enum Message {
     LOG_BUY_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of buyable items."),
 
     // the next line was edited in 2.0.0
-    LOG_BUY_ITEM_EDITED ("User %1% has modified the buyable item %2%: %3%."),
+    LOG_BUY_ITEM_EDITED("User %1% has modified the buyable item %2%: %3%."),
 
     LOG_EDITED_ID("changed id from %1% to %2%"),
     LOG_EDITED_NAME("changed name from %1% to %2%"),
@@ -210,25 +216,31 @@ public enum Message {
 
     // LOG_BUY_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for buying, new price: %4%%5%, old price: %6%%7%."),
 
-    LOG_DISCOUNT_ADDED ("User %1% has added %2%% discount for %3% (ID: %4%)."),
-    LOG_DISCOUNT_EDITED ("User %1% has changed the discount for %2% (ID: %3%), new discount: %4%%, old discount: %5%%."),
-    LOG_DISCOUNT_DELETED ("User %1% has deleted the discount for %2% (ID: %3%)."),
+    LOG_DISCOUNT_ADDED("User %1% has added a %2%% discount for %3% (ID: %4%) for %5% %6%."),
+    // LOG_DISCOUNT_EDITED ("User %1% has changed the discount for %2% (ID: %3%), new discount: %4%%, old discount: %5%%."),
+    LOG_DISCOUNT_DELETED("User %1% has deleted the discount for %2% (ID: %3%)."),
 
-    LOG_SELL_ITEM_ADDED ("User %1% has added %2% (ID: %3%) to the list of sellable items, price: %4%%5%."),
+    LOG_SELL_ITEM_ADDED("User %1% has added %2% (ID: %3%) to the list of sellable items, price: %4%%5%."),
     LOG_SELL_ITEM_ADDED_WITH_CUSTOM_NAME("User %1% has added %2% (original name: %3%, ID: %4%) to the list of sellable items, price: %5%%6%."),
-    LOG_SELL_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of sellable items."),
+    LOG_SELL_ITEM_DELETED("User %1% has deleted %2% (ID: %3%) from the list of sellable items."),
 
     // the next line was edited in 2.0.0
-    LOG_SELL_ITEM_EDITED ("User %1% has modified the sellable item %2%: %3%."),
+    LOG_SELL_ITEM_EDITED("User %1% has modified the sellable item %2%: %3%."),
 
-    LOG_BUY_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%)"),
-    LOG_SELL_ENCHANTMENT_ADDED ("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%)"),
-    LOG_BUY_ENCHANTMENT_REMOVED ("User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%)"),
-    LOG_SELL_ENCHANTMENT_REMOVED ("User %1% has removed %2% %3% enchantment from a sellable item %4% (%5%)"),
+    LOG_BUY_ENCHANTMENT_ADDED("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%)"),
+    LOG_SELL_ENCHANTMENT_ADDED("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%)"),
+    LOG_BUY_ENCHANTMENT_REMOVED("User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%)"),
+    LOG_SELL_ENCHANTMENT_REMOVED("User %1% has removed %2% %3% enchantment from a sellable item %4% (%5%)"),
 
     // Transaction logs
-    LOG_BOUGHT ("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),
-    LOG_SOLD ("Player %1% have sold %2%x %3% (ID: %4%) for %5%%6%.");
+    LOG_BOUGHT("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),
+    LOG_SOLD("Player %1% have sold %2%x %3% (ID: %4%) for %5%%6%."),
+
+    // time units
+    MINUTES("minutes"),
+    HOURS("hours"),
+    DAYS("days"),
+    MONTHS("months");
 
     private static String language = "english";
     private static char c1; //= 'a';

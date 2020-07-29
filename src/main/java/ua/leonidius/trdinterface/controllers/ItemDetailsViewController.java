@@ -4,6 +4,8 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.models.BuyableItem;
+import ua.leonidius.trdinterface.models.Discount;
 import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 
@@ -13,8 +15,6 @@ public abstract class ItemDetailsViewController extends BaseController {
         super(manager);
     }
 
-    public abstract boolean isBuy();
-
     protected abstract ShopItem getItem();
 
     public String buildItemDescription() {
@@ -23,34 +23,38 @@ public abstract class ItemDetailsViewController extends BaseController {
         getItem().resetGameItem();
         Item gameItem = getItem().toGameItem();
 
-        if (isBuy()) {
-            // TODO: apply discount to price
-        }
-
         sb.append(Message.WDW_BUY_NAME.getText(gameItem.getName()));
         sb.append("\n");
 
-        Item pureItem = Item.fromString(gameItem.getId() + ":" + gameItem.getDamage());
+        Item pureItem = Item.fromString(getItem().getItemId());
         sb.append(Message.WDW_BUY_ORIGINAL_NAME.getText(pureItem.getName(),
                 gameItem.getId(), gameItem.getDamage()));
 
         sb.append("\n").append(Message.WDW_BUY_PRICE.getText(getItem().getPrice(),
                 Trading.getSettings().getCurrency()));
 
-        if (isBuy()) {
-            /*if (shopItem.discount != 0) {
-            sb.append("\n")
-                    .append(Message.WDW_BUY_DISCOUNT.getText(shopItem.discount, shopItem.calculatePrice(), settings.currency));
-        }*/
+        // Adding discount info
+        if (getItem() instanceof BuyableItem) {
+            Discount discount = ((BuyableItem) getItem()).getDiscount();
+            if (discount != null) {
+                sb.append("\n")
+                        .append(Message.WDW_BUY_DISCOUNT.getText(
+                                discount.getPercent()));
+                sb.append("\n")
+                        .append(Message.WDW_BUY_ORIGINAL_PRICE.getText(
+                                ((BuyableItem) getItem()).getOriginalPrice(),
+                                Trading.getSettings().getCurrency()));
+            }
         }
-
 
         if (gameItem.getLore() != null && gameItem.getLore().length != 0) {
             StringBuilder loreBuilder = new StringBuilder();
             for (String line : gameItem.getLore()) {
                 loreBuilder.append(line).append("\n");
             }
-            sb.append("\n").append(Message.WDW_BUY_CUSTOM_LORE.getText(loreBuilder.toString()));
+            sb.append("\n")
+                    .append(Message.WDW_BUY_CUSTOM_LORE.getText(
+                            loreBuilder.toString()));
         }
 
         Enchantment[] enchantments = gameItem.getEnchantments();
@@ -59,7 +63,8 @@ public abstract class ItemDetailsViewController extends BaseController {
             StringBuilder eListBuilder = new StringBuilder();
             for (int i = 0; i < enchantments.length; i++) {
                 Enchantment enchantment = enchantments[i];
-                eListBuilder.append(enchantment.getName()).append(" ").append(enchantment.getLevel());
+                eListBuilder.append(enchantment.getName())
+                        .append(" ").append(enchantment.getLevel());
                 if (i != enchantments.length - 1) eListBuilder.append(", ");
             }
             sb.append(Message.WDW_BUY_ENCHANTMENTS.getText(eListBuilder.toString()));

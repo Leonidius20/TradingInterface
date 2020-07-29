@@ -44,7 +44,7 @@ public class AddCategoryController extends NamingController {
 
             manager.back();
         } catch (SQLException e) {
-            Trading.handleException(e);
+            Trading.printException(e);
 
             InfoController controller;
             // TODO: test this

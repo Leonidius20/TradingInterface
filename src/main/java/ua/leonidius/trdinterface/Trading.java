@@ -10,10 +10,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import ru.nukkit.dblib.DbLib;
-import ua.leonidius.trdinterface.models.BuyableItem;
-import ua.leonidius.trdinterface.models.Category;
-import ua.leonidius.trdinterface.models.SellableItem;
-import ua.leonidius.trdinterface.models.Shop;
+import ua.leonidius.trdinterface.models.*;
 import ua.leonidius.trdinterface.views.screens.Screen;
 
 import java.io.File;
@@ -60,6 +57,7 @@ public class Trading extends PluginBase implements Listener {
             TableUtils.createTableIfNotExists(source, Category.class);
             TableUtils.createTableIfNotExists(source, BuyableItem.class);
             TableUtils.createTableIfNotExists(source, SellableItem.class);
+            TableUtils.createTableIfNotExists(source, Discount.class);
         } catch (SQLException e) {
             getLogger().critical(e.getMessage());
             getPluginLoader().disablePlugin(this);
@@ -96,7 +94,7 @@ public class Trading extends PluginBase implements Listener {
      *
      * @param e exception to handle
      */
-    public static void handleException(Exception e) {
+    public static void printException(Exception e) {
         if (getSettings().debugActive()) {
             getPlugin().getLogger().debug(e.getMessage());
             e.printStackTrace();

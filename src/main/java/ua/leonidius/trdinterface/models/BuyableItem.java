@@ -2,11 +2,14 @@ package ua.leonidius.trdinterface.models;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 import ua.leonidius.trdinterface.Trading;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 @DatabaseTable(tableName = "buyable_items")
@@ -32,6 +35,9 @@ public class BuyableItem extends ShopItem {
     @DatabaseField(dataType = DataType.BYTE_ARRAY)
     private byte[] nbt;
 
+    @ForeignCollectionField(columnName = "discounts", foreignFieldName = "item")
+    private ForeignCollection<Discount> discount;
+
     @Override
     protected int getRecordId() {
         return recordId;
@@ -44,12 +50,31 @@ public class BuyableItem extends ShopItem {
 
     @Override
     public double getPrice() {
+        if (getDiscount() == null) return price;
+        return price - (price * (getDiscount().getPercent() / 100));
+    }
+
+    public double getOriginalPrice() {
         return price;
     }
 
     @Override
     public byte[] getNbt() {
         return nbt;
+    }
+
+    /**
+     * @return discount for the item if there is one, null otherwise
+     */
+    public Discount getDiscount() {
+        if (discount.size() == 0) return null;
+        Discount result = discount.iterator().next();
+        try {
+            discount.closeLastIterator();
+        } catch (IOException e) {
+            Trading.printException(e);
+        }
+        return result;
     }
 
     @Override

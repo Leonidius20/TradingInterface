@@ -4,6 +4,7 @@ import ua.leonidius.trdinterface.controllers.DeleteItemController;
 import ua.leonidius.trdinterface.controllers.EditItemController;
 import ua.leonidius.trdinterface.controllers.ItemDetailsViewController;
 import ua.leonidius.trdinterface.controllers.ManageEnchantmentsController;
+import ua.leonidius.trdinterface.controllers.buy.discounts.AddDiscountController;
 import ua.leonidius.trdinterface.controllers.buy.items.BuyAmountSelectorController;
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -24,13 +25,12 @@ public class ManageBuyableItemController extends ItemDetailsViewController {
     }
 
     @Override
-    public boolean isBuy() {
-        return true;
-    }
-
-    @Override
     protected BuyableItem getItem() {
         return item;
+    }
+
+    public boolean hasDiscount() {
+        return item.getDiscount() != null;
     }
 
     public void buyItem() {
@@ -41,7 +41,11 @@ public class ManageBuyableItemController extends ItemDetailsViewController {
         new EditItemController(manager, item).showScreen();
     }
 
-    public void editDiscount() {
+    public void addDiscount() {
+        new AddDiscountController(manager, item).showScreen();
+    }
+
+    public void removeDiscount() {
         // TODO
     }
 

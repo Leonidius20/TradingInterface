@@ -23,11 +23,6 @@ public class ManageSellableItemController extends ItemDetailsViewController {
     }
 
     @Override
-    public boolean isBuy() {
-        return false;
-    }
-
-    @Override
     protected SellableItem getItem() {
         return item;
     }

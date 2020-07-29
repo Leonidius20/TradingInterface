@@ -45,7 +45,7 @@ public abstract class ShopItem {
                 Trading.getPlugin().getLogger().error(
                         "Error reading NBT tag on item with record_id "
                                 + getRecordId());
-                Trading.handleException(e);
+                Trading.printException(e);
             }
         }
 
@@ -105,7 +105,7 @@ public abstract class ShopItem {
         try {
             item.setNbt(gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag()));
         } catch (IOException e) {
-            Trading.handleException(e);
+            Trading.printException(e);
             throw new IllegalArgumentException("Incorrect NBT");
         }
     }

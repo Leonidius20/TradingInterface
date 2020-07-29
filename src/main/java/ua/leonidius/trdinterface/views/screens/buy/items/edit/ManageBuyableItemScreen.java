@@ -6,8 +6,9 @@ import ua.leonidius.trdinterface.views.elements.CallbackButton;
 import ua.leonidius.trdinterface.views.screens.SimpleScreen;
 
 /**
- * This screen is shown to players who have permissions to manage the shop. It allows to select an action
- * to perform on an item: buy, edit, delete, edit discount
+ * This screen is shown to players who have permissions to manage the shop.
+ * It allows to select an action to perform on an item:
+ * buy, edit, delete, add or remove discount, manage enchantments
  */
 public class ManageBuyableItemScreen extends SimpleScreen {
 
@@ -23,8 +24,6 @@ public class ManageBuyableItemScreen extends SimpleScreen {
                 controller::buyItem));
         addButton(new CallbackButton(Message.BTN_EDIT_ITEM.getText(),
                 controller::editItem));
-        addButton(new CallbackButton(Message.BTN_EDIT_DISCOUNT.getText(),
-                controller::editDiscount));
         addButton(new CallbackButton(Message.BTN_MANAGE_ENCHANTMENTS.getText(),
                 controller::manageEnchantments));
         addButton(new CallbackButton(Message.BTN_DELETE_ITEM.getText(),
@@ -36,6 +35,13 @@ public class ManageBuyableItemScreen extends SimpleScreen {
     @Override
     public void update() {
         setContent(controller.buildItemDescription());
+        if (controller.hasDiscount()) {
+            addButton(new CallbackButton(Message.BTN_REMOVE_DISCOUNT.getText(),
+                    controller::removeDiscount));
+        } else {
+            addButton(new CallbackButton(Message.BTN_ADD_DISCOUNT.getText(),
+                    controller::addDiscount));
+        }
     }
 
 }

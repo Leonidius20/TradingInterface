@@ -40,7 +40,7 @@ public class ShopCommand extends PluginCommand<Trading> implements CommandExecut
             Shop shop = shopDao.queryForId(1); // default shop has record_id = 1
             new MainController(new ScreenManager(player), shop).showScreen();
         } catch (SQLException e) {
-            Trading.handleException(e);
+            Trading.printException(e);
             new InfoController(new ScreenManager(player), Message.ERROR.getText());
         }
 

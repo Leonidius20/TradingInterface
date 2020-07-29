@@ -33,7 +33,7 @@ public abstract class BaseController {
      * @param e exception to handle
      */
     protected void handleException(Exception e) {
-        Trading.handleException(e);
+        Trading.printException(e);
         showErrorScreen();
     }
 
