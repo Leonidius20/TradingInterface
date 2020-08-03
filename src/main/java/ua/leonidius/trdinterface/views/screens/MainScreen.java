@@ -4,7 +4,6 @@ import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.MainController;
 import ua.leonidius.trdinterface.views.elements.CallbackButton;
 
-// TODO: may be replaced with generic ButtonsScreen
 public class MainScreen extends SimpleScreen {
 
     public MainScreen(MainController controller) {
@@ -13,13 +12,10 @@ public class MainScreen extends SimpleScreen {
         addButton(new CallbackButton(Message.MENU_BUY.getText(), controller::buy));
         addButton(new CallbackButton(Message.MENU_SELL.getText(), controller::sell));
 
-        /*if (manager.getPlayer().hasPermission...) {
-            //addButton(new ElementButton(Message.MENU_EDIT_BUY_LIST.getText()));
-            //addButton(new ElementButton(Message.MENU_EDIT_SELL_LIST.getText()));
-            addButton(new ElementButton(Message.MENU_CUSTOM_NAMES.getText()));
-        }*/
-
-        // TODO: add converter button
+        if (controller.showCustomNamesButton()) {
+            addButton(new CallbackButton(Message.MENU_CUSTOM_NAMES.getText(),
+                    controller::customNames));
+        }
     }
 
     @Override

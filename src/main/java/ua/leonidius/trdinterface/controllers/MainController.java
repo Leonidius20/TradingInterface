@@ -28,4 +28,12 @@ public class MainController extends BaseController {
         new SellableItemsController(manager, shop).showScreen();
     }
 
+    public boolean showCustomNamesButton() {
+        return manager.getPlayer().hasPermission("shop.edit");
+    }
+
+    public void customNames() {
+        // TODO
+    }
+
 }

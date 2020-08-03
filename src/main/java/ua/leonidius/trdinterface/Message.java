@@ -26,36 +26,38 @@ public enum Message {
     LNG_PRINT_FAIL("Failed to print message to 'null': \"%1%\""),
 
     // Commands
-    CMD_CONSOLE ("You cannot use this command in console."),
-    CMD_SHOP ("Opens the shop interface"),
+    CMD_CONSOLE("You cannot use this command in console."),
+    CMD_SHOP("Opens the shop interface"),
 
     // Main menu
-    WDW_MAIN_TITLE ("Main menu"),
-    MENU_BUY ("Buy items"),
-    MENU_SELL ("Sell items"),
-    MENU_EDIT_BUY_LIST ("Edit buyable items"),
-    MENU_EDIT_SELL_LIST ("Edit sellable items"),
-    MENU_CUSTOM_NAMES ("Custom item names"),
+    WDW_MAIN_TITLE("Main menu"),
+    MENU_BUY("Buy items"),
+    MENU_SELL("Sell items"),
+    MENU_EDIT_BUY_LIST("Edit buyable items"),
+    MENU_EDIT_SELL_LIST("Edit sellable items"),
+    // EDITED IN 2.0.0
+    MENU_CUSTOM_NAMES("Custom item translations"),
+    // end of edited stuff
 
     // Buttons
-    BTN_BACK ("< Back"),
+    BTN_BACK("< Back"),
 
     // Modal windows
-    BTN_YES ("Yes"),
-    BTN_NO ("No"),
+    BTN_YES("Yes"),
+    BTN_NO("No"),
 
     // Custom names windows
-    BTN_EDIT_CUSTOM_NAME ("* Edit custom name"),
-    BTN_DELETE_CUSTOM_NAME ("* Delete custom name"),
-    BTN_ADD_CUSTOM_NAME ("+ Add custom name"),
+    BTN_EDIT_CUSTOM_NAME("* Edit custom name"),
+    BTN_DELETE_CUSTOM_NAME("* Delete custom name"),
+    BTN_ADD_CUSTOM_NAME("+ Add custom name"),
 
     // Success and fail
-    WDW_SUCCESS_TITLE ("Success"),
-    WDW_FAIL_TITLE ("Fail"),
+    WDW_SUCCESS_TITLE("Success"),
+    WDW_FAIL_TITLE("Fail"),
 
     // Category selector window
-    WDW_BUY_CAT_TITLE ("Choose a category"),
-    WDW_BUY_NO_CATEGORIES ("There are no categories of goods in the shop. In order to use the shop, there must be at least one category."),
+    WDW_BUY_CAT_TITLE("Choose a category"),
+    WDW_BUY_NO_CATEGORIES("There are no categories of goods in the shop. In order to use the shop, there must be at least one category."),
 
     // Buy item selector window
     WDW_BUY_EMPTY_CAT("There are no items in this category."),
@@ -80,7 +82,7 @@ public enum Message {
     // Sell item selector window
     WDW_SELL_SELECT_ITEM("Select an item to sell"),
     WDW_SELL_NOTHING("You have nothing to sell."),
-    BTN_ITEM_SELL("%1% (x%2%)"),
+    BTN_ITEM_SELL("%1% (%2%%3%) (x%4%)"), // edited in 2.0.0
 
 
     // Sell window
@@ -102,23 +104,23 @@ public enum Message {
     // Category editing window
     BTN_RENAME_CATEGORY("* Rename category"),
     BTN_DELETE_CATEGORY("* Delete category"),
-    BTN_ADD_ITEM ("+ Add item"),
+    BTN_ADD_ITEM("+ Add item"),
 
     // Category deletion window
-    WDW_DELETE_CATEGORY_TITLE ("Deleting category"),
-    WDW_DELETE_CATEGORY_CONF ("Are you sure you want to delete %1% category? All of the items in this category will be deleted as well. This action cannot be undone."),
+    WDW_DELETE_CATEGORY_TITLE("Deleting category"),
+    WDW_DELETE_CATEGORY_CONF("Are you sure you want to delete %1% category? All of the items in this category will be deleted as well. This action cannot be undone."),
 
     // Adding item windows
-    WDW_ADD_ITEM_TITLE ("Adding item"),
-    WDW_ADD_ITEM_ID ("Item's ID (string or number)"),
-    WDW_ADD_ITEM_PRICE ("Price per item"),
-    WDW_ADD_ITEM_CUSTOM_NAME ("Custom name (optional)"),
-    WDW_ADD_ITEM_CUSTOM_LORE ("Custom lore (optional)"),
-    WDW_ADD_ITEM_ENCHANTMENTS ("You will be able to edit enchantments later."),
-    WDW_ADD_BUY_ITEM_SUCCESS ("You have successfully added %1% to the list of buyable items."),
-    WDW_ADD_SELL_ITEM_SUCCESS ("You have successfully added %1% to the list of sellable items."),
-    WDW_INVALID_PARAMS ("Invalid parameters."),
-    WDW_ITEM_ALREADY_EXISTS ("This item is already on the list."),
+    WDW_ADD_ITEM_TITLE("Adding item"),
+    WDW_ADD_ITEM_ID("Item's ID (string or number)"),
+    WDW_ADD_ITEM_PRICE("Price per item"),
+    WDW_ADD_ITEM_CUSTOM_NAME("Custom name (optional)"),
+    WDW_ADD_ITEM_CUSTOM_LORE("Custom lore (optional)"),
+    WDW_ADD_ITEM_ENCHANTMENTS("You will be able to edit enchantments later."),
+    WDW_ADD_BUY_ITEM_SUCCESS("You have successfully added %1% to the list of buyable items."),
+    WDW_ADD_SELL_ITEM_SUCCESS("You have successfully added %1% to the list of sellable items."),
+    WDW_INVALID_PARAMS("Invalid parameters."),
+    WDW_ITEM_ALREADY_EXISTS("This item is already on the list."),
 
     // Item editing windows
     WDW_EDIT_ITEM_TITLE("Editing item"),
@@ -162,20 +164,20 @@ public enum Message {
     WDW_CUSTOM_NAME_INFO("Item's ID: %1%\nOriginal name: %2%\nCustom name: %3%"),
 
     // Custom name adding window
-    WDW_ADD_CUSTOM_NAME_TITLE ("Adding custom name"),
-    WDW_ADD_CUSTOM_NAME_FAIL ("There is already a custom name for this item."),
+    WDW_ADD_CUSTOM_NAME_TITLE("Adding custom name"),
+    WDW_ADD_CUSTOM_NAME_FAIL("There is already a custom name for this item."),
 
     // Custom name editing window
-    WDW_EDIT_CUSTOM_NAME_TITLE ("Editing custom name"),
-    WDW_CUSTOM_NAME_HINT ("Item's custom name:"),
+    WDW_EDIT_CUSTOM_NAME_TITLE("Editing custom name"),
+    WDW_CUSTOM_NAME_HINT("Item's custom name:"),
 
     // Custom name deletion window
-    WDW_DELETE_CUSTOM_NAME_TITLE ("Deleting custom name"),
-    WDW_DELETE_CUSTOM_NAME_CONF ("Are you sure you want to delete a custom name for an item? This action can't be undone."),
+    WDW_DELETE_CUSTOM_NAME_TITLE("Deleting custom name"),
+    WDW_DELETE_CUSTOM_NAME_CONF("Are you sure you want to delete a custom name for an item? This action can't be undone."),
 
-    WDW_ADD_ENCHANTMENT_TITLE ("Adding an enchantment"),
-    WDW_ADD_ENCHANTMENT_SELECTOR_HINT ("Select an enchantment:"),
-    WDW_ADD_ENCHANTMENT_LEVEL_HINT ("Select a level (0 to return)"),
+    WDW_ADD_ENCHANTMENT_TITLE("Adding an enchantment"),
+    WDW_ADD_ENCHANTMENT_SELECTOR_HINT("Select an enchantment:"),
+    WDW_ADD_ENCHANTMENT_LEVEL_HINT("Select a level (0 to return)"),
 
     // WDW_REMOVE_ENCHANTMENT_HINT ("Select an enchantment to remove:"),
 
@@ -183,28 +185,28 @@ public enum Message {
     WDW_MANAGE_ENCHANTMENTS_TEXT("Select an enchantment from the list to remove it or press \"+ Add enchantment\" to add one."),
     WDW_MANAGE_ENCHANTMENTS_EMPTY("There are no enchantments on this item"),
 
-    WDW_REMOVE_ENCHANTMENT_TITLE ("Removing an enchantment"),
+    WDW_REMOVE_ENCHANTMENT_TITLE("Removing an enchantment"),
     WDW_REMOVE_ENCHANTMENT_CONF("Are you sure you want to remove %1% from %2%?"),
 
     // Buy success and fail strings
-    BUY_NO_MONEY ("Not enough money to buy this item."),
-    BUY_NO_SPACE ("There is no free space in your inventory."),
-    BUY_NO_SPACE_AND_MONEY ("There is no free space in your inventory and there is not enough money to buy this item."),
-    ERROR ("An error occurred."),
+    BUY_NO_MONEY("Not enough money to buy this item."),
+    BUY_NO_SPACE("There is no free space in your inventory."),
+    BUY_NO_SPACE_AND_MONEY("There is no free space in your inventory and there is not enough money to buy this item."),
+    ERROR("An error occurred."),
     ERROR_DESC("An error occurred: %1%"),
-    BUY_SUCCESS ("You have successfully bought %1%x %2% for %3%%4%."),
+    BUY_SUCCESS("You have successfully bought %1%x %2% for %3%%4%."),
 
     // Sell success string
-    SELL_SUCCESS ("You have successfully sold %1%x %2% for %3%%4%."),
+    SELL_SUCCESS("You have successfully sold %1%x %2% for %3%%4%."),
 
     // List edit logs
-    LOG_CATEGORY_ADDED ("User %1% has added a new category of buyable items called %2%."),
-    LOG_CATEGORY_DELETED ("User %1% has deleted a category of buyable items called %2%."),
-    LOG_CATEGORY_RENAMED ("User %1% has renamed a category of buyable items called %2% into %3%."),
+    LOG_CATEGORY_ADDED("User %1% has added a new category of buyable items called %2%."),
+    LOG_CATEGORY_DELETED("User %1% has deleted a category of buyable items called %2%."),
+    LOG_CATEGORY_RENAMED("User %1% has renamed a category of buyable items called %2% into %3%."),
 
-    LOG_BUY_ITEM_ADDED ("User %1% has added %2% (ID: %3%) to the list of buyable items, price: %4%%5%."),
-    LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME ("User %1% has added %2% (original name: %3%, ID: %4%) to the list of buyable items, price: %5%%6%."),
-    LOG_BUY_ITEM_DELETED ("User %1% has deleted %2% (ID: %3%) from the list of buyable items."),
+    LOG_BUY_ITEM_ADDED("User %1% has added %2% (ID: %3%) to the list of buyable items, price: %4%%5%."),
+    LOG_BUY_ITEM_ADDED_WITH_CUSTOM_NAME("User %1% has added %2% (original name: %3%, ID: %4%) to the list of buyable items, price: %5%%6%."),
+    LOG_BUY_ITEM_DELETED("User %1% has deleted %2% (ID: %3%) from the list of buyable items."),
 
     // the next line was edited in 2.0.0
     LOG_BUY_ITEM_EDITED("User %1% has modified the buyable item %2%: %3%."),
@@ -248,31 +250,31 @@ public enum Message {
     private static String language = "english";
     private static char c1; //= 'a';
     private static char c2; //= '2';
-    private static boolean saveLanguage = false;
 
     private static PluginBase plugin = null;
 
-    public boolean log(Object... s) {
+    public void log(Object... s) {
         plugin.getLogger().info(getText(s));
-        return true;
     }
 
-    public boolean print(CommandSender sender, Object... s) {
-        if (sender == null) return Message.LNG_PRINT_FAIL.log(this.name());
+    public void print(CommandSender sender, Object... s) {
+        if (sender == null) {
+            Message.LNG_PRINT_FAIL.log(this.name());
+            return;
+        }
         sender.sendMessage(getText(s));
-        return true;
     }
 
     public void printError(CommandSender sender, Object... s) {
-        print (sender, s, 'c', 'c');
+        print(sender, s, 'c', 'c');
     }
 
-    public void tip (Player player, Object... s) {
-        if (player!=null) player.sendTip(getText(s));
+    public void tip(Player player, Object... s) {
+        if (player != null) player.sendTip(getText(s));
     }
 
-    public void popup (Player player, Object... s) {
-        if (player!=null) player.sendPopup(getText(s));
+    public void popup(Player player, Object... s) {
+        if (player != null) player.sendPopup(getText(s));
     }
 
     public boolean broadcast(String permission, Object... s) {
@@ -289,22 +291,22 @@ public enum Message {
         int count = 1;
         int c = 0;
         DecimalFormat fmt = new DecimalFormat("####0.##");
-        for (int i = 0; i < keys.length; i++) {
-            String s = keys[i].toString();
+        for (Object key : keys) {
+            String s = key.toString();
             if (s.equals("FULLFLOAT")) {
                 fullFloat = true;
                 continue;
-            } else if (keys[i] instanceof Location) {
-                Location loc = (Location) keys[i];
+            } else if (key instanceof Location) {
+                Location loc = (Location) key;
                 if (fullFloat)
                     s = loc.getLevel().getName() + "[" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + "]";
                 else
                     s = loc.getLevel().getName() + "[" + fmt.format(loc.getX()) + ", " + fmt.format(loc.getY()) + ", " + fmt.format(loc.getZ()) + "]";
-            } else if (keys[i] instanceof Double || keys[i] instanceof Float) {
-                if (!fullFloat) s = fmt.format(keys[i]);
+            } else if (key instanceof Double || key instanceof Float) {
+                if (!fullFloat) s = fmt.format(key);
             }
 
-            String from = (new StringBuilder("%").append(count).append("%")).toString();
+            String from = "%" + count + "%";
             String to = s;
             str = str.replace(from, to);
             count++;
@@ -318,8 +320,8 @@ public enum Message {
     }
 
     private String message;
-    private Character color1;
-    private Character color2;
+    private final Character color1;
+    private final Character color2;
 
     Message(String msg) {
         message = msg;
@@ -344,13 +346,19 @@ public enum Message {
 
     public static void init(PluginBase plg) {
         plugin = plg;
+
         language = Trading.getSettings().getLanguage();
-        if (language.equalsIgnoreCase("default")) language = Server.getInstance().getLanguage().getLang();
-        else if (language.length() > 3) language = language.substring(0, 3);
-        saveLanguage = Trading.getSettings().saveLanguageFile();
+        if (language.equalsIgnoreCase("default"))
+            language = Server.getInstance().getLanguage().getLang();
+        else if (language.length() > 3)
+            language = language.substring(0, 3);
 
         initMessages();
-        if (saveLanguage) saveMessages();
+
+        if (Trading.getSettings().saveLanguageFile()) {
+            saveMessages();
+        }
+
         c1 = 'a';
         c2 = '2';
     }
@@ -382,14 +390,5 @@ public enum Message {
             LNG_SAVE_FAIL.log();
         }
     }
-
-    /*public static String join(Object... s) {
-        StringBuilder sb = new StringBuilder();
-        for (Object o : s) {
-            if (sb.length() > 0) sb.append(" ");
-            sb.append(o.toString());
-        }
-        return sb.toString();
-    }*/
 
 }

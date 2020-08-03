@@ -1,7 +1,7 @@
 package ua.leonidius.trdinterface.controllers.sell.edit;
 
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.controllers.ItemsListController;
+import ua.leonidius.trdinterface.controllers.ListController;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.models.ShopItem;
@@ -10,7 +10,7 @@ import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.util.LinkedHashMap;
 
-public class EditSellableItemsController extends ItemsListController {
+public class EditSellableItemsController extends ListController<ShopItem> {
 
     private final Shop shop;
 

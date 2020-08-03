@@ -1,7 +1,10 @@
 package ua.leonidius.trdinterface.controllers.buy.items;
 
+import cn.nukkit.item.Item;
+import cn.nukkit.utils.TextFormat;
 import ua.leonidius.trdinterface.Message;
-import ua.leonidius.trdinterface.controllers.ItemsListController;
+import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.controllers.ListController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.DeleteCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.RenameCategoryController;
 import ua.leonidius.trdinterface.controllers.buy.items.edit.AddBuyableItemController;
@@ -9,13 +12,12 @@ import ua.leonidius.trdinterface.controllers.buy.items.edit.ManageBuyableItemCon
 import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Discount;
-import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.util.LinkedHashMap;
 
-public class BuyableItemsController extends ItemsListController {
+public class BuyableItemsController extends ListController<BuyableItem> {
 
     private final Category category;
 
@@ -75,14 +77,35 @@ public class BuyableItemsController extends ItemsListController {
     }
 
     @Override
-    public void selectItem(ShopItem item) {
+    public void selectItem(BuyableItem item) {
         // TODO: check divided permissions
         if (manager.getPlayer().hasPermission("shop.edit")) {
-            new ManageBuyableItemController(manager, (BuyableItem) item).showScreen();
+            new ManageBuyableItemController(manager, item).showScreen();
             return;
         }
 
-        new BuyAmountSelectorController(manager, (BuyableItem) item).showScreen();
+        new BuyAmountSelectorController(manager, item).showScreen();
+    }
+
+    @Override
+    public String buildItemButtonText(BuyableItem item) {
+        Item gameItem = item.toGameItem();
+
+        String result;
+
+        if (item.getDiscount() != null) {
+            result = Message.BTN_ITEM_BUY_SALE.getText(item.getName(),
+                    item.getPrice(), Trading.getSettings().getCurrency(),
+                    item.getDiscount().getPercent());
+        } else {
+            result = Message.BTN_ITEM_BUY.getText(item.getName(), item.getPrice(),
+                    Trading.getSettings().getCurrency());
+        }
+
+
+        if (gameItem.hasEnchantments()) {
+            return TextFormat.colorize(TextFormat.DARK_PURPLE.getChar(), result);
+        } else return result;
     }
 
 }
