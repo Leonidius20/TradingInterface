@@ -1,6 +1,9 @@
 package ua.leonidius.trdinterface.controllers.sell.edit;
 
+import cn.nukkit.item.Item;
+import cn.nukkit.utils.TextFormat;
 import ua.leonidius.trdinterface.Message;
+import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.ListController;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.Shop;
@@ -50,6 +53,18 @@ public class EditSellableItemsController extends ListController<ShopItem> {
     @Override
     public String getTitle() {
         return Message.MENU_EDIT_SELL_LIST.getText();
+    }
+
+    @Override
+    public String buildItemButtonText(ShopItem item) {
+        Item gameItem = item.toGameItem();
+
+        String result = Message.BTN_ITEM_BUY.getText(item.getName(),
+                item.getPrice(), Trading.getSettings().getCurrency());
+
+        if (gameItem.hasEnchantments()) {
+            return TextFormat.colorize(TextFormat.DARK_PURPLE.getChar(), result);
+        } else return result;
     }
 
 }
