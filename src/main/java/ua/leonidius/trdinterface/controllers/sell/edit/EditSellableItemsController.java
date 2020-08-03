@@ -7,13 +7,16 @@ import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.ListController;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.Shop;
-import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.util.LinkedHashMap;
 
-public class EditSellableItemsController extends ListController<ShopItem> {
+/**
+ * Controller for showing a list of all
+ * sellable items in the shop to edit them
+ */
+public class EditSellableItemsController extends ListController<SellableItem> {
 
     private final Shop shop;
 
@@ -37,8 +40,8 @@ public class EditSellableItemsController extends ListController<ShopItem> {
     }
 
     @Override
-    public void selectItem(ShopItem item) {
-        new ManageSellableItemController(manager, (SellableItem) item).showScreen();
+    public void selectItem(SellableItem item) {
+        new ManageSellableItemController(manager, item).showScreen();
     }
 
     private void addItem() {
@@ -56,7 +59,7 @@ public class EditSellableItemsController extends ListController<ShopItem> {
     }
 
     @Override
-    public String buildItemButtonText(ShopItem item) {
+    public String buildItemButtonText(SellableItem item) {
         Item gameItem = item.toGameItem();
 
         String result = Message.BTN_ITEM_BUY.getText(item.getName(),

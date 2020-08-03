@@ -17,11 +17,11 @@ import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.util.LinkedHashMap;
 
-public class BuyableItemsController extends ListController<BuyableItem> {
+public class BuyableItemsListController extends ListController<BuyableItem> {
 
     private final Category category;
 
-    public BuyableItemsController(ScreenManager manager, Category category) {
+    public BuyableItemsListController(ScreenManager manager, Category category) {
         super(manager);
         this.category = category;
     }

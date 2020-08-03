@@ -16,11 +16,11 @@ import ua.leonidius.trdinterface.views.screens.ListScreen;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
-public class SellableItemsController extends ListController<SellableItem> {
+public class SellableItemsListController extends ListController<SellableItem> {
 
     private final Shop shop;
 
-    public SellableItemsController(ScreenManager manager, Shop shop) {
+    public SellableItemsListController(ScreenManager manager, Shop shop) {
         super(manager);
         this.shop = shop;
     }

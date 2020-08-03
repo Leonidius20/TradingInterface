@@ -58,6 +58,7 @@ public class Trading extends PluginBase implements Listener {
             TableUtils.createTableIfNotExists(source, BuyableItem.class);
             TableUtils.createTableIfNotExists(source, SellableItem.class);
             TableUtils.createTableIfNotExists(source, Discount.class);
+            TableUtils.createTableIfNotExists(source, Translation.class);
         } catch (SQLException e) {
             getLogger().critical(e.getMessage());
             getPluginLoader().disablePlugin(this);

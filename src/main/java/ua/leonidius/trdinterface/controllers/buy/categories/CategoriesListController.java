@@ -3,7 +3,7 @@ package ua.leonidius.trdinterface.controllers.buy.categories;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.ListController;
 import ua.leonidius.trdinterface.controllers.buy.categories.edit.AddCategoryController;
-import ua.leonidius.trdinterface.controllers.buy.items.BuyableItemsController;
+import ua.leonidius.trdinterface.controllers.buy.items.BuyableItemsListController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -11,11 +11,11 @@ import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.util.LinkedHashMap;
 
-public class CategoriesController extends ListController<Category> {
+public class CategoriesListController extends ListController<Category> {
 
     private final Shop shop;
 
-    public CategoriesController(ScreenManager manager, Shop shop) {
+    public CategoriesListController(ScreenManager manager, Shop shop) {
         super(manager);
         this.shop = shop;
     }
@@ -61,7 +61,7 @@ public class CategoriesController extends ListController<Category> {
 
     @Override
     public void selectItem(Category category) {
-        new BuyableItemsController(manager, category).showScreen();
+        new BuyableItemsListController(manager, category).showScreen();
     }
 
 }

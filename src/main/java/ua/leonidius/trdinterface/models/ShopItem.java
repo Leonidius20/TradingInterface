@@ -4,6 +4,8 @@ import cn.nukkit.item.Item;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Trading;
 
 import java.io.IOException;
@@ -110,9 +112,47 @@ public abstract class ShopItem {
         }
     }
 
+    /**
+     * Used to cache the item's name to avoid querying for custom
+     * translation more than once
+     */
+    private String name = null;
+
+    /**
+     * Returns the name of the item, which may have a custom translation
+     *
+     * @return name of the item
+     */
     public String getName() {
-        // TODO: custom names
-        return toGameItem().getName();
+        if (name == null) {
+            if (toGameItem().hasCustomName())
+                return name = toGameItem().getCustomName();
+
+            try {
+                Dao<Translation, Integer> translationDao =
+                        DaoManager.createDao(Trading.getSource(), Translation.class);
+                translationDao.queryForEq("itemId", getItemId());
+
+                if (translationDao.iterator().hasNext()) {
+                    return name = translationDao.iterator().next().getTranslation();
+                }
+                translationDao.iterator().closeQuietly();
+            } catch (SQLException e) {
+                Trading.printException(e);
+            }
+
+            return name = toGameItem().getName();
+        }
+
+        return name;
+    }
+
+    /**
+     * Deleting the cached version of the item's name in order
+     * for the new name to be shown after a custom translation was added
+     */
+    public void resetName() {
+        name = null;
     }
 
     public abstract void update() throws SQLException;

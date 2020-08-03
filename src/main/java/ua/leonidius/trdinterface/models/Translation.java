@@ -18,4 +18,12 @@ public class Translation {
     @DatabaseField(canBeNull = false, columnName = "translation")
     private String translation;
 
+    public String getItemId() {
+        return itemId;
+    }
+
+    public String getTranslation() {
+        return translation;
+    }
+
 }
