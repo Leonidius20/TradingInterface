@@ -9,6 +9,14 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "translations")
 public class Translation {
 
+    public Translation() {
+    }
+
+    public Translation(String itemId, String translation) {
+        this.itemId = itemId;
+        this.translation = translation;
+    }
+
     @DatabaseField(generatedId = true, columnName = "record_id")
     private int recordId;
 

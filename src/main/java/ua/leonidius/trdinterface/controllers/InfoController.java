@@ -22,11 +22,7 @@ public class InfoController extends BaseController {
 
     @Override
     public void showScreen() {
-        manager.addAndShow(new InfoScreen(this, title, content));
-    }
-
-    public void back() {
-        manager.back();
+        manager.addAndShow(new InfoScreen(this, title, content), true);
     }
 
 }

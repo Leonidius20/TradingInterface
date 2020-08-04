@@ -24,4 +24,8 @@ public abstract class CustomScreen extends FormWindowCustom implements Screen {
         return ignoresStack;
     }
 
+    @Override
+    public void update() {
+    }
+
 }

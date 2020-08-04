@@ -131,7 +131,7 @@ public abstract class ShopItem {
             try {
                 Dao<Translation, Integer> translationDao =
                         DaoManager.createDao(Trading.getSource(), Translation.class);
-                translationDao.queryForEq("itemId", getItemId());
+                translationDao.queryForEq("item_id", getItemId());
 
                 if (translationDao.iterator().hasNext()) {
                     return name = translationDao.iterator().next().getTranslation();

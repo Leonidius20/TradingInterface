@@ -15,6 +15,10 @@ public interface Screen {
 
     boolean ignoresStack();
 
+    /**
+     * Called before showing the screen for the first time
+     * and when returning to the screen using a back button
+     */
     void update();
 
 }

@@ -18,7 +18,4 @@ public class MainScreen extends SimpleScreen {
         }
     }
 
-    @Override
-    public void update() {}
-
 }

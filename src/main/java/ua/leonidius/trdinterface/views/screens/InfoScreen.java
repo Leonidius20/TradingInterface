@@ -14,7 +14,4 @@ public class InfoScreen extends SimpleScreen {
         addButton(new CallbackButton(Message.BTN_BACK.getText(), controller::back));
     }
 
-    @Override
-    public void update() {}
-
 }

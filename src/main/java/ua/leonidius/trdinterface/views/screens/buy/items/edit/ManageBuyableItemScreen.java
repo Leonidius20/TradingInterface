@@ -26,8 +26,6 @@ public class ManageBuyableItemScreen extends SimpleScreen {
 
         this.controller = controller;
 
-        setContent(controller.buildItemDescription());
-
         addButton(new CallbackButton(Message.BTN_BACK.getText(), controller::back));
         addButton(new CallbackButton(Message.BTN_BUY_ITEM.getText(),
                 controller::buyItem));
@@ -38,13 +36,7 @@ public class ManageBuyableItemScreen extends SimpleScreen {
         addButton(new CallbackButton(Message.BTN_DELETE_ITEM.getText(),
                 controller::deleteItem));
 
-        if (controller.hasDiscount()) {
-            discountButton = new CallbackButton(Message.BTN_REMOVE_DISCOUNT.getText(),
-                    controller::removeDiscount);
-        } else {
-            discountButton = new CallbackButton(Message.BTN_ADD_DISCOUNT.getText(),
-                    controller::addDiscount);
-        }
+        discountButton = new CallbackButton("", null);
         addButton(discountButton);
     }
 

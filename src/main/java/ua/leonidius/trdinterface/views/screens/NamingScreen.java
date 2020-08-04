@@ -32,7 +32,4 @@ public class NamingScreen extends CustomScreen {
         else controller.giveName(name);
     }
 
-    @Override
-    public void update() {}
-
 }

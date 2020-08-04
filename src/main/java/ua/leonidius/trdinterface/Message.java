@@ -164,16 +164,16 @@ public enum Message {
     WDW_CUSTOM_NAME_INFO("Item's ID: %1%\nOriginal name: %2%\nCustom name: %3%"),
 
     // Custom name adding window
-    WDW_ADD_CUSTOM_NAME_TITLE("Adding custom name"),
-    WDW_ADD_CUSTOM_NAME_FAIL("There is already a custom name for this item."),
+    WDW_ADD_CUSTOM_NAME_TITLE("Adding translation"), // changed in 2.0.0
+    WDW_ADD_CUSTOM_NAME_FAIL("There is already a custom translation for this item's name."), // changed in 2.0.0
 
     // Custom name editing window
     WDW_EDIT_CUSTOM_NAME_TITLE("Editing custom name"),
-    WDW_CUSTOM_NAME_HINT("Item's custom name:"),
+    WDW_CUSTOM_NAME_HINT("Item's name translation:"), // changed in 2.0.0
 
     // Custom name deletion window
-    WDW_DELETE_CUSTOM_NAME_TITLE("Deleting custom name"),
-    WDW_DELETE_CUSTOM_NAME_CONF("Are you sure you want to delete a custom name for an item? This action can't be undone."),
+    WDW_DELETE_CUSTOM_NAME_TITLE("Deleting translation"), // changed in 2.0.0
+    WDW_DELETE_CUSTOM_NAME_CONF("Are you sure you want to delete a custom translation for the item's name? This action can't be undone."), // changed in 2.0.0
 
     WDW_ADD_ENCHANTMENT_TITLE("Adding an enchantment"),
     WDW_ADD_ENCHANTMENT_SELECTOR_HINT("Select an enchantment:"),
@@ -238,6 +238,10 @@ public enum Message {
     // Transaction logs
     LOG_BOUGHT("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),
     LOG_SOLD("Player %1% have sold %2%x %3% (ID: %4%) for %5%%6%."),
+
+    LOG_TRANSLATION_ADDED("Player %1% have added a custom translation for %2% (%3%) - %4%"),
+    LOG_TRANSLATION_CHANGED("Player %1% have changed a custom translation for %2% (%3%) from %4% to %5%"),
+    LOG_TRANSLATION_DELETED("Player %1% have deleted a custom translation for %2% (%3%)"),
 
     // time units
     SECONDS("seconds"),

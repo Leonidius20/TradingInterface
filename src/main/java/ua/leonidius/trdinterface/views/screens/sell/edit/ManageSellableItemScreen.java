@@ -20,8 +20,6 @@ public class ManageSellableItemScreen extends SimpleScreen {
                 controller::manageEnchantments));
         addButton(new CallbackButton(Message.BTN_DELETE_ITEM.getText(),
                 controller::deleteItem));
-
-        update();
     }
 
     @Override

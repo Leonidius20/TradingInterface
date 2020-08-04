@@ -48,7 +48,4 @@ public class AddDiscountScreen extends CustomScreen {
         controller.addDiscount(percentS, durationS, unit);
     }
 
-    @Override
-    public void update() {}
-
 }

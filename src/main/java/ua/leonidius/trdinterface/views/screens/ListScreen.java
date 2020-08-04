@@ -7,7 +7,10 @@ import ua.leonidius.trdinterface.views.elements.CallbackButton;
 import java.util.Map;
 
 /**
- * Created by Leonidius20 on 26.06.18.
+ * A screen that allows to choose an item from a provided list of items,
+ * and optionally shows extra action buttons on top of the list.
+ *
+ * @param <T> represents the type of items in the list
  */
 public class ListScreen<T> extends SimpleScreen {
 
@@ -23,8 +26,6 @@ public class ListScreen<T> extends SimpleScreen {
     }
 
     /**
-     * A screen that allows to choose an item from a provided list of items.
-     * Parameter T represents the type of items in the list.
      * @param controller Controller for this screen
      * @param emptyContent Text to show if the list is empty
      * @param notEmptyContent Text to show if the list is not empty
@@ -38,7 +39,6 @@ public class ListScreen<T> extends SimpleScreen {
         this.emptyContent = emptyContent;
         this.notEmptyContent = notEmptyContent;
         this.additionalButtons = additionalButtons;
-        update();
     }
 
     @Override
@@ -56,9 +56,9 @@ public class ListScreen<T> extends SimpleScreen {
         }
 
         T[] items = controller.fetchItems();
-        if (items.length == 0) {
-            setContent(emptyContent);
-        } else {
+        if (items == null) setContent(Message.ERROR.getText());
+        else if (items.length == 0) setContent(emptyContent);
+        else {
             for (T item : controller.fetchItems()) {
                 addButton(new CallbackButton(controller.buildItemButtonText(item),
                         () -> controller.selectItem(item)));

@@ -44,4 +44,9 @@ public abstract class SimpleScreen extends FormWindowSimple implements Screen {
             ((CallbackButton) button).executeCallback();
         }
     }
+
+    @Override
+    public void update() {
+    }
+
 }

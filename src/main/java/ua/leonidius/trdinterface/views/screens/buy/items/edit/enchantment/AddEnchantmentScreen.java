@@ -30,9 +30,6 @@ public class AddEnchantmentScreen extends CustomScreen {
     }
 
     @Override
-    public void update() {}
-
-    @Override
     public void onResponse(PlayerFormRespondedEvent event) {
         int enchantmentLevel = (int) getResponse().getSliderResponse(1);
 

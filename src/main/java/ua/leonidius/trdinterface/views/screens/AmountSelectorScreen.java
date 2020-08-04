@@ -23,9 +23,6 @@ public class AmountSelectorScreen extends CustomScreen {
     }
 
     @Override
-    public void update() {}
-
-    @Override
     public void onResponse(PlayerFormRespondedEvent event) {
         int amount = (int)getResponse().getSliderResponse(2);
         if (amount == 0) controller.back();

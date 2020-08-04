@@ -33,9 +33,6 @@ public class ItemDetailsEditScreen extends CustomScreen {
     }
 
     @Override
-    public void update() {}
-
-    @Override
     public void onResponse(PlayerFormRespondedEvent event) {
         String itemId = getResponse().getInputResponse(0);
         String price = getResponse().getInputResponse(1);
