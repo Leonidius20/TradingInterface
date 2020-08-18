@@ -22,7 +22,12 @@ public abstract class Sell {
 
         double price = Trading.sellCfg.getDouble(id.replace(":", "-"));
 
-        double cost = price*amount;
+        double cost = price * amount;
+
+        if (!player.getInventory().contains(item)) {
+            player.showFormWindow(new SellFailScreen());
+            return;
+        }
 
         player.getInventory().removeItem(item);
         EconomyAPI.getInstance().addMoney(player, cost);
