@@ -32,7 +32,6 @@ public class ManageEnchantmentsController extends ListController<Enchantment> {
                 Message.WDW_MANAGE_ENCHANTMENTS_TEXT.getText(), buttons));
     }
 
-
     @Override
     public Enchantment[] fetchItems() {
         return item.toGameItem().getEnchantments();

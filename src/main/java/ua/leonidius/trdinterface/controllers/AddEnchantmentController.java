@@ -42,11 +42,11 @@ public class AddEnchantmentController extends BaseController {
 
         if (Trading.getSettings().logEdits()) {
             if (item instanceof BuyableItem) {
-                Message.LOG_BUY_ENCHANTMENT_ADDED.log(manager.getPlayer(),
+                Message.LOG_BUY_ENCHANTMENT_ADDED.log(manager.getPlayer().getName(),
                         Enchantment.get(id).getName(), level,
                         gameItem.getName(), item.getItemId());
             } else {
-                Message.LOG_SELL_ENCHANTMENT_ADDED.log(manager.getPlayer(),
+                Message.LOG_SELL_ENCHANTMENT_ADDED.log(manager.getPlayer().getName(),
                         Enchantment.get(id).getName(), level,
                         gameItem.getName(), item.getItemId());
             }

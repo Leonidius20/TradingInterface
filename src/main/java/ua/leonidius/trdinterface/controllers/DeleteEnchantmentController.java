@@ -34,8 +34,10 @@ public class DeleteEnchantmentController extends ModalController {
 
     @Override
     public void onPositiveResponse() {
+        // we need to save custom name & lore, because we update the NBT tag
         Item oldGameItem = item.toGameItem();
         Item newGameItem = Item.fromString(item.getItemId());
+
         if (!oldGameItem.getCustomName().equals(""))
             newGameItem.setCustomName(oldGameItem.getCustomName());
         if (oldGameItem.getLore() != null && oldGameItem.getLore().length != 0) {
@@ -69,6 +71,9 @@ public class DeleteEnchantmentController extends ModalController {
                         item.getName(), item.getItemId());
             }
         }
+
+        item.resetGameItem(); // so that the list of enchantments in
+        // ManageEnchantmentsController is updated
 
         manager.back();
     }

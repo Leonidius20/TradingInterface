@@ -230,10 +230,10 @@ public enum Message {
     // the next line was edited in 2.0.0
     LOG_SELL_ITEM_EDITED("User %1% has modified the sellable item %2%: %3%."),
 
-    LOG_BUY_ENCHANTMENT_ADDED("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%)"),
-    LOG_SELL_ENCHANTMENT_ADDED("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%)"),
-    LOG_BUY_ENCHANTMENT_REMOVED("User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%)"),
-    LOG_SELL_ENCHANTMENT_REMOVED("User %1% has removed %2% %3% enchantment from a sellable item %4% (%5%)"),
+    LOG_BUY_ENCHANTMENT_ADDED("User %1% has added %2% %3% enchantment to a buyable item %4% (%5%)."),
+    LOG_SELL_ENCHANTMENT_ADDED("User %1% has added %2% %3% enchantment to a sellable item %4% (%5%)."),
+    LOG_BUY_ENCHANTMENT_REMOVED("User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%)."),
+    LOG_SELL_ENCHANTMENT_REMOVED("User %1% has removed %2% %3% enchantment from a sellable item %4% (%5%)."),
 
     // Transaction logs
     LOG_BOUGHT("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),
