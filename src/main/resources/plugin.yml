@@ -1,6 +1,6 @@
 name: Trading Interface
 main: ua.leonidius.trdinterface.Trading
-version: "1.0.2"
+version: "1.0.3"
 author: Leonidius20
 url: github.com/Leonidius20/TradingInterface
 api: ["1.0.0"]
