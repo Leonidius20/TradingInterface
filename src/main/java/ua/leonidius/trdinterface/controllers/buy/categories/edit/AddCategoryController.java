@@ -10,7 +10,6 @@ import ua.leonidius.trdinterface.controllers.NamingController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.NamingScreen;
 
 import java.sql.SQLException;
 
@@ -24,14 +23,17 @@ public class AddCategoryController extends NamingController {
     }
 
     @Override
-    public void showScreen() {
-        manager.addAndShow(new NamingScreen(this,
-                Message.WDW_NEW_CATEGORY.getText(),
-                Message.WDW_NEW_CATEGORY_NAME.getText()), true);
+    protected String getScreenTitle() {
+        return Message.WDW_NEW_CATEGORY.getText();
     }
 
     @Override
-    public void giveName(String name) {
+    protected String getInputFieldHint() {
+        return Message.WDW_NEW_CATEGORY_NAME.getText();
+    }
+
+    @Override
+    public void submitName(String name) {
         try {
             Dao<Category, Integer> categoryDao =
                     DaoManager.createDao(Trading.getSource(), Category.class);

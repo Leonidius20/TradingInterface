@@ -29,7 +29,7 @@ public class NamingScreen extends CustomScreen {
         // TODO: possibly replace with a callback element
         String name = getResponse().getInputResponse(0);
         if (name.isEmpty()) controller.back();
-        else controller.giveName(name);
+        else controller.submitName(name);
     }
 
 }

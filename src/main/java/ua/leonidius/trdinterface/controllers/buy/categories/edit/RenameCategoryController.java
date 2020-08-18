@@ -7,7 +7,6 @@ import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.NamingController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
-import ua.leonidius.trdinterface.views.screens.NamingScreen;
 
 import java.sql.SQLException;
 
@@ -21,15 +20,17 @@ public class RenameCategoryController extends NamingController {
     }
 
     @Override
-    public void showScreen() {
-        manager.addAndShow(new NamingScreen(this,
-                Message.WDW_RENAME_CATEGORY_TITLE.getText(),
-                Message.WDW_RENAME_CATEGORY_NAME.getText(),
-                category.name));
+    protected String getScreenTitle() {
+        return Message.WDW_RENAME_CATEGORY_TITLE.getText();
     }
 
     @Override
-    public void giveName(String name) {
+    protected String getInputFieldHint() {
+        return Message.WDW_RENAME_CATEGORY_NAME.getText();
+    }
+
+    @Override
+    public void submitName(String name) {
         try {
             String oldName = category.name;
             Dao<Category, Integer> categoryDao =

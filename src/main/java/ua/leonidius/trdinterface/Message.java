@@ -46,10 +46,10 @@ public enum Message {
     BTN_YES("Yes"),
     BTN_NO("No"),
 
-    // Custom names windows
-    BTN_EDIT_CUSTOM_NAME("* Edit custom name"),
-    BTN_DELETE_CUSTOM_NAME("* Delete custom name"),
-    BTN_ADD_CUSTOM_NAME("+ Add custom name"),
+    // Custom names windows (all edited in 2.0.0)
+    BTN_EDIT_CUSTOM_NAME("* Edit translation"),
+    BTN_DELETE_CUSTOM_NAME("* Delete translation"),
+    BTN_ADD_CUSTOM_NAME("+ Add translation"),
 
     // Success and fail
     WDW_SUCCESS_TITLE("Success"),
@@ -67,7 +67,7 @@ public enum Message {
     // Buy window & BuyManageItemScreen
     WDW_BUY_TITLE("Buying %1%"),
     WDW_BUY_NAME("Name: %1%"),
-    WDW_BUY_ORIGINAL_NAME("Original name: %1% (%2%:%3%)"),
+    WDW_BUY_ORIGINAL_NAME("Original name: %1% (%2%)"), // modified in 2.0.0
     WDW_BUY_PRICE("Price: %1%%2% per item"),
     // edited in 2.0.0
     WDW_BUY_DISCOUNT("Discount: %1% percent, time left: %2%"),
@@ -168,7 +168,7 @@ public enum Message {
     WDW_ADD_CUSTOM_NAME_FAIL("There is already a custom translation for this item's name."), // changed in 2.0.0
 
     // Custom name editing window
-    WDW_EDIT_CUSTOM_NAME_TITLE("Editing custom name"),
+    WDW_EDIT_CUSTOM_NAME_TITLE("Editing translation"), // changed in 2.0.0
     WDW_CUSTOM_NAME_HINT("Item's name translation:"), // changed in 2.0.0
 
     // Custom name deletion window
@@ -239,9 +239,9 @@ public enum Message {
     LOG_BOUGHT("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),
     LOG_SOLD("Player %1% have sold %2%x %3% (ID: %4%) for %5%%6%."),
 
-    LOG_TRANSLATION_ADDED("Player %1% have added a custom translation for %2% (%3%) - %4%"),
-    LOG_TRANSLATION_CHANGED("Player %1% have changed a custom translation for %2% (%3%) from %4% to %5%"),
-    LOG_TRANSLATION_DELETED("Player %1% have deleted a custom translation for %2% (%3%)"),
+    LOG_TRANSLATION_ADDED("Player %1% have added a custom translation for %2% (%3%) - %4%."),
+    LOG_TRANSLATION_CHANGED("Player %1% have changed a custom translation for %2% (%3%) from %4% to %5%."),
+    LOG_TRANSLATION_DELETED("Player %1% have deleted a custom translation for %2% (%3%)."),
 
     // time units
     SECONDS("seconds"),

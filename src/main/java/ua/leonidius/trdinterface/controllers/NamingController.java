@@ -1,6 +1,7 @@
 package ua.leonidius.trdinterface.controllers;
 
 import ua.leonidius.trdinterface.views.ScreenManager;
+import ua.leonidius.trdinterface.views.screens.NamingScreen;
 
 /**
  * This is a base class for a controller for NamingScreen
@@ -11,6 +12,16 @@ public abstract class NamingController extends BaseController {
         super(manager);
     }
 
-    public abstract void giveName(String name);
+    protected abstract String getScreenTitle();
+
+    protected abstract String getInputFieldHint();
+
+    @Override
+    public void showScreen() {
+        manager.addAndShow(new NamingScreen(this,
+                getScreenTitle(), getInputFieldHint()), true);
+    }
+
+    public abstract void submitName(String name);
 
 }

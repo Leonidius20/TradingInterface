@@ -50,14 +50,14 @@ public class TranslationsListController extends ListController<Translation> {
     }
 
     @Override
-    public void selectItem(Translation item) {
-        // TODO: translation adding/deleting logging
+    public void selectItem(Translation translation) {
+        new TranslationMenuController(manager, translation).showScreen();
     }
 
     @Override
     public String buildItemButtonText(Translation translation) {
         return Item.fromString(translation.getItemId()).getName()
-                + "-" + translation.getTranslation();
+                + " - " + translation.getTranslation();
     }
 
     @Override

@@ -34,4 +34,8 @@ public class Translation {
         return translation;
     }
 
+    public void setTranslation(String translation) {
+        this.translation = translation;
+    }
+
 }
