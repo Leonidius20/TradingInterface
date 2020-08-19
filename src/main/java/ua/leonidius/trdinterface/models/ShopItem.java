@@ -10,6 +10,7 @@ import ua.leonidius.trdinterface.Trading;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public abstract class ShopItem {
 
@@ -131,10 +132,12 @@ public abstract class ShopItem {
             try {
                 Dao<Translation, Integer> translationDao =
                         DaoManager.createDao(Trading.getSource(), Translation.class);
-                translationDao.queryForEq("item_id", getItemId());
 
-                if (translationDao.iterator().hasNext()) {
-                    return name = translationDao.iterator().next().getTranslation();
+                List<Translation> list =
+                        translationDao.queryForEq("item_id", getItemId());
+
+                if (list.size() != 0) {
+                    return name = list.get(0).getTranslation();
                 }
                 translationDao.iterator().closeQuietly();
             } catch (SQLException e) {

@@ -62,7 +62,7 @@ public enum Message {
     // Buy item selector window
     WDW_BUY_EMPTY_CAT("There are no items in this category."),
     BTN_ITEM_BUY("%1% (%2%%3%)"),
-    BTN_ITEM_BUY_SALE("%1% (%2%%3%) &c-%4%%!"),
+    BTN_ITEM_BUY_SALE("%1% (%2%%3%) &c-%4% pct!"),
 
     // Buy window & BuyManageItemScreen
     WDW_BUY_TITLE("Buying %1%"),
@@ -83,7 +83,6 @@ public enum Message {
     WDW_SELL_SELECT_ITEM("Select an item to sell"),
     WDW_SELL_NOTHING("You have nothing to sell."),
     BTN_ITEM_SELL("%1% (%2%%3%) (x%4%)"), // edited in 2.0.0
-
 
     // Sell window
     WDW_SELL_TITLE("Selling %1%"),
@@ -144,8 +143,8 @@ public enum Message {
 
     // Item deletion windows
     WDW_DELETE_ITEM_TITLE("Deleting item"),
-    WDW_DELETE_BUY_ITEM_CONF("Are you sure you want to delete %1% from the list of buyable items? This action can't be undone."),
-    WDW_DELETE_SELL_ITEM_CONF("Are you sure you want to delete %1% from the list of sellable items? This action can't be undone."),
+    WDW_DELETE_BUY_ITEM_CONF("Are you sure you want to delete &l%1%&r from the list of buyable items? This action can't be undone."), // cosmetic change in 2.0.0
+    WDW_DELETE_SELL_ITEM_CONF("Are you sure you want to delete &l%1%&r from the list of sellable items? This action can't be undone."),  // cosmetic change in 2.0.0
 
     // Discount editing window
     // EDITED IN 2.0.0!
