@@ -243,6 +243,15 @@ public enum Message {
     LOG_TRANSLATION_CHANGED("Player %1% have changed a custom translation for %2% (%3%) from %4% to %5%."),
     LOG_TRANSLATION_DELETED("Player %1% have deleted a custom translation for %2% (%3%)."),
 
+    // YAML to DB conversion
+    LOG_BUYABLE_ITEMS_FOUND("Found buyList.yml, importing items to the database..."),
+    LOG_SELLABLE_ITEMS_FOUND("Found sellList.yml, importing items to the database..."),
+    LOG_TRANSLATIONS_FOUND("Found customItemNames.yml, importing translations to the database..."),
+
+    LOG_BUYABLE_ITEMS_IMPORTED("Imported %1% buyable items, buyList.yml deleted."),
+    LOG_SELLABLE_ITEMS_IMPORTED("Imported %1% sellable items, sellList.yml deleted."),
+    LOG_TRANSLATIONS_IMPORTED("Imported %1% translations, customItemNames.yml deleted."),
+
     // time units
     SECONDS("seconds"),
     MINUTES("minutes"),
