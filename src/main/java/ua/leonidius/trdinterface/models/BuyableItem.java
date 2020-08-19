@@ -17,6 +17,13 @@ public class BuyableItem extends ShopItem {
 
     public BuyableItem() {}
 
+    public BuyableItem(Shop shop, Category category, String itemId, double price) {
+        this.shop = shop;
+        this.category = category;
+        this.itemId = itemId;
+        this.price = price;
+    }
+
     @DatabaseField(generatedId = true, columnName = "record_id")
     private int recordId;
 

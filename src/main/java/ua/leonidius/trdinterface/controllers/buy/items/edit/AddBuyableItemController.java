@@ -48,6 +48,7 @@ public class AddBuyableItemController extends ItemDetailsEditController {
             Dao<BuyableItem, Integer> itemDao =
                     DaoManager.createDao(Trading.getSource(), BuyableItem.class);
             itemDao.create(item);
+            itemDao.assignEmptyForeignCollection(item, "discounts");
         } catch (SQLException e) {
             handleException(e);
             return;

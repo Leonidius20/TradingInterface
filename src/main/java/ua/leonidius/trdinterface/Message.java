@@ -248,9 +248,11 @@ public enum Message {
     LOG_SELLABLE_ITEMS_FOUND("Found sellList.yml, importing items to the database..."),
     LOG_TRANSLATIONS_FOUND("Found customItemNames.yml, importing translations to the database..."),
 
-    LOG_BUYABLE_ITEMS_IMPORTED("Imported %1% buyable items, buyList.yml deleted."),
+    LOG_BUYABLE_ITEMS_IMPORTED("Imported %1% categories and %2% buyable items, buyList.yml deleted."),
     LOG_SELLABLE_ITEMS_IMPORTED("Imported %1% sellable items, sellList.yml deleted."),
     LOG_TRANSLATIONS_IMPORTED("Imported %1% translations, customItemNames.yml deleted."),
+
+    LOG_IMPORT_FAILED("Failed to import."),
 
     // time units
     SECONDS("seconds"),

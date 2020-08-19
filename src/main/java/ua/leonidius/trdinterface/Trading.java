@@ -69,27 +69,32 @@ public class Trading extends PluginBase implements Listener {
         // Converting old configs
         File buyableItemsFile = new File(getDataFolder(), "buyList.yml");
         if (buyableItemsFile.exists()) {
-
+            Message.LOG_BUYABLE_ITEMS_FOUND.log();
             Config buyableItems = new Config(buyableItemsFile);
-            YamlToDbConverter.convertBuyableItems(buyableItems);
-            // buyableItemsFile.delete();
-            // TODO
+            if (YamlToDbConverter.convertBuyableItems(buyableItems)) {
+                // buyableItemsFile.delete();
+                // TODO
+            }
         }
 
         File sellableItemsFile = new File(getDataFolder(), "sellList.yml");
         if (sellableItemsFile.exists()) {
+            Message.LOG_SELLABLE_ITEMS_FOUND.log();
             Config sellableItems = new Config(sellableItemsFile);
-            YamlToDbConverter.convertSellableItems(sellableItems);
-            // TODO
-            // sellableItemsFile.delete();
+            if (YamlToDbConverter.convertSellableItems(sellableItems)) {
+                // TODO
+                // sellableItemsFile.delete();
+            }
         }
 
         File translationsFile = new File(getDataFolder(), "customItemNames.yml");
         if (translationsFile.exists()) {
+            Message.LOG_TRANSLATIONS_FOUND.log();
             Config translations = new Config(translationsFile);
-            YamlToDbConverter.convertTranslations(translations);
-            // TODO
-            // translationsFile.delete();
+            if (YamlToDbConverter.convertTranslations(translations)) {
+                // TODO
+                // translationsFile.delete();
+            }
         }
     }
 

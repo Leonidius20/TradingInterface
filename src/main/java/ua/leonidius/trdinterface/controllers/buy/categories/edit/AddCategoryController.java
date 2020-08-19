@@ -2,7 +2,6 @@ package ua.leonidius.trdinterface.controllers.buy.categories.edit;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import org.sqlite.SQLiteErrorCode;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.InfoController;
@@ -37,6 +36,13 @@ public class AddCategoryController extends NamingController {
         try {
             Dao<Category, Integer> categoryDao =
                     DaoManager.createDao(Trading.getSource(), Category.class);
+
+            if (categoryDao.queryForEq("name", name).size() != 0) {
+                new InfoController(manager,
+                        Message.WDW_NEW_CATEGORY_FAIL.getText()).showScreen();
+                return;
+            }
+
             Category newCategory = new Category(shop, name);
             categoryDao.create(newCategory);
 
@@ -48,14 +54,7 @@ public class AddCategoryController extends NamingController {
         } catch (SQLException e) {
             Trading.printException(e);
 
-            InfoController controller;
-            // TODO: test this
-            if (e.getErrorCode() == SQLiteErrorCode.SQLITE_CONSTRAINT.code) {
-                controller = new InfoController(manager, Message.WDW_NEW_CATEGORY_FAIL.getText());
-            } else {
-                controller = new InfoController(manager, Message.ERROR.getText());
-            }
-            controller.showScreen();
+            new InfoController(manager, Message.ERROR.getText()).showScreen();
         }
     }
 
