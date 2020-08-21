@@ -38,6 +38,11 @@ public class SellAmountSelectorController extends AmountSelectorController {
         manager.getPlayer().getInventory().removeItem(gameItem);
         EconomyAPI.getInstance().addMoney(manager.getPlayer(), cost);
 
+        if (!manager.getPlayer().getInventory().contains(gameItem)) {
+            showErrorScreen(Message.WDW_SELL_NOTHING.getText());
+            return;
+        }
+
         // Success
         if (Trading.getSettings().logTransactions()) {
             Message.LOG_SOLD.log(manager.getPlayer().getName(), amount,
