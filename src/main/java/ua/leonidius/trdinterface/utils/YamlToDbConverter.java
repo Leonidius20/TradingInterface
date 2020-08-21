@@ -7,10 +7,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
-import ua.leonidius.trdinterface.models.BuyableItem;
-import ua.leonidius.trdinterface.models.Category;
-import ua.leonidius.trdinterface.models.Discount;
-import ua.leonidius.trdinterface.models.Shop;
+import ua.leonidius.trdinterface.models.*;
 
 import java.util.List;
 
@@ -30,8 +27,6 @@ public abstract class YamlToDbConverter {
             int numberOfItems = 0;
 
             for (String categoryKey : buyableItems.getKeys(false)) {
-                numberOfCategories++;
-
                 ConfigSection category = buyableItems.getSection(categoryKey);
 
                 String categoryName = category.getString("name");
@@ -42,11 +37,10 @@ public abstract class YamlToDbConverter {
                 if (eponymousCategories.size() == 0) {
                     categoryModel = new Category(Shop.getDefault(), categoryName);
                     categoryDao.create(categoryModel);
+                    numberOfCategories++;
                 } else categoryModel = eponymousCategories.get(0);
 
                 for (String itemKey : category.getSection("items").getKeys(false)) {
-                    numberOfItems++;
-
                     ConfigSection item = category.getSection("items").getSection(itemKey);
 
                     String id = itemKey.replace("-", ":");
@@ -57,6 +51,8 @@ public abstract class YamlToDbConverter {
                             categoryModel, id, price);
 
                     categoryModel.items.add(itemModel);
+
+                    numberOfItems++;
 
                     categoryModel.items.getDao()
                             .assignEmptyForeignCollection(itemModel, "discounts");
@@ -81,7 +77,24 @@ public abstract class YamlToDbConverter {
 
     public static boolean convertSellableItems(Config sellableItems) {
         try {
-            // TODO
+            int numberOfItems = 0;
+
+            for (String itemKey : sellableItems.getKeys(false)) {
+                String itemId = itemKey.replace("-", ":");
+                double price = sellableItems.getDouble(itemKey);
+
+                SellableItem itemModel =
+                        new SellableItem(Shop.getDefault(), itemId, price);
+
+                Dao<SellableItem, Integer> itemDao =
+                        DaoManager.createDao(Trading.getSource(), SellableItem.class);
+                itemDao.create(itemModel);
+
+                numberOfItems++;
+            }
+
+            Message.LOG_SELLABLE_ITEMS_IMPORTED.log(numberOfItems);
+
             return true;
         } catch (Exception e) {
             Trading.printException(e);
