@@ -12,7 +12,6 @@ import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.models.Discount;
 import ua.leonidius.trdinterface.models.Shop;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -73,21 +72,31 @@ public abstract class YamlToDbConverter {
             Message.LOG_BUYABLE_ITEMS_IMPORTED.log(numberOfCategories, numberOfItems);
 
             return true;
-        } catch (SQLException e) {
+        } catch (Exception e) { // return false in case of any exception
+                                // so that buyList.yml doesn't get deleted
             Trading.printException(e);
             return false;
         }
     }
 
     public static boolean convertSellableItems(Config sellableItems) {
-        // TODO
-
-        Trading.getPlugin().getLogger().info("");
-        return true;
+        try {
+            // TODO
+            return true;
+        } catch (Exception e) {
+            Trading.printException(e);
+            return false;
+        }
     }
 
     public static boolean convertTranslations(Config translations) {
-        return true;
+        try {
+            // TODO
+            return true;
+        } catch (Exception e) {
+            Trading.printException(e);
+            return false;
+        }
     }
 
 }
