@@ -249,7 +249,8 @@ public enum Message {
 
     LOG_BUYABLE_ITEMS_IMPORTED("Imported %1% categories and %2% buyable items, buyList.yml deleted."),
     LOG_SELLABLE_ITEMS_IMPORTED("Imported %1% sellable items, sellList.yml deleted."),
-    LOG_TRANSLATIONS_IMPORTED("Imported %1% translations, customItemNames.yml deleted."),
+    LOG_ALL_TRANSLATIONS_IMPORTED("Imported %1% translations, customItemNames.yml deleted."),
+    LOG_IMPORT_SKIPPED_TRANSLATIONS("Imported %1% translations, skipped %2% translations for items, for which there are already custom translations. Skipped items are kept in customItemNames.yml."),
 
     LOG_IMPORT_FAILED("Failed to import."),
 

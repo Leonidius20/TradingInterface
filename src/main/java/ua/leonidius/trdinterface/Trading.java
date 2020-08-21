@@ -72,8 +72,7 @@ public class Trading extends PluginBase implements Listener {
             Message.LOG_BUYABLE_ITEMS_FOUND.log();
             Config buyableItems = new Config(buyableItemsFile);
             if (YamlToDbConverter.convertBuyableItems(buyableItems)) {
-                // buyableItemsFile.delete();
-                // TODO
+                buyableItemsFile.delete();
             }
         }
 
@@ -82,8 +81,7 @@ public class Trading extends PluginBase implements Listener {
             Message.LOG_SELLABLE_ITEMS_FOUND.log();
             Config sellableItems = new Config(sellableItemsFile);
             if (YamlToDbConverter.convertSellableItems(sellableItems)) {
-                // TODO
-                // sellableItemsFile.delete();
+                sellableItemsFile.delete();
             }
         }
 
@@ -92,8 +90,7 @@ public class Trading extends PluginBase implements Listener {
             Message.LOG_TRANSLATIONS_FOUND.log();
             Config translations = new Config(translationsFile);
             if (YamlToDbConverter.convertTranslations(translations)) {
-                // TODO
-                // translationsFile.delete();
+                translationsFile.delete();
             }
         }
     }

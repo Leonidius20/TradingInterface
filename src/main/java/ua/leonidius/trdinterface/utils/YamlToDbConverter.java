@@ -18,6 +18,14 @@ import java.util.List;
  */
 public abstract class YamlToDbConverter {
 
+    /**
+     * Converts the list of buyable items from
+     * YAML config format to database format
+     *
+     * @param buyableItems config to convert
+     * @return whether buyList.yml can be safely deleted
+     * without losing data
+     */
     public static boolean convertBuyableItems(Config buyableItems) {
         try {
             Dao<Category, Integer> categoryDao =
@@ -69,12 +77,20 @@ public abstract class YamlToDbConverter {
 
             return true;
         } catch (Exception e) { // return false in case of any exception
-                                // so that buyList.yml doesn't get deleted
+            // so that buyList.yml doesn't get deleted
             Trading.printException(e);
             return false;
         }
     }
 
+    /**
+     * Converts the list of sellable items from
+     * YAML config format to database format
+     *
+     * @param sellableItems config to convert
+     * @return whether sellList.yml can be safely deleted
+     * without losing data
+     */
     public static boolean convertSellableItems(Config sellableItems) {
         try {
             int numberOfItems = 0;
@@ -102,10 +118,48 @@ public abstract class YamlToDbConverter {
         }
     }
 
+    /**
+     * Converts custom item name translations from
+     * YAML config format to database format
+     *
+     * @param translations config to convert
+     * @return whether customItemNames.yml can be
+     * safely deleted without losing data
+     */
     public static boolean convertTranslations(Config translations) {
         try {
-            // TODO
-            return true;
+            int importedTranslations = 0;
+            int skippedTranslations = 0;
+
+            for (String key : translations.getKeys(false)) {
+                String itemId = key.replace("-", ":");
+                String translation = translations.getString(key);
+
+                Dao<Translation, Integer> translationDao =
+                        DaoManager.createDao(Trading.getSource(), Translation.class);
+
+                // if there is already a translation - do not override it
+                if (translationDao.queryForEq("item_id", itemId).size() != 0) {
+                    skippedTranslations++;
+                    continue;
+                }
+
+                Translation translationModel = new Translation(itemId, translation);
+                translationDao.create(translationModel);
+
+                translations.remove(key);
+
+                importedTranslations++;
+            }
+
+            if (skippedTranslations == 0) {
+                Message.LOG_ALL_TRANSLATIONS_IMPORTED.log(importedTranslations);
+                return true;
+            } else {
+                Message.LOG_IMPORT_SKIPPED_TRANSLATIONS.log(importedTranslations,
+                        skippedTranslations);
+                return false;
+            }
         } catch (Exception e) {
             Trading.printException(e);
             return false;
