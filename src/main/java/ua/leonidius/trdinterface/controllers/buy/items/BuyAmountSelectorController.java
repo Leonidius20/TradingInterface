@@ -45,7 +45,7 @@ public class BuyAmountSelectorController extends AmountSelectorController {
 
     @Override
     public void selectAmount(int amount) {
-        double price = item.getPrice(); // TODO: apply discount
+        double price = item.getPrice();
         double cost = amount * price;
 
         Item gameItem = item.toGameItem();
@@ -55,8 +55,7 @@ public class BuyAmountSelectorController extends AmountSelectorController {
 
         if (Trading.getSettings().logTransactions()) {
             Message.LOG_BOUGHT.log(manager.getPlayer().getName(),
-                    amount, gameItem.getName(),
-                    gameItem.getId() + ":" + gameItem.getDamage(),
+                    amount, item.getName(), item.getItemId(),
                     cost, Trading.getSettings().getCurrency());
         }
 
@@ -74,7 +73,6 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         return (int) Math.floor(money / priceWithDiscount);
     }
 
-    // TODO: test this
     private int getMaxByInventory() {
         PlayerInventory inventory = manager.getPlayer().getInventory();
         Item gameItem = item.toGameItem();

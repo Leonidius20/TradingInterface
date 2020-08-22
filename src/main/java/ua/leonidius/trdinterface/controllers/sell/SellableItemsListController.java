@@ -13,10 +13,12 @@ import ua.leonidius.trdinterface.utils.ItemCompare;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.Map;
 
-public class SellableItemsListController extends ListController<SellableItem> {
+public class SellableItemsListController
+        extends ListController<Map.Entry<SellableItem, Integer>> {
 
     private final Shop shop;
 
@@ -39,25 +41,32 @@ public class SellableItemsListController extends ListController<SellableItem> {
     }
 
     @Override
-    public void selectItem(SellableItem item) {
-        new SellAmountSelectorController(manager, item).showScreen();
+    public void selectItem(Map.Entry<SellableItem, Integer> item) {
+        new SellAmountSelectorController(manager,
+                item.getKey(), item.getValue()).showScreen();
     }
 
     @Override
-    public SellableItem[] fetchItems() {
-        LinkedList<SellableItem> items = new LinkedList<>();
+    public Collection<Map.Entry<SellableItem, Integer>> fetchItems() {
         CloseableIterator<SellableItem> iterator = shop.sellableItems.closeableIterator();
+
         // TODO: optimize
+        LinkedHashMap<SellableItem, Integer> itemsAndCounts = new LinkedHashMap<>();
+
         while (iterator.hasNext()) {
             SellableItem item = iterator.next();
             for (int i = 0; i < 36; i++) {
                 Item itemInSlot = manager.getPlayer().getInventory().getItem(i);
                 if (ItemCompare.equals(itemInSlot, item.toGameItem())) {
-                    items.add(item);
+                    if (itemsAndCounts.containsKey(item)) {
+                        itemsAndCounts.put(item,
+                                itemInSlot.getCount() + itemsAndCounts.get(item));
+                    } else itemsAndCounts.put(item, itemInSlot.getCount());
                 }
             }
         }
-        return items.toArray(new SellableItem[0]);
+
+        return itemsAndCounts.entrySet();
     }
 
     @Override
@@ -70,13 +79,14 @@ public class SellableItemsListController extends ListController<SellableItem> {
     }
 
     @Override
-    public String buildItemButtonText(SellableItem item) {
+    public String buildItemButtonText(Map.Entry<SellableItem, Integer> entry) {
+        SellableItem item = entry.getKey();
+        int amount = entry.getValue();
+
         Item gameItem = item.toGameItem();
 
-        int amount = -1; // TODO: real amount
         String result = Message.BTN_ITEM_SELL.getText(item.getName(),
                 item.getPrice(), Trading.getSettings().getCurrency(), amount);
-
 
         if (gameItem.hasEnchantments()) {
             return TextFormat.colorize(

@@ -4,6 +4,7 @@ import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.controllers.ListController;
 import ua.leonidius.trdinterface.views.elements.CallbackButton;
 
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -55,11 +56,11 @@ public class ListScreen<T> extends SimpleScreen {
                     addButton(new CallbackButton(name, action::call)));
         }
 
-        T[] items = controller.fetchItems();
+        Collection<T> items = controller.fetchItems();
         if (items == null) setContent(Message.ERROR.getText());
-        else if (items.length == 0) setContent(emptyContent);
+        else if (items.isEmpty()) setContent(emptyContent);
         else {
-            for (T item : controller.fetchItems()) {
+            for (T item : items) {
                 addButton(new CallbackButton(controller.buildItemButtonText(item),
                         () -> controller.selectItem(item)));
             }

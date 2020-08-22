@@ -11,6 +11,7 @@ import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 /**
@@ -36,11 +37,11 @@ public class TranslationsListController extends ListController<Translation> {
     }
 
     @Override
-    public Translation[] fetchItems() {
+    public Collection<Translation> fetchItems() {
         try {
             Dao<Translation, Integer> translationDao =
                     DaoManager.createDao(Trading.getSource(), Translation.class);
-            return translationDao.queryForAll().toArray(new Translation[0]);
+            return translationDao.queryForAll();
         } catch (SQLException e) {
             Trading.printException(e);
             screen.setContent(screen.getContent() + '\n' + Message.ERROR.getText());

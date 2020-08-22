@@ -10,6 +10,7 @@ import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 /**
@@ -49,8 +50,8 @@ public class EditSellableItemsController extends ListController<SellableItem> {
     }
 
     @Override
-    public SellableItem[] fetchItems() {
-        return shop.sellableItems.toArray(new SellableItem[0]);
+    public Collection<SellableItem> fetchItems() {
+        return shop.sellableItems;
     }
 
     @Override

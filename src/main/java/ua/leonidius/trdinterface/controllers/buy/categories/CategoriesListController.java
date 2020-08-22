@@ -9,6 +9,7 @@ import ua.leonidius.trdinterface.models.Shop;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class CategoriesListController extends ListController<Category> {
@@ -40,9 +41,8 @@ public class CategoriesListController extends ListController<Category> {
     }
 
     @Override
-    public Category[] fetchItems() {
-        Category[] categories = new Category[0];
-        return shop.buyableItemsCategories.toArray(categories);
+    public Collection<Category> fetchItems() {
+        return shop.buyableItemsCategories;
     }
 
     @Override

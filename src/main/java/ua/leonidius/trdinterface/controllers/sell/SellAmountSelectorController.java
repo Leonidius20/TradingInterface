@@ -8,24 +8,26 @@ import ua.leonidius.trdinterface.controllers.AmountSelectorController;
 import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.models.SellableItem;
 import ua.leonidius.trdinterface.models.ShopItem;
-import ua.leonidius.trdinterface.utils.ItemCompare;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.AmountSelectorScreen;
 
 public class SellAmountSelectorController extends AmountSelectorController {
 
     private final SellableItem item;
+    private final int maxAmount;
 
-    public SellAmountSelectorController(ScreenManager manager, SellableItem item) {
+    public SellAmountSelectorController(ScreenManager manager,
+                                        SellableItem item, int maxAmount) {
         super(manager);
         this.item = item;
+        this.maxAmount = maxAmount;
     }
 
     @Override
     public void showScreen() {
         manager.addAndShow(new AmountSelectorScreen(this,
                 Message.WDW_SELL_TITLE.getText(item.getName()),
-                buildItemDescription(), getMaxAmount()), true);
+                buildItemDescription(), maxAmount), true);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class SellAmountSelectorController extends AmountSelectorController {
         // Success
         if (Trading.getSettings().logTransactions()) {
             Message.LOG_SOLD.log(manager.getPlayer().getName(), amount,
-                    gameItem.getName(), item.getItemId(),
+                    item.getName(), item.getItemId(),
                     cost, Trading.getSettings().getCurrency());
         }
 
@@ -60,7 +62,7 @@ public class SellAmountSelectorController extends AmountSelectorController {
         return item;
     }
 
-    public int getMaxAmount() {
+    /*public int getMaxAmount() {
         int amount = 0;
         for (int i = 0; i < 36; i++) {
             Item itemInSlot = manager.getPlayer().getInventory().getItem(i);
@@ -69,6 +71,6 @@ public class SellAmountSelectorController extends AmountSelectorController {
             }
         }
         return amount;
-    }
+    }*/
 
 }
