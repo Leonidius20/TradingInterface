@@ -42,12 +42,15 @@ public class Trading extends PluginBase implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
 
         getDataFolder().mkdirs();
-        /*imageFolder = new File(getDataFolder(), "images");
-        imageFolder.mkdirs();*/
+
+        /* imageFolder = new File(getDataFolder(), "images");
+        imageFolder.mkdirs(); */
 
         saveResource("config.yml");
 
-        source = DbLib.getConnectionSource(DbLib.getSqliteUrl(new File(getDataFolder(), "shops.db")), null, null);
+        source = DbLib.getConnectionSource(
+                DbLib.getSqliteUrl(new File(getDataFolder(), "shops.db")),
+                null, null);
 
         try {
             TableUtils.createTableIfNotExists(source, Shop.class);
@@ -126,10 +129,8 @@ public class Trading extends PluginBase implements Listener {
      * @param e exception to handle
      */
     public static void printException(Exception e) {
-        if (getSettings().debugActive()) {
-            getPlugin().getLogger().debug(e.getMessage());
-            e.printStackTrace();
-        }
+        getPlugin().getLogger().error(e.getMessage());
+        e.printStackTrace();
     }
 
 }

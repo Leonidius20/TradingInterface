@@ -48,6 +48,8 @@ public abstract class YamlToDbConverter {
                     numberOfCategories++;
                 } else categoryModel = eponymousCategories.get(0);
 
+                categoryDao.assignEmptyForeignCollection(categoryModel, "items");
+
                 for (String itemKey : category.getSection("items").getKeys(false)) {
                     ConfigSection item = category.getSection("items").getSection(itemKey);
 
