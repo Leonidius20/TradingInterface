@@ -76,6 +76,7 @@ public class SellableItem extends ShopItem {
         this.shop = shop;
     }
 
+    // TODO: remove this method
     @Override
     public void update() throws SQLException {
         Dao<SellableItem, Integer> itemDao =

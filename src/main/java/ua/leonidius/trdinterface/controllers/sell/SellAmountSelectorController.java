@@ -35,15 +35,15 @@ public class SellAmountSelectorController extends AmountSelectorController {
         Item gameItem = item.toGameItem();
         gameItem.setCount(amount);
 
-        double cost = item.getPrice() * amount;
-
-        manager.getPlayer().getInventory().removeItem(gameItem);
-        EconomyAPI.getInstance().addMoney(manager.getPlayer(), cost);
-
         if (!manager.getPlayer().getInventory().contains(gameItem)) {
             showErrorScreen(Message.WDW_SELL_NOTHING.getText());
             return;
         }
+
+        double cost = item.getPrice() * amount;
+
+        manager.getPlayer().getInventory().removeItem(gameItem);
+        EconomyAPI.getInstance().addMoney(manager.getPlayer(), cost);
 
         // Success
         if (Trading.getSettings().logTransactions()) {
@@ -61,16 +61,5 @@ public class SellAmountSelectorController extends AmountSelectorController {
     protected ShopItem getItem() {
         return item;
     }
-
-    /*public int getMaxAmount() {
-        int amount = 0;
-        for (int i = 0; i < 36; i++) {
-            Item itemInSlot = manager.getPlayer().getInventory().getItem(i);
-            if (ItemCompare.equals(itemInSlot, item.toGameItem())) {
-                amount += itemInSlot.getCount();
-            }
-        }
-        return amount;
-    }*/
 
 }

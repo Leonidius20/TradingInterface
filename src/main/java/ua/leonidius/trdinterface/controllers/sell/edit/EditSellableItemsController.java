@@ -37,7 +37,7 @@ public class EditSellableItemsController extends ListController<SellableItem> {
         }
 
         manager.addAndShow(new ListScreen<>(this,
-                Message.WDW_BUY_EMPTY_CAT.getText(), buttons)); // TODO: change text
+                Message.WDW_EDIT_SELLABLE_ITEMS_EMPTY.getText(), buttons));
     }
 
     @Override
@@ -67,7 +67,12 @@ public class EditSellableItemsController extends ListController<SellableItem> {
                 item.getPrice(), Trading.getSettings().getCurrency());
 
         if (gameItem.hasEnchantments()) {
-            return TextFormat.colorize(TextFormat.DARK_PURPLE.getChar(), result);
+            Trading.getPlugin().getLogger().debug("item " + item.getItemId() +
+                    "is believed to be enchanted");
+
+            return TextFormat.colorize(
+                    "&" + TextFormat.DARK_PURPLE.getChar() + result
+                            + "&" + TextFormat.RESET.getChar());
         } else return result;
     }
 

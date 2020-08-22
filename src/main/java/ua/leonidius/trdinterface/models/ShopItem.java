@@ -6,6 +6,7 @@ import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 
 import java.io.IOException;
@@ -44,10 +45,7 @@ public abstract class ShopItem {
                 CompoundTag tag = NBTIO.read(getNbt());
                 item.setCompoundTag(tag);
             } catch (IOException e) {
-                // TODO: translate the error message
-                Trading.getPlugin().getLogger().error(
-                        "Error reading NBT tag on item with record_id "
-                                + getRecordId());
+                Message.LOG_READING_NBT_FAILED.error(getRecordId());
                 Trading.printException(e);
             }
         }
@@ -83,15 +81,22 @@ public abstract class ShopItem {
             throws IllegalArgumentException {
         Item gameItem;
 
-        if (itemId.isEmpty() || (gameItem = Item.fromString(itemId)).getId() == 0) {
-            throw new IllegalArgumentException("Please fill in all of the required parameters");
+        if (itemId.isEmpty()) {
+            throw new IllegalArgumentException(
+                    Message.WDW_ADD_ITEM_MISSING_ID.getText());
+        }
+
+        if ((gameItem = Item.fromString(itemId)).getId() == 0) {
+            throw new IllegalArgumentException(
+                    Message.WDW_ADD_ITEM_INVALID_ID.getText());
         }
 
         double price;
         try {
             price = Double.parseDouble(priceS.replace(",", "."));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Incorrect price"); // TODO: translate and show
+            throw new IllegalArgumentException(
+                    Message.WDW_ADD_ITEM_INVALID_PRICE.getText());
         }
 
         if (customName != null && !customName.isEmpty())
@@ -106,10 +111,12 @@ public abstract class ShopItem {
         item.setPrice(price);
 
         try {
-            item.setNbt(gameItem.getNamedTag() == null ? null : NBTIO.write(gameItem.getNamedTag()));
+            item.setNbt(gameItem.getNamedTag() == null ? null
+                    : NBTIO.write(gameItem.getNamedTag()));
         } catch (IOException e) {
             Trading.printException(e);
-            throw new IllegalArgumentException("Incorrect NBT");
+            throw new IllegalArgumentException(
+                    Message.WDW_ADD_ITEM_INVALID_NBT.getText());
         }
     }
 
@@ -148,14 +155,6 @@ public abstract class ShopItem {
         }
 
         return name;
-    }
-
-    /**
-     * Deleting the cached version of the item's name in order
-     * for the new name to be shown after a custom translation was added
-     */
-    public void resetName() {
-        name = null;
     }
 
     public abstract void update() throws SQLException;

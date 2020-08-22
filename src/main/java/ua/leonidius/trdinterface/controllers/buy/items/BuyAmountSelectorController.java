@@ -50,6 +50,22 @@ public class BuyAmountSelectorController extends AmountSelectorController {
 
         Item gameItem = item.toGameItem();
         gameItem.setCount(amount);
+
+        // Check in case player has lost money between selecting an item
+        // and confirming buying
+        if (EconomyAPI.getInstance().myMoney(manager.getPlayer()) < cost) {
+            showInfoScreen(Message.BUY_NO_MONEY.getText());
+            return;
+        }
+
+        // Check in case something was added to the player's inventory
+        // between selecting an item and confirming buying and now
+        // there is not enough space
+        if (!manager.getPlayer().getInventory().canAddItem(gameItem)) {
+            showInfoScreen(Message.BUY_NO_SPACE.getText());
+            return;
+        }
+
         EconomyAPI.getInstance().reduceMoney(manager.getPlayer(), cost);
         manager.getPlayer().getInventory().addItem(gameItem);
 

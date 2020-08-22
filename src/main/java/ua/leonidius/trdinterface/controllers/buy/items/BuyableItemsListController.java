@@ -106,7 +106,8 @@ public class BuyableItemsListController extends ListController<BuyableItem> {
 
         if (gameItem.hasEnchantments()) {
             return TextFormat.colorize(
-                    "&" + TextFormat.DARK_PURPLE.getChar() + result);
+                    "&" + TextFormat.DARK_PURPLE.getChar() + result
+                            + "&" + TextFormat.RESET.getChar());
         } else return result;
     }
 
