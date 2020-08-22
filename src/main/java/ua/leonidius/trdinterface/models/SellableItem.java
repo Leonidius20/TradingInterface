@@ -12,7 +12,14 @@ import java.sql.SQLException;
 @DatabaseTable(tableName = "sellable_items")
 public class SellableItem extends ShopItem {
 
-    public SellableItem() {}
+    public SellableItem() {
+    }
+
+    public SellableItem(Shop shop, String itemId, double price) {
+        this.shop = shop;
+        this.itemId = itemId;
+        this.price = price;
+    }
 
     @DatabaseField(generatedId = true, columnName = "record_id")
     private int recordId;
@@ -69,6 +76,7 @@ public class SellableItem extends ShopItem {
         this.shop = shop;
     }
 
+    // TODO: remove this method
     @Override
     public void update() throws SQLException {
         Dao<SellableItem, Integer> itemDao =

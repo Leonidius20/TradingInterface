@@ -45,18 +45,33 @@ public class BuyAmountSelectorController extends AmountSelectorController {
 
     @Override
     public void selectAmount(int amount) {
-        double price = item.getPrice(); // TODO: apply discount
+        double price = item.getPrice();
         double cost = amount * price;
 
         Item gameItem = item.toGameItem();
         gameItem.setCount(amount);
+
+        // Check in case player has lost money between selecting an item
+        // and confirming buying
+        if (EconomyAPI.getInstance().myMoney(manager.getPlayer()) < cost) {
+            showInfoScreen(Message.BUY_NO_MONEY.getText());
+            return;
+        }
+
+        // Check in case something was added to the player's inventory
+        // between selecting an item and confirming buying and now
+        // there is not enough space
+        if (!manager.getPlayer().getInventory().canAddItem(gameItem)) {
+            showInfoScreen(Message.BUY_NO_SPACE.getText());
+            return;
+        }
+
         EconomyAPI.getInstance().reduceMoney(manager.getPlayer(), cost);
         manager.getPlayer().getInventory().addItem(gameItem);
 
         if (Trading.getSettings().logTransactions()) {
             Message.LOG_BOUGHT.log(manager.getPlayer().getName(),
-                    amount, gameItem.getName(),
-                    gameItem.getId() + ":" + gameItem.getDamage(),
+                    amount, item.getName(), item.getItemId(),
                     cost, Trading.getSettings().getCurrency());
         }
 
@@ -74,7 +89,6 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         return (int) Math.floor(money / priceWithDiscount);
     }
 
-    // TODO: test this
     private int getMaxByInventory() {
         PlayerInventory inventory = manager.getPlayer().getInventory();
         Item gameItem = item.toGameItem();

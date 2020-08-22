@@ -5,12 +5,14 @@ import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.utils.Config;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import ru.nukkit.dblib.DbLib;
 import ua.leonidius.trdinterface.models.*;
+import ua.leonidius.trdinterface.utils.YamlToDbConverter;
 import ua.leonidius.trdinterface.views.screens.Screen;
 
 import java.io.File;
@@ -40,12 +42,15 @@ public class Trading extends PluginBase implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
 
         getDataFolder().mkdirs();
-        /*imageFolder = new File(getDataFolder(), "images");
-        imageFolder.mkdirs();*/
+
+        /* imageFolder = new File(getDataFolder(), "images");
+        imageFolder.mkdirs(); */
 
         saveResource("config.yml");
 
-        source = DbLib.getConnectionSource(DbLib.getSqliteUrl(new File(getDataFolder(), "shops.db")), null, null);
+        source = DbLib.getConnectionSource(
+                DbLib.getSqliteUrl(new File(getDataFolder(), "shops.db")),
+                null, null);
 
         try {
             TableUtils.createTableIfNotExists(source, Shop.class);
@@ -62,6 +67,34 @@ public class Trading extends PluginBase implements Listener {
         } catch (SQLException e) {
             getLogger().critical(e.getMessage());
             getPluginLoader().disablePlugin(this);
+        }
+
+        // Converting old configs
+        File buyableItemsFile = new File(getDataFolder(), "buyList.yml");
+        if (buyableItemsFile.exists()) {
+            Message.LOG_BUYABLE_ITEMS_FOUND.log();
+            Config buyableItems = new Config(buyableItemsFile);
+            if (YamlToDbConverter.convertBuyableItems(buyableItems)) {
+                buyableItemsFile.delete();
+            }
+        }
+
+        File sellableItemsFile = new File(getDataFolder(), "sellList.yml");
+        if (sellableItemsFile.exists()) {
+            Message.LOG_SELLABLE_ITEMS_FOUND.log();
+            Config sellableItems = new Config(sellableItemsFile);
+            if (YamlToDbConverter.convertSellableItems(sellableItems)) {
+                sellableItemsFile.delete();
+            }
+        }
+
+        File translationsFile = new File(getDataFolder(), "customItemNames.yml");
+        if (translationsFile.exists()) {
+            Message.LOG_TRANSLATIONS_FOUND.log();
+            Config translations = new Config(translationsFile);
+            if (YamlToDbConverter.convertTranslations(translations)) {
+                translationsFile.delete();
+            }
         }
     }
 
@@ -96,10 +129,8 @@ public class Trading extends PluginBase implements Listener {
      * @param e exception to handle
      */
     public static void printException(Exception e) {
-        if (getSettings().debugActive()) {
-            getPlugin().getLogger().debug(e.getMessage());
-            e.printStackTrace();
-        }
+        getPlugin().getLogger().error(e.getMessage());
+        e.printStackTrace();
     }
 
 }

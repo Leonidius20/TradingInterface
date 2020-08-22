@@ -15,6 +15,7 @@ import ua.leonidius.trdinterface.models.Discount;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class BuyableItemsListController extends ListController<BuyableItem> {
@@ -43,8 +44,8 @@ public class BuyableItemsListController extends ListController<BuyableItem> {
     }
 
     @Override
-    public BuyableItem[] fetchItems() {
-        BuyableItem[] items = category.items.toArray(new BuyableItem[0]);
+    public Collection<BuyableItem> fetchItems() {
+        Collection<BuyableItem> items = category.items;
 
         for (BuyableItem item : items) {
             Discount discount = item.getDiscount();
@@ -104,7 +105,9 @@ public class BuyableItemsListController extends ListController<BuyableItem> {
 
 
         if (gameItem.hasEnchantments()) {
-            return TextFormat.colorize(TextFormat.DARK_PURPLE.getChar(), result);
+            return TextFormat.colorize(
+                    "&" + TextFormat.DARK_PURPLE.getChar() + result
+                            + "&" + TextFormat.RESET.getChar());
         } else return result;
     }
 

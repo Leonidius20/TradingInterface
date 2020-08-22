@@ -6,6 +6,8 @@ import ua.leonidius.trdinterface.models.ShopItem;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ListScreen;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class ManageEnchantmentsController extends ListController<Enchantment> {
@@ -33,8 +35,8 @@ public class ManageEnchantmentsController extends ListController<Enchantment> {
     }
 
     @Override
-    public Enchantment[] fetchItems() {
-        return item.toGameItem().getEnchantments();
+    public Collection<Enchantment> fetchItems() {
+        return Arrays.asList(item.toGameItem().getEnchantments());
     }
 
     @Override

@@ -28,7 +28,7 @@ public class Category {
     @DatabaseField(canBeNull = false, unique = true)
     public String name;
 
-    @ForeignCollectionField(columnName = "items", foreignFieldName = "category")
+    @ForeignCollectionField(foreignFieldName = "category")
     public ForeignCollection<BuyableItem> items;
 
 }

@@ -62,7 +62,7 @@ public enum Message {
     // Buy item selector window
     WDW_BUY_EMPTY_CAT("There are no items in this category."),
     BTN_ITEM_BUY("%1% (%2%%3%)"),
-    BTN_ITEM_BUY_SALE("%1% (%2%%3%) &c-%4%%!"),
+    BTN_ITEM_BUY_SALE("%1% (%2%%3%) &c-%4% pct!"), // edited in 2.0.0
 
     // Buy window & BuyManageItemScreen
     WDW_BUY_TITLE("Buying %1%"),
@@ -71,22 +71,24 @@ public enum Message {
     WDW_BUY_PRICE("Price: %1%%2% per item"),
     // edited in 2.0.0
     WDW_BUY_DISCOUNT("Discount: %1% percent, time left: %2%"),
-    WDW_BUY_ORIGINAL_PRICE("Price without the discount: %1%%2%"),
+    WDW_BUY_ORIGINAL_PRICE("Price without discount: %1%%2%"),
     // end of edited stuff
     WDW_BUY_CUSTOM_LORE("Lore: %1%"),
     WDW_BUY_ENCHANTMENTS("Enchantments: %1%"),
     WDW_BUY_ENCHANTMENTS_ABSENT("none"),
     WDW_BUY_AMOUNT("Select amount"),
-    WDW_SELECT_ZERO_TO_RETURN("Select zero to return to the previous screen."),
+    WDW_SELECT_ZERO_TO_RETURN("Select zero to return to the previous screen."), // new in 2.0.0
 
     // Sell item selector window
     WDW_SELL_SELECT_ITEM("Select an item to sell"),
     WDW_SELL_NOTHING("You have nothing to sell."),
     BTN_ITEM_SELL("%1% (%2%%3%) (x%4%)"), // edited in 2.0.0
 
-
     // Sell window
     WDW_SELL_TITLE("Selling %1%"),
+
+    // EditSellableItems
+    WDW_EDIT_SELLABLE_ITEMS_EMPTY("There are no sellable items in the shop."), // new in 2.0.0
 
     // Categories list window
     BTN_ADD_CATEGORY("+ Add category"),
@@ -121,6 +123,11 @@ public enum Message {
     WDW_ADD_SELL_ITEM_SUCCESS("You have successfully added %1% to the list of sellable items."),
     WDW_INVALID_PARAMS("Invalid parameters."),
     WDW_ITEM_ALREADY_EXISTS("This item is already on the list."),
+    // next few are new in 2.0.0
+    WDW_ADD_ITEM_MISSING_ID("please fill in item's id."),
+    WDW_ADD_ITEM_INVALID_ID("the item with such an ID is not registered on the server."),
+    WDW_ADD_ITEM_INVALID_PRICE("price format is invalid."),
+    WDW_ADD_ITEM_INVALID_NBT("failed to write NBT tag."),
 
     // Item editing windows
     WDW_EDIT_ITEM_TITLE("Editing item"),
@@ -144,8 +151,8 @@ public enum Message {
 
     // Item deletion windows
     WDW_DELETE_ITEM_TITLE("Deleting item"),
-    WDW_DELETE_BUY_ITEM_CONF("Are you sure you want to delete %1% from the list of buyable items? This action can't be undone."),
-    WDW_DELETE_SELL_ITEM_CONF("Are you sure you want to delete %1% from the list of sellable items? This action can't be undone."),
+    WDW_DELETE_BUY_ITEM_CONF("Are you sure you want to delete &l%1%&r from the list of buyable items? This action can't be undone."), // cosmetic change in 2.0.0
+    WDW_DELETE_SELL_ITEM_CONF("Are you sure you want to delete &l%1%&r from the list of sellable items? This action can't be undone."),  // cosmetic change in 2.0.0
 
     // Discount editing window
     // EDITED IN 2.0.0!
@@ -236,12 +243,27 @@ public enum Message {
     LOG_SELL_ENCHANTMENT_REMOVED("User %1% has removed %2% %3% enchantment from a sellable item %4% (%5%)."),
 
     // Transaction logs
-    LOG_BOUGHT("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."),
-    LOG_SOLD("Player %1% have sold %2%x %3% (ID: %4%) for %5%%6%."),
+    LOG_BOUGHT("Player %1% have bought %2%x %3% (ID: %4%) for %5%%6%."), // edited
+    LOG_SOLD("Player %1% have sold %2%x %3% (ID: %4%) for %5%%6%."), // edited
 
+    // edited in 2.0.0
     LOG_TRANSLATION_ADDED("Player %1% have added a custom translation for %2% (%3%) - %4%."),
     LOG_TRANSLATION_CHANGED("Player %1% have changed a custom translation for %2% (%3%) from %4% to %5%."),
     LOG_TRANSLATION_DELETED("Player %1% have deleted a custom translation for %2% (%3%)."),
+
+    // YAML to DB conversion
+    LOG_BUYABLE_ITEMS_FOUND("Found buyList.yml, importing items to the database..."),
+    LOG_SELLABLE_ITEMS_FOUND("Found sellList.yml, importing items to the database..."),
+    LOG_TRANSLATIONS_FOUND("Found customItemNames.yml, importing translations to the database..."),
+
+    LOG_BUYABLE_ITEMS_IMPORTED("Imported %1% categories and %2% buyable items, buyList.yml deleted."),
+    LOG_SELLABLE_ITEMS_IMPORTED("Imported %1% sellable items, sellList.yml deleted."),
+    LOG_ALL_TRANSLATIONS_IMPORTED("Imported %1% translations, customItemNames.yml deleted."),
+    LOG_IMPORT_SKIPPED_TRANSLATIONS("Imported %1% translations, skipped %2% translations for items, for which there are already custom translations. Skipped items are kept in customItemNames.yml."),
+
+    LOG_IMPORT_FAILED("Failed to import."),
+
+    LOG_READING_NBT_FAILED("Error reading NBT tag on item with record_id %1%"),
 
     // time units
     SECONDS("seconds"),
@@ -259,6 +281,10 @@ public enum Message {
 
     public void log(Object... s) {
         plugin.getLogger().info(getText(s));
+    }
+
+    public void error(Object... params) {
+        plugin.getLogger().error(getText(params));
     }
 
     public void print(CommandSender sender, Object... s) {
