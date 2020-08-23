@@ -74,7 +74,7 @@ public class BuyableItemsListController extends ListController<BuyableItem> {
 
     @Override
     public String getTitle() {
-        return category.name;
+        return category.getName();
     }
 
     @Override

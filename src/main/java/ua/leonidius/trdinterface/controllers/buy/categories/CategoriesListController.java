@@ -47,7 +47,7 @@ public class CategoriesListController extends ListController<Category> {
 
     @Override
     public String buildItemButtonText(Category category) {
-        return category.name;
+        return category.getName();
     }
 
     @Override

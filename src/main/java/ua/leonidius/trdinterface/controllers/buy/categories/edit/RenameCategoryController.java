@@ -30,16 +30,28 @@ public class RenameCategoryController extends NamingController {
     }
 
     @Override
+    protected String getDefaultText() {
+        return category.getName();
+    }
+
+    @Override
     public void submitName(String name) {
+        String oldName = category.getName();
+
+        if (oldName.equals(name)) {
+            manager.back();
+            return;
+        }
+
         try {
-            String oldName = category.name;
             Dao<Category, Integer> categoryDao =
                     DaoManager.createDao(Trading.getSource(), Category.class);
-            category.name = name;
+            category.setName(name);
             categoryDao.update(category);
 
             if (Trading.getSettings().logEdits()) {
-                Message.LOG_CATEGORY_RENAMED.log(manager.getPlayer().getName(), oldName, name);
+                Message.LOG_CATEGORY_RENAMED.log(manager.getPlayer().getName(),
+                        oldName, name);
             }
 
             manager.back();

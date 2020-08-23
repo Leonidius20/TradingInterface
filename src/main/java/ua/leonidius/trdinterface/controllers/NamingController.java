@@ -16,10 +16,15 @@ public abstract class NamingController extends BaseController {
 
     protected abstract String getInputFieldHint();
 
+    protected String getDefaultText() {
+        return "";
+    }
+
     @Override
     public void showScreen() {
         manager.addAndShow(new NamingScreen(this,
-                getScreenTitle(), getInputFieldHint()), true);
+                getScreenTitle(), getInputFieldHint(),
+                getDefaultText()), true);
     }
 
     public abstract void submitName(String name);

@@ -13,9 +13,7 @@ public class NamingScreen extends CustomScreen {
     private transient final NamingController controller;
 
     public NamingScreen(NamingController controller, String title, String label) {
-        super(title);
-        this.controller = controller;
-        addElement(new ElementInput(label));
+        this(controller, title, label, "");
     }
 
     public NamingScreen(NamingController controller, String title, String label, String text) {
@@ -26,7 +24,6 @@ public class NamingScreen extends CustomScreen {
 
     @Override
     public void onResponse(PlayerFormRespondedEvent event) {
-        // TODO: possibly replace with a callback element
         String name = getResponse().getInputResponse(0);
         if (name.isEmpty()) controller.back();
         else controller.submitName(name);

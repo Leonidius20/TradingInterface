@@ -19,16 +19,27 @@ public class Category {
     }
 
     @DatabaseField(generatedId = true, columnName = "record_id")
-    public int recordId; // primary key, not null
+    private int recordId; // primary key, not null
 
     @DatabaseField(canBeNull = false, foreign = true, columnName = "shop_id")
-    public Shop shop; // must be refreshed before accessing anything other than ID
+    private Shop shop; // must be refreshed before accessing anything other than ID
     // 'foreignAutoRefresh = true' can be set if needed
 
     @DatabaseField(canBeNull = false, unique = true)
-    public String name;
+    private String name;
 
     @ForeignCollectionField(foreignFieldName = "category")
     public ForeignCollection<BuyableItem> items;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
 }

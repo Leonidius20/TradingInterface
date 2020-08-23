@@ -32,7 +32,7 @@ public class AddBuyableItemController extends ItemDetailsEditController {
     @Override
     public void submitDetails(String itemId, String priceS, String customName, String customLore) {
         BuyableItem item = new BuyableItem();
-        item.setShop(category.shop);
+        item.setShop(category.getShop());
         item.setCategory(category);
 
         try {

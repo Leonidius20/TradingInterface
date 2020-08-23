@@ -1,6 +1,5 @@
 package ua.leonidius.trdinterface.controllers.buy.categories.edit;
 
-import cn.nukkit.utils.TextFormat;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
@@ -24,9 +23,8 @@ public class DeleteCategoryController extends ModalController {
     @Override
     public void showScreen() {
         manager.addAndShow(new ModalScreen(Message.WDW_DELETE_CATEGORY_TITLE.getText(),
-                Message.WDW_DELETE_CATEGORY_CONF.getText(
-                        TextFormat.colorize(TextFormat.BOLD.getChar(), category.name)),
-                        this), true);
+                Message.WDW_DELETE_CATEGORY_CONF.getText(category.getName()),
+                this), true);
     }
 
     @Override
@@ -37,6 +35,11 @@ public class DeleteCategoryController extends ModalController {
             Dao<Category, Integer> categoryDao =
                     DaoManager.createDao(Trading.getSource(), Category.class);
             categoryDao.delete(category);
+
+            if (Trading.getSettings().logEdits()) {
+                Message.LOG_CATEGORY_DELETED.log(manager.getPlayer().getName(),
+                        category.getName());
+            }
 
             manager.backTwoScreens();
         } catch (SQLException e) {
