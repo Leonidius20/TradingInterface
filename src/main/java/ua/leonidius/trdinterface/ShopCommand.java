@@ -35,13 +35,15 @@ public class ShopCommand extends PluginCommand<Trading> implements CommandExecut
         Player player = sender.getServer().getPlayer(sender.getName());
         if (player == null) return false;
 
+        ScreenManager manager = new ScreenManager(player);
+
         try {
             Dao<Shop, Integer> shopDao = DaoManager.createDao(Trading.getSource(), Shop.class);
             Shop shop = shopDao.queryForId(1); // default shop has record_id = 1
-            new MainController(new ScreenManager(player), shop).showScreen();
+            new MainController(manager, shop).showScreen();
         } catch (SQLException e) {
             Trading.printException(e);
-            new InfoController(new ScreenManager(player), Message.ERROR.getText());
+            new InfoController(manager, Message.ERROR.getText());
         }
 
         return true;

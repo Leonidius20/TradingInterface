@@ -12,7 +12,7 @@ import java.util.Stack;
 public class ScreenManager {
 
     private final Player player;
-    private Stack<Screen> backStack;
+    private final Stack<Screen> backStack;
     private Screen currentScreen;
 
     public ScreenManager(Player player) {
@@ -53,14 +53,12 @@ public class ScreenManager {
         back();
     }
 
-    // TODO: maybe add a method that checks if there is a specified screen in the stack and returns to it
-
     public Player getPlayer() {
         return player;
     }
 
     public void onClose() {
-        backStack = null; // that's for JC to delete the screens
+        backStack.clear(); // that's for JC to delete the screens
     }
 
     private void showScreen(Player player, Screen screen) {

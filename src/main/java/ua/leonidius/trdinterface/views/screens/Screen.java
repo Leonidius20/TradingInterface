@@ -9,7 +9,7 @@ public interface Screen {
 
     void onResponse(PlayerFormRespondedEvent event);
 
-    //void onClose(PlayerFormRespondedEvent event);
+    // void onClose(PlayerFormRespondedEvent event);
 
     void setIgnoreStack(boolean ignoresStack);
 
