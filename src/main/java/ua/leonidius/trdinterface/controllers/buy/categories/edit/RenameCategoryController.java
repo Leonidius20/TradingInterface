@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
+import ua.leonidius.trdinterface.controllers.InfoController;
 import ua.leonidius.trdinterface.controllers.NamingController;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
@@ -46,6 +47,13 @@ public class RenameCategoryController extends NamingController {
         try {
             Dao<Category, Integer> categoryDao =
                     DaoManager.createDao(Trading.getSource(), Category.class);
+
+            if (categoryDao.queryForEq("name", name).size() != 0) {
+                new InfoController(manager,
+                        Message.WDW_NEW_CATEGORY_FAIL.getText()).showScreen();
+                return;
+            }
+
             category.setName(name);
             categoryDao.update(category);
 
