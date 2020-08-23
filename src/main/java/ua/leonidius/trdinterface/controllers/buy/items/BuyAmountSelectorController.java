@@ -75,7 +75,7 @@ public class BuyAmountSelectorController extends AmountSelectorController {
                     cost, Trading.getSettings().getCurrency());
         }
 
-        showInfoScreen(Message.BUY_SUCCESS.getText(amount, gameItem.getName(),
+        showInfoScreen(Message.BUY_SUCCESS.getText(amount, item.getName(),
                 cost, Trading.getSettings().getCurrency()));
     }
 

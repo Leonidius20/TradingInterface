@@ -53,7 +53,7 @@ public class SellAmountSelectorController extends AmountSelectorController {
         }
 
         new InfoController(manager, Message.WDW_SUCCESS_TITLE.getText(),
-                Message.SELL_SUCCESS.getText(amount, gameItem.getName(),
+                Message.SELL_SUCCESS.getText(amount, item.getName(),
                         cost, Trading.getSettings().getCurrency())).showScreen();
     }
 
