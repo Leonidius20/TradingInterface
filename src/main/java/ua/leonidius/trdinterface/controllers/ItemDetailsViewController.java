@@ -22,6 +22,7 @@ public abstract class ItemDetailsViewController extends BaseController {
         StringBuilder sb = new StringBuilder();
 
         getItem().resetGameItem();
+        getItem().resetCachedName();
         Item gameItem = getItem().toGameItem();
 
         sb.append(Message.WDW_BUY_NAME.getText(getItem().getName()));

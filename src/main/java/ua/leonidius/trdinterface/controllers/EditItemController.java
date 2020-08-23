@@ -50,13 +50,12 @@ public class EditItemController extends ItemDetailsEditController {
 
         // so that item.getName(), item.getLore() return updated info
         item.resetGameItem();
-
-        String newLore = arrayToString(item.toGameItem().getLore());
+        item.resetCachedName();
 
         if (item.getItemId().equals(oldId)
                 && item.getPurePrice() == oldPrice
                 && customName.equals(oldCustomName)
-                && newLore.equals(oldLore)) {
+                && customLore.equals(oldLore)) {
             manager.back();
             return;
         }
@@ -90,12 +89,12 @@ public class EditItemController extends ItemDetailsEditController {
                             oldCustomName, customName));
             }
 
-            if (!newLore.equals(oldLore)) {
+            if (!customLore.equals(oldLore)) {
                 if (oldLore.trim().isEmpty()) {
-                    changes.add(Message.LOG_ADDED_LORE.getText(newLore));
-                } else if (newLore.trim().isEmpty()) {
+                    changes.add(Message.LOG_ADDED_LORE.getText(customLore));
+                } else if (customLore.trim().isEmpty()) {
                     changes.add(Message.LOG_REMOVED_LORE.getText(oldLore));
-                } else changes.add(Message.LOG_EDITED_LORE.getText(oldLore, newLore));
+                } else changes.add(Message.LOG_EDITED_LORE.getText(oldLore, customLore));
             }
 
             if (item instanceof BuyableItem) {

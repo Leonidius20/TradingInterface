@@ -170,6 +170,14 @@ public abstract class ShopItem {
         return name;
     }
 
+    /**
+     * Used to reset the cached item's name
+     * when it is changed
+     */
+    public void resetCachedName() {
+        name = null;
+    }
+
     public abstract void update() throws SQLException;
 
 }

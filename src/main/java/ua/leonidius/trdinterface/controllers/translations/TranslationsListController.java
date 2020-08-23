@@ -58,6 +58,7 @@ public class TranslationsListController extends ListController<Translation> {
     @Override
     public String buildItemButtonText(Translation translation) {
         return Item.fromString(translation.getItemId()).getName()
+                + " (" + translation.getItemId() + ")"
                 + " - " + translation.getTranslation();
     }
 
