@@ -1,8 +1,8 @@
 name: "Trading_Interface"
 main: ua.leonidius.trdinterface.Trading
-version: 2.0.0-devbuild
-author: Leonidius20
-url: github.com/Leonidius20/TradingInterface
+version: ${project.version}
+author: Leondius20
+url: ${project.url}
 api: ["1.0.8"]
 description: Shop system based on interface.
 permissions:

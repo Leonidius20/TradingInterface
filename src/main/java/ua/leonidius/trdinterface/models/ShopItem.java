@@ -19,7 +19,15 @@ public abstract class ShopItem {
 
     public abstract String getItemId();
 
+    /**
+     * @return price with discount (if there is a discount)
+     */
     public abstract double getPrice();
+
+    /**
+     * @return price without discount
+     */
+    public abstract double getPurePrice();
 
     public abstract byte[] getNbt();
 
@@ -97,6 +105,10 @@ public abstract class ShopItem {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(
                     Message.WDW_ADD_ITEM_INVALID_PRICE.getText());
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException(
+                    Message.WDW_EDIT_ITEM_NEGATIVE_PRICE.getText());
         }
 
         if (customName != null && !customName.isEmpty())

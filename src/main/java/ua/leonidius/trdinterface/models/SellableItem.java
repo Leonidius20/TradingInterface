@@ -52,6 +52,11 @@ public class SellableItem extends ShopItem {
     }
 
     @Override
+    public double getPurePrice() {
+        return price;
+    }
+
+    @Override
     public byte[] getNbt() {
         return nbt;
     }

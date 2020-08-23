@@ -1,6 +1,5 @@
 package ua.leonidius.trdinterface;
 
-import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.level.Location;
@@ -110,7 +109,7 @@ public enum Message {
 
     // Category deletion window
     WDW_DELETE_CATEGORY_TITLE("Deleting category"),
-    WDW_DELETE_CATEGORY_CONF("Are you sure you want to delete %1% category? All of the items in this category will be deleted as well. This action cannot be undone."),
+    WDW_DELETE_CATEGORY_CONF("Are you sure you want to delete &l%1%&r category? All of the items in this category will be deleted as well. This action cannot be undone."),
 
     // Adding item windows
     WDW_ADD_ITEM_TITLE("Adding item"),
@@ -119,14 +118,15 @@ public enum Message {
     WDW_ADD_ITEM_CUSTOM_NAME("Custom name (optional)"),
     WDW_ADD_ITEM_CUSTOM_LORE("Custom lore (optional)"),
     WDW_ADD_ITEM_ENCHANTMENTS("You will be able to edit enchantments later."),
-    WDW_ADD_BUY_ITEM_SUCCESS("You have successfully added %1% to the list of buyable items."),
-    WDW_ADD_SELL_ITEM_SUCCESS("You have successfully added %1% to the list of sellable items."),
+    WDW_ADD_BUY_ITEM_SUCCESS("You have successfully added &l%1%&r to the list of buyable items."),
+    WDW_ADD_SELL_ITEM_SUCCESS("You have successfully added &l%1%&r to the list of sellable items."),
     WDW_INVALID_PARAMS("Invalid parameters."),
     WDW_ITEM_ALREADY_EXISTS("This item is already on the list."),
     // next few are new in 2.0.0
     WDW_ADD_ITEM_MISSING_ID("please fill in item's id."),
     WDW_ADD_ITEM_INVALID_ID("the item with such an ID is not registered on the server."),
     WDW_ADD_ITEM_INVALID_PRICE("price format is invalid."),
+    WDW_EDIT_ITEM_NEGATIVE_PRICE("price cannot be negative."),
     WDW_ADD_ITEM_INVALID_NBT("failed to write NBT tag."),
 
     // Item editing windows
@@ -160,7 +160,7 @@ public enum Message {
     WDW_EDIT_DISCOUNT_HINT("Enter discount in percents (0 to return):"),
     WDW_EDIT_DISCOUNT_DURATION("Enter discount duration (numerical value):"),
     WDW_EDIT_DISCOUNT_MORE_THAN_100("Discount can't be bigger than 100% or less than 0%."),
-    WDW_REMOVE_DISCOUNT_CONF("Are you sure you want to remove a %1% percent discount from %2%?"), // added in 2.0.0
+    WDW_REMOVE_DISCOUNT_CONF("Are you sure you want to remove a %1% percent discount from &l%2%&r?"), // added in 2.0.0
     // end of edited stuff
 
     // Custom names list window
@@ -201,10 +201,10 @@ public enum Message {
     BUY_NO_SPACE_AND_MONEY("There is no free space in your inventory and there is not enough money to buy this item."),
     ERROR("An error occurred."),
     ERROR_DESC("An error occurred: %1%"),
-    BUY_SUCCESS("You have successfully bought %1%x %2% for %3%%4%."),
+    BUY_SUCCESS("You have successfully bought %1%x &l%2%&r for %3%%4%."),
 
     // Sell success string
-    SELL_SUCCESS("You have successfully sold %1%x %2% for %3%%4%."),
+    SELL_SUCCESS("You have successfully sold %1%x &l%2%&r for %3%%4%."),
 
     // List edit logs
     LOG_CATEGORY_ADDED("User %1% has added a new category of buyable items called %2%."),
@@ -223,6 +223,10 @@ public enum Message {
     LOG_EDITED_PRICE("changed price from %1%%2% to %3%%2%"),
     LOG_EDITED_LORE("changed lore from %1% to %2%"),
     LOG_ADDED_LORE("added a lore (%1%)"),
+    LOG_REMOVED_LORE("removed lore (%1%)"),
+    LOG_ADDED_CUSTOM_NAME("added a custom name (%1%)"),
+    LOG_EDITED_CUSTOM_NAME("changed custom name from %1% to %2%"),
+    LOG_REMOVED_CUSTOM_NAME("removed custom name (%1%)"),
 
     // LOG_BUY_ITEM_EDITED ("User %1% has changed the price of %2% (ID: %3%) for buying, new price: %4%%5%, old price: %6%%7%."),
 
@@ -274,8 +278,6 @@ public enum Message {
     INFINITY("infinity");
 
     private static String language = "english";
-    private static char c1; //= 'a';
-    private static char c2; //= '2';
 
     private static PluginBase plugin = null;
 
@@ -295,31 +297,18 @@ public enum Message {
         sender.sendMessage(getText(s));
     }
 
-    public void printError(CommandSender sender, Object... s) {
-        print(sender, s, 'c', 'c');
-    }
-
-    public void tip(Player player, Object... s) {
-        if (player != null) player.sendTip(getText(s));
-    }
-
-    public void popup(Player player, Object... s) {
-        if (player != null) player.sendPopup(getText(s));
-    }
-
-    public boolean broadcast(String permission, Object... s) {
+    /* public boolean broadcast(String permission, Object... s) {
         for (Player player : plugin.getServer().getOnlinePlayers().values()) {
             if (permission == null || player.hasPermission(permission)) print(player, s);
         }
         return true;
-    }
+    } */
 
     public String getText(Object... keys) {
         if (keys.length == 0) return TextFormat.colorize(this.message);
         String str = this.message;
         boolean fullFloat = false;
         int count = 1;
-        int c = 0;
         DecimalFormat fmt = new DecimalFormat("####0.##");
         for (Object key : keys) {
             String s = key.toString();
@@ -350,23 +339,9 @@ public enum Message {
     }
 
     private String message;
-    private final Character color1;
-    private final Character color2;
 
     Message(String msg) {
         message = msg;
-        this.color1 = null;
-        this.color2 = null;
-    }
-
-    Message(String msg, char color1, char color2) {
-        this.message = msg;
-        this.color1 = color1;
-        this.color2 = color2;
-    }
-
-    Message(String msg, char color) {
-        this(msg, color, color);
     }
 
     @Override
@@ -388,9 +363,6 @@ public enum Message {
         if (Trading.getSettings().saveLanguageFile()) {
             saveMessages();
         }
-
-        c1 = 'a';
-        c2 = '2';
     }
 
     private static void initMessages() {

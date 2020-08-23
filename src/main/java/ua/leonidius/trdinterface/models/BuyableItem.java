@@ -62,6 +62,11 @@ public class BuyableItem extends ShopItem {
         return price - (price * (getDiscount().getPercent() / 100));
     }
 
+    @Override
+    public double getPurePrice() {
+        return price;
+    }
+
     public double getOriginalPrice() {
         return price;
     }

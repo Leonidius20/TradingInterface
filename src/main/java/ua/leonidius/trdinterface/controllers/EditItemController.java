@@ -25,29 +25,37 @@ public class EditItemController extends ItemDetailsEditController {
     public void showScreen() {
         manager.addAndShow(new ItemDetailsEditScreen(this,
                 Message.WDW_EDIT_ITEM_TITLE.getText(),
-                item.getItemId(), String.valueOf(item.getPrice()),
+                item.getItemId(), String.valueOf(item.getPurePrice()),
                 item.toGameItem().getCustomName(),
-                arrayToString(item.toGameItem().getLore())));
+                arrayToString(item.toGameItem().getLore())), true);
     }
 
     @Override
-    public void submitDetails(String itemId, String priceS, String customName, String customLore) {
+    public void submitDetails(String itemId, String priceS,
+                              String customName, String customLore) {
         String oldId = item.getItemId();
         String oldName = item.getName();
-        double oldPrice = item.getPrice();
+        String oldCustomName = item.toGameItem().getCustomName();
+        double oldPrice = item.getPurePrice();
         String oldLore = arrayToString(item.toGameItem().getLore());
         Enchantment[] oldEnchantments = item.toGameItem().getEnchantments();
 
-        ShopItem.populate(item, itemId, priceS, customName,
-                customLore, oldEnchantments);
+        try {
+            ShopItem.populate(item, itemId, priceS, customName,
+                    customLore, oldEnchantments);
+        } catch (IllegalArgumentException e) { // invalid input
+            showErrorScreen(e.getMessage());
+            return;
+        }
 
         // so that item.getName(), item.getLore() return updated info
         item.resetGameItem();
 
         String newLore = arrayToString(item.toGameItem().getLore());
 
-        if (item.getItemId().equals(oldId) && item.getPrice() == oldPrice
-                && item.getName().equals(oldName)
+        if (item.getItemId().equals(oldId)
+                && item.getPurePrice() == oldPrice
+                && customName.equals(oldCustomName)
                 && newLore.equals(oldLore)) {
             manager.back();
             return;
@@ -62,19 +70,31 @@ public class EditItemController extends ItemDetailsEditController {
 
         if (Trading.getSettings().logEdits()) {
             LinkedList<String> changes = new LinkedList<>();
+
             if (!item.getItemId().equals(oldId)) {
                 changes.add(Message.LOG_EDITED_ID.getText(oldId, item.getItemId()));
             }
+
             if (item.getPrice() != oldPrice) {
                 changes.add(Message.LOG_EDITED_PRICE.getText(oldPrice,
-                        Trading.getSettings().getCurrency(), item.getPrice()));
+                        Trading.getSettings().getCurrency(), item.getPurePrice()));
             }
-            if (!item.getName().equals(oldName)) {
-                changes.add(Message.LOG_EDITED_NAME.getText(oldName, item.getName()));
+
+            if (!customName.equals(oldCustomName)) {
+                if (oldCustomName.isEmpty()) {
+                    changes.add(Message.LOG_ADDED_CUSTOM_NAME.getText(customName));
+                } else if (customName.isEmpty()) {
+                    changes.add(Message.LOG_REMOVED_CUSTOM_NAME.getText(oldCustomName));
+                } else
+                    changes.add(Message.LOG_EDITED_NAME.getText(
+                            oldCustomName, customName));
             }
+
             if (!newLore.equals(oldLore)) {
                 if (oldLore.trim().isEmpty()) {
                     changes.add(Message.LOG_ADDED_LORE.getText(newLore));
+                } else if (newLore.trim().isEmpty()) {
+                    changes.add(Message.LOG_REMOVED_LORE.getText(oldLore));
                 } else changes.add(Message.LOG_EDITED_LORE.getText(oldLore, newLore));
             }
 
