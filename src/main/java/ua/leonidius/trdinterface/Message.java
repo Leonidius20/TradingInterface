@@ -74,7 +74,6 @@ public enum Message {
     // end of edited stuff
     WDW_BUY_CUSTOM_LORE("Lore: %1%"),
     WDW_BUY_ENCHANTMENTS("Enchantments: %1%"),
-    WDW_BUY_ENCHANTMENTS_ABSENT("none"),
     WDW_BUY_AMOUNT("Select amount"),
     WDW_SELECT_ZERO_TO_RETURN("Select zero to return to the previous screen."), // new in 2.0.0
 
@@ -121,9 +120,9 @@ public enum Message {
     WDW_ADD_BUY_ITEM_SUCCESS("You have successfully added &l%1%&r to the list of buyable items."),
     WDW_ADD_SELL_ITEM_SUCCESS("You have successfully added &l%1%&r to the list of sellable items."),
     WDW_INVALID_PARAMS("Invalid parameters."),
-    WDW_ITEM_ALREADY_EXISTS("This item is already on the list."),
+    // WDW_ITEM_ALREADY_EXISTS("This item is already on the list."),
     // next few are new in 2.0.0
-    WDW_ADD_ITEM_MISSING_ID("please fill in item's id."),
+    WDW_ADD_ITEM_MISSING_ID("please fill in item's ID."),
     WDW_ADD_ITEM_INVALID_ID("the item with such an ID is not registered on the server."),
     WDW_ADD_ITEM_INVALID_PRICE("price format is invalid."),
     WDW_EDIT_ITEM_NEGATIVE_PRICE("price cannot be negative."),
@@ -133,7 +132,7 @@ public enum Message {
     WDW_EDIT_ITEM_TITLE("Editing item"),
     //BUY_ITEM_INFO ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%"),
     //BUY_ITEM_INFO_DISC ("Item: %1%\nPrice: %2%%3%\nDiscount: %4%%\nPrice with discount: %5%%6%"),
-    SELL_ITEM_INFO("Item: %1%\nPrice: %2%%3%"),
+    // SELL_ITEM_INFO("Item: %1%\nPrice: %2%%3%"),
     BTN_EDIT_ITEM("* Edit item"),
     BTN_DELETE_ITEM("* Delete item"),
     // BTN_EDIT_DISCOUNT ("* Edit discount"),
@@ -141,7 +140,7 @@ public enum Message {
     BTN_REMOVE_DISCOUNT("* Remove discount"), // new in 2.0.0
 
     // AddEnchantmentFailScreen
-    WDW_ADD_ENCHANTMENT_FAIL("Failed to add enchantment."),
+    // WDW_ADD_ENCHANTMENT_FAIL("Failed to add enchantment."),
 
     // BuyManageItemScreen
     BTN_BUY_ITEM("Buy this item"),
@@ -164,11 +163,11 @@ public enum Message {
     // end of edited stuff
 
     // Custom names list window
-    WDW_CUSTOM_NAMES_HINT("You can add a custom name to an item. It will appear instead of the original one."),
-    WDW_CUSTOM_NAME_TITLE("Custom item name"),
+    WDW_CUSTOM_NAMES_HINT("You can add a custom translation for an item's name. Note! It has nothing to do with custom names (which can be added with an anvil) and only affects the item's name in the shop."), // edited in 2.0.0
+    WDW_CUSTOM_NAME_TITLE("Item name translation"),
 
     // Custom name editing menu
-    WDW_CUSTOM_NAME_INFO("Item's ID: %1%\nOriginal name: %2%\nCustom name: %3%"),
+    WDW_CUSTOM_NAME_INFO("Item's ID: %1%\nOriginal name: %2%\nTranslation: %3%"),
 
     // Custom name adding window
     WDW_ADD_CUSTOM_NAME_TITLE("Adding translation"), // changed in 2.0.0
@@ -218,7 +217,7 @@ public enum Message {
     // the next line was edited in 2.0.0
     LOG_BUY_ITEM_EDITED("User %1% has modified the buyable item %2%: %3%."),
 
-    LOG_EDITED_ID("changed id from %1% to %2%"),
+    LOG_EDITED_ID("changed ID from %1% to %2%"),
     LOG_EDITED_NAME("changed name from %1% to %2%"),
     LOG_EDITED_PRICE("changed price from %1%%2% to %3%%2%"),
     LOG_EDITED_LORE("changed lore from %1% to %2%"),
