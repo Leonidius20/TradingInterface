@@ -117,7 +117,8 @@ public abstract class ShopItem {
         if (customLore != null && !customLore.isEmpty())
             gameItem.setLore(customLore.split("\n"));
 
-        gameItem.addEnchantment(enchantments);
+        if (enchantments != null && enchantments.length != 0)
+            gameItem.addEnchantment(enchantments);
 
         item.setItemId(itemId);
         item.setPrice(price);

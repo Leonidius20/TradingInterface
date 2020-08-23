@@ -193,7 +193,7 @@ public enum Message {
     WDW_MANAGE_ENCHANTMENTS_EMPTY("There are no enchantments on this item"),
 
     WDW_REMOVE_ENCHANTMENT_TITLE("Removing an enchantment"),
-    WDW_REMOVE_ENCHANTMENT_CONF("Are you sure you want to remove %1% from %2%?"),
+    WDW_REMOVE_ENCHANTMENT_CONF("Are you sure you want to remove &l%1%&r from &l%2%&r?"),
 
     // Buy success and fail strings
     BUY_NO_MONEY("Not enough money to buy this item."),

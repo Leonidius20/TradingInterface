@@ -5,6 +5,7 @@ import com.j256.ormlite.dao.DaoManager;
 import ua.leonidius.trdinterface.Message;
 import ua.leonidius.trdinterface.Trading;
 import ua.leonidius.trdinterface.controllers.ModalController;
+import ua.leonidius.trdinterface.models.BuyableItem;
 import ua.leonidius.trdinterface.models.Category;
 import ua.leonidius.trdinterface.views.ScreenManager;
 import ua.leonidius.trdinterface.views.screens.ModalScreen;
@@ -30,7 +31,10 @@ public class DeleteCategoryController extends ModalController {
     @Override
     public void onPositiveResponse() {
         try {
-            category.items.clear();
+            for (BuyableItem item : category.items) {
+                item.removeDiscount();
+                category.items.getDao().delete(item);
+            }
 
             Dao<Category, Integer> categoryDao =
                     DaoManager.createDao(Trading.getSource(), Category.class);

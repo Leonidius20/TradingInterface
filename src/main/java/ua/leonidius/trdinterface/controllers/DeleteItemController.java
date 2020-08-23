@@ -41,6 +41,7 @@ public class DeleteItemController extends ModalController {
             if (item instanceof BuyableItem) {
                 Dao<BuyableItem, Integer> itemDao =
                         DaoManager.createDao(Trading.getSource(), BuyableItem.class);
+                ((BuyableItem) item).removeDiscount();
                 itemDao.delete((BuyableItem) item);
             } else {
                 Dao<SellableItem, Integer> itemDao =
