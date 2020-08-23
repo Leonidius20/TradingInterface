@@ -50,7 +50,6 @@ public class EditItemController extends ItemDetailsEditController {
 
         // so that item.getName(), item.getLore() return updated info
         item.resetGameItem();
-        item.resetCachedName();
 
         if (item.getItemId().equals(oldId)
                 && item.getPurePrice() == oldPrice

@@ -134,21 +134,32 @@ public abstract class ShopItem {
     }
 
     /**
-     * Used to cache the item's name to avoid querying for custom
+     * Used to cache the item's original name
+     * (= not a custom name, like the one added
+     * with an anvil) to avoid querying for custom
      * translation more than once
      */
     private String name = null;
 
     /**
-     * Returns the name of the item, which may have a custom translation
+     * Returns the name of the item, which my be a custom name
+     * or a custom translation
      *
      * @return name of the item
      */
     public String getName() {
-        if (name == null) {
-            if (toGameItem().hasCustomName())
-                return name = toGameItem().getCustomName();
+        if (toGameItem().hasCustomName())
+            return toGameItem().getCustomName();
+        return getOriginalName();
+    }
 
+    /**
+     * Returns the name of an item, which may have a custom translation
+     *
+     * @return original name
+     */
+    public String getOriginalName() {
+        if (name == null) {
             try {
                 Dao<Translation, Integer> translationDao =
                         DaoManager.createDao(Trading.getSource(), Translation.class);
@@ -157,25 +168,14 @@ public abstract class ShopItem {
                         translationDao.queryForEq("item_id", getItemId());
 
                 if (list.size() != 0) {
-                    return name = list.get(0).getTranslation();
-                }
-                translationDao.iterator().closeQuietly();
+                    name = list.get(0).getTranslation();
+                } else name = Item.fromString(getItemId()).getName();
             } catch (SQLException e) {
                 Trading.printException(e);
+                name = Item.fromString(getItemId()).getName();
             }
-
-            return name = toGameItem().getName();
         }
-
         return name;
-    }
-
-    /**
-     * Used to reset the cached item's name
-     * when it is changed
-     */
-    public void resetCachedName() {
-        name = null;
     }
 
     public abstract void update() throws SQLException;

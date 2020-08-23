@@ -22,15 +22,14 @@ public abstract class ItemDetailsViewController extends BaseController {
         StringBuilder sb = new StringBuilder();
 
         getItem().resetGameItem();
-        getItem().resetCachedName();
+
         Item gameItem = getItem().toGameItem();
 
         sb.append(Message.WDW_BUY_NAME.getText(getItem().getName()));
         sb.append("\n");
 
-        Item pureItem = Item.fromString(getItem().getItemId());
-        sb.append(Message.WDW_BUY_ORIGINAL_NAME.getText(pureItem.getName(),
-                getItem().getItemId()));
+        sb.append(Message.WDW_BUY_ORIGINAL_NAME.getText(
+                getItem().getOriginalName(), getItem().getItemId()));
 
         sb.append("\n").append(Message.WDW_BUY_PRICE.getText(getItem().getPrice(),
                 Trading.getSettings().getCurrency()));
