@@ -26,6 +26,9 @@ To open up the shop's interface type `/shop` into the chat.
 ## Translations
 If the plugin is not translated into the language of your choosing, a file called `<your_lang>.lng`, where `<your_lang>` is the three-letter ID of your language, will be created in the plugin's data folder. It will contain text strings in the format of `key: value`, where `key` is the string's identifier and `value` is the string itself. Replace values in English with the values in your language, and these new strings will be used by the plugin. You can also start a pull request, placing `<your_lang>.lng` into `src/main/resources/lang`, and your translation may officially become a part of the plugin.
 
+## Building from sources
+`mvn clean package`
+
 ## Links
 -   [Trading Interface on nukkitx.com](https://nukkitx.com/resources/trading-interface.113/)
 -   [Trading Interface on nukkit.ru](http://forums.voxelwind.com/resources/trading-interface.144/)
