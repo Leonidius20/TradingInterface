@@ -70,9 +70,6 @@ public class EditSellableItemsController extends ListController<SellableItem> {
                 item.getPrice(), Trading.getSettings().getCurrency());
 
         if (gameItem.hasEnchantments()) {
-            Trading.getPlugin().getLogger().debug("item " + item.getItemId() +
-                    "is believed to be enchanted");
-
             return TextFormat.colorize(
                     "&" + TextFormat.DARK_PURPLE.getChar() + result
                             + "&" + TextFormat.RESET.getChar());
