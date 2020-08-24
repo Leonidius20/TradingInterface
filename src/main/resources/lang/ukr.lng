@@ -145,7 +145,7 @@ log_buyable_items_found: Знайдено файл buyList.yml, імпортує
 log_sellable_items_found: Знайдено файл sellList.yml, імпортуємо предмети до бази даних...
 log_translations_found: Знайдено файл customItemNames.yml, імпортуємо переклади до бази даних...
 log_buyable_items_imported: Імпортовано %1% категорій та %2% предметів для купівлі, файл buyList.yml видалено.
-log_sellable_items_imported: Імпортовано %1% редметів для продажу, файл sellList.yml видалено.
+log_sellable_items_imported: Імпортовано %1% предметів для продажу, файл sellList.yml видалено.
 log_all_translations_imported: Імпортовано %1% перекладів, файл customItemNames.yml видалено.
 log_import_skipped_translations: Імпортовано %1% перекладів, пропущено %2% перекладів назв тих предметів, для яких вже є переклади. Пропущені переклади збережено в файлі customItemNames.yml.
 log_import_failed: Не вдалося імпортувати.
