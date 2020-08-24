@@ -87,7 +87,7 @@ wdw_add_custom_name_fail: There is already a custom translation for this item's 
 wdw_edit_custom_name_title: Editing translation
 wdw_custom_name_hint: 'Item''s name translation:'
 wdw_delete_custom_name_title: Deleting translation
-wdw_delete_custom_name_conf: Are you sure you want to delete a custom translation for the item's name? This action can't be undone.
+wdw_delete_custom_name_conf: Are you sure you want to delete a custom translation for the item's name? 此操作無法撤消.
 wdw_add_enchantment_title: Adding an enchantment
 wdw_add_enchantment_selector_hint: 'Select an enchantment:'
 wdw_add_enchantment_level_hint: Select a level (0 to return)
