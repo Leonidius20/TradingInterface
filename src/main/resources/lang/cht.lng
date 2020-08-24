@@ -1,4 +1,4 @@
-lng_save_fail: 保存語言文件失敗 (.lng)
+lng_save_fail: '保存語言文件失敗 (.lng)'
 lng_print_fail: '無法向玩家發送消息 ''null'': "%1%"'
 cmd_console: 無法從控制台執行此命令.
 cmd_shop: 打開商店介面
@@ -125,7 +125,7 @@ log_discount_deleted: '用戶. %1% 已刪除 %2% (ID: %3%) 的折扣.'
 log_sell_item_added: '用戶. %1% 將 %2% (ID: %3%) 添加到可供銷售的商品列表中, 價格: %4%%5%.'
 log_sell_item_added_with_custom_name: 'User %1% has added %2% (original name: %3%, ID: %4%) to the list of sellable items, price: %5%%6%.'
 log_sell_item_deleted: '用戶. %1% 已從可供出售的商品列表中刪除 %2% (ID: %3%).'
-log_sell_item_edited: 'User %1% has modified the sellable item %2%: %3%.'log_bought: '玩家 %1% 購買 %2% 個 %3% (ID: %4%) 花費 %5%%6%.'
+log_sell_item_edited: 'User %1% has modified the sellable item %2%: %3%.'
 log_buy_enchantment_added: User %1% has added %2% %3% enchantment to a buyable item %4% (%5%).
 log_sell_enchantment_added: User %1% has added %2% %3% enchantment to a sellable item %4% (%5%).
 log_buy_enchantment_removed: User %1% has removed %2% %3% enchantment from a buyable item %4% (%5%).

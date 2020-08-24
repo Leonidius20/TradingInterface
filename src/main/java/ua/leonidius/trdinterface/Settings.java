@@ -21,7 +21,7 @@ public class Settings extends SimpleConfig {
     }
 
     @Path(value = "save-translation")
-    private boolean save_translation = false;
+    private boolean saveTranslation = false;
 
     @Path(value = "language")
     private String language = "default";
@@ -38,7 +38,7 @@ public class Settings extends SimpleConfig {
     private String currency;
 
     public boolean saveLanguageFile() {
-        return save_translation;
+        return saveTranslation;
     }
 
     public String getLanguage() {
