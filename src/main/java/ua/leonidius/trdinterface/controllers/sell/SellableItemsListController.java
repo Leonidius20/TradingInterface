@@ -34,6 +34,8 @@ public class SellableItemsListController
 
         if (manager.getPlayer().hasPermission("shop.edit")) {
             buttons.put(Message.MENU_EDIT_SELL_LIST.getText(), this::editList);
+        } else {
+            buttons.put(Message.MENU_BROWSE_SELL_LIST.getText(), this::editList);
         }
 
         manager.addAndShow(new ListScreen<>(this,

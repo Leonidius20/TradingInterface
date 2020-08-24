@@ -30,11 +30,14 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         int maxByInventory = getMaxByInventory();
 
         if (maxByMoney == 0 && maxByInventory == 0) {
-            showInfoScreen(Message.BUY_NO_SPACE_AND_MONEY.getText());
+            showInfoScreen(buildItemDescription()
+                    + "\n\n" + Message.BUY_NO_SPACE_AND_MONEY.getText());
         } else if (maxByMoney == 0) {
-            showInfoScreen(Message.BUY_NO_MONEY.getText());
+            showInfoScreen(buildItemDescription()
+                    + "\n\n" + Message.BUY_NO_MONEY.getText());
         } else if (maxByInventory == 0) {
-            showInfoScreen(Message.BUY_NO_SPACE.getText());
+            showInfoScreen(buildItemDescription()
+                    + "\n\n" + Message.BUY_NO_SPACE.getText());
         } else {
             int maxAmount = Math.min(maxByInventory, maxByMoney);
             manager.addAndShow(new AmountSelectorScreen(this,

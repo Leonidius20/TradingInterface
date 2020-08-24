@@ -22,6 +22,11 @@ public class ManageSellableItemController extends ItemDetailsViewController {
         manager.addAndShow(new ManageSellableItemScreen(this));
     }
 
+    public boolean showEditingButtons() {
+        // TODO: check divided permissions
+        return manager.getPlayer().hasPermission("shop.edit");
+    }
+
     @Override
     protected SellableItem getItem() {
         return item;

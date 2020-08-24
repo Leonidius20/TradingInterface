@@ -10,16 +10,21 @@ public class ManageSellableItemScreen extends SimpleScreen {
     private final transient ManageSellableItemController controller;
 
     public ManageSellableItemScreen(ManageSellableItemController controller) {
-        super(Message.WDW_EDIT_ITEM_TITLE.getText());
+        super(controller.showEditingButtons()
+                ? Message.WDW_EDIT_ITEM_TITLE.getText()
+                : Message.WDW_VIEWING_SELLABLE_ITEM.getText());
         this.controller = controller;
 
         addButton(new CallbackButton(Message.BTN_BACK.getText(), controller::back));
-        addButton(new CallbackButton(Message.BTN_EDIT_ITEM.getText(),
-                controller::editItem));
-        addButton(new CallbackButton(Message.BTN_MANAGE_ENCHANTMENTS.getText(),
-                controller::manageEnchantments));
-        addButton(new CallbackButton(Message.BTN_DELETE_ITEM.getText(),
-                controller::deleteItem));
+
+        if (controller.showEditingButtons()) {
+            addButton(new CallbackButton(Message.BTN_EDIT_ITEM.getText(),
+                    controller::editItem));
+            addButton(new CallbackButton(Message.BTN_MANAGE_ENCHANTMENTS.getText(),
+                    controller::manageEnchantments));
+            addButton(new CallbackButton(Message.BTN_DELETE_ITEM.getText(),
+                    controller::deleteItem));
+        }
     }
 
     @Override

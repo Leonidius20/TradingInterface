@@ -34,6 +34,7 @@ public enum Message {
     MENU_SELL("Sell items"),
     MENU_EDIT_BUY_LIST("Edit buyable items"),
     MENU_EDIT_SELL_LIST("Edit sellable items"),
+    MENU_BROWSE_SELL_LIST("Browse sellable items"),
     // EDITED IN 2.0.0
     MENU_CUSTOM_NAMES("Custom item translations"),
     // end of edited stuff
@@ -81,6 +82,9 @@ public enum Message {
     WDW_SELL_SELECT_ITEM("Select an item to sell"),
     WDW_SELL_NOTHING("You have nothing to sell."),
     BTN_ITEM_SELL("%1% (%2%%3%) (x%4%)"), // edited in 2.0.0
+    WDW_BROWSE_SELLABLE_ITEMS_TITLE("Browsing sellable items"),
+    WDW_VIEWING_BUYABLE_ITEM("Viewing a buyable item"),
+    WDW_VIEWING_SELLABLE_ITEM("Viewing a sellable item"),
 
     // Sell window
     WDW_SELL_TITLE("Selling %1%"),
