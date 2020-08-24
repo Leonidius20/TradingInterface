@@ -7,6 +7,7 @@ menu_buy: 購買物品
 menu_sell: 回收物品
 menu_edit_buy_list: 編輯購買物品
 menu_edit_sell_list: 編輯回收物品
+menu_browse_sell_list: Browse sellable items
 menu_custom_names: Custom item translations
 btn_back: < 返回
 btn_yes: 確定
@@ -31,6 +32,9 @@ wdw_buy_amount: 選擇數量
 wdw_select_zero_to_return: Select zero to return to the previous screen.
 wdw_sell_select_item: 選擇待售商品
 wdw_sell_nothing: 你沒有可出售的物品.
+wdw_browse_sellable_items_title: Browsing sellable items
+wdw_viewing_buyable_item: Viewing a buyable item
+wdw_viewing_sellable_item: Viewing a sellable item
 btn_item_sell: '%1% (%2%%3%) (%4% 個)'
 wdw_sell_title: 賣出 %1%
 wdw_edit_sellable_items_empty: There are no sellable items in the shop.

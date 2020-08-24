@@ -56,7 +56,10 @@ public class EditSellableItemsController extends ListController<SellableItem> {
 
     @Override
     public String getTitle() {
-        return Message.MENU_EDIT_SELL_LIST.getText();
+        // TODO: check divided permissions
+        return manager.getPlayer().hasPermission("shop.edit")
+                ? Message.MENU_EDIT_SELL_LIST.getText()
+                : Message.WDW_BROWSE_SELLABLE_ITEMS_TITLE.getText();
     }
 
     @Override

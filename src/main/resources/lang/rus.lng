@@ -7,6 +7,7 @@ menu_buy: Покупка предметов
 menu_sell: Продажа предметов
 menu_edit_buy_list: Ред. покупаемые предметы
 menu_edit_sell_list: Ред. продаваемые предметы
+menu_browse_sell_list: Список продаваемых предметов
 menu_custom_names: Переводы названий предметов
 btn_back: < Назад
 btn_yes: Да
@@ -31,6 +32,9 @@ wdw_buy_amount: Выберите количество
 wdw_select_zero_to_return: Выберите ноль, чтоб вернуться на предыдущий экран.
 wdw_sell_select_item: Выберите предмет для продажи
 wdw_sell_nothing: У вас нет предметов, которые можно продавать.
+wdw_browse_sellable_items_title: Просмотр продаваемых предметов
+wdw_viewing_buyable_item: Просмотр покупаемого предмета
+wdw_viewing_sellable_item: Просмотр продаваемого предмета
 btn_item_sell: '%1% (%2%%3%) (%4% шт.)'
 wdw_sell_title: Продажа %1%
 wdw_edit_sellable_items_empty: В магазине нет предметов, доступных для продажи.

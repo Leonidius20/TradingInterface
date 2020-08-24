@@ -30,14 +30,17 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         int maxByInventory = getMaxByInventory();
 
         if (maxByMoney == 0 && maxByInventory == 0) {
-            showInfoScreen(buildItemDescription()
-                    + "\n\n" + Message.BUY_NO_SPACE_AND_MONEY.getText());
+            showInfoScreen(Message.WDW_VIEWING_BUYABLE_ITEM.getText(),
+                    buildItemDescription()
+                            + "\n\n" + Message.BUY_NO_SPACE_AND_MONEY.getText());
         } else if (maxByMoney == 0) {
-            showInfoScreen(buildItemDescription()
-                    + "\n\n" + Message.BUY_NO_MONEY.getText());
+            showInfoScreen(Message.WDW_VIEWING_BUYABLE_ITEM.getText(),
+                    buildItemDescription()
+                            + "\n\n" + Message.BUY_NO_MONEY.getText());
         } else if (maxByInventory == 0) {
-            showInfoScreen(buildItemDescription()
-                    + "\n\n" + Message.BUY_NO_SPACE.getText());
+            showInfoScreen(Message.WDW_VIEWING_BUYABLE_ITEM.getText(),
+                    buildItemDescription()
+                            + "\n\n" + Message.BUY_NO_SPACE.getText());
         } else {
             int maxAmount = Math.min(maxByInventory, maxByMoney);
             manager.addAndShow(new AmountSelectorScreen(this,
@@ -57,7 +60,8 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         // Check in case player has lost money between selecting an item
         // and confirming buying
         if (EconomyAPI.getInstance().myMoney(manager.getPlayer()) < cost) {
-            showInfoScreen(Message.BUY_NO_MONEY.getText());
+            showInfoScreen(Message.WDW_FAIL_TITLE.getText(),
+                    Message.BUY_NO_MONEY.getText());
             return;
         }
 
@@ -65,7 +69,8 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         // between selecting an item and confirming buying and now
         // there is not enough space
         if (!manager.getPlayer().getInventory().canAddItem(gameItem)) {
-            showInfoScreen(Message.BUY_NO_SPACE.getText());
+            showInfoScreen(Message.WDW_FAIL_TITLE.getText(),
+                    Message.BUY_NO_SPACE.getText());
             return;
         }
 
@@ -78,8 +83,9 @@ public class BuyAmountSelectorController extends AmountSelectorController {
                     cost, Trading.getSettings().getCurrency());
         }
 
-        showInfoScreen(Message.BUY_SUCCESS.getText(amount, item.getName(),
-                cost, Trading.getSettings().getCurrency()));
+        showInfoScreen(Message.WDW_SUCCESS_TITLE.getText(),
+                Message.BUY_SUCCESS.getText(amount, item.getName(),
+                        cost, Trading.getSettings().getCurrency()));
     }
 
     @Override
@@ -108,8 +114,8 @@ public class BuyAmountSelectorController extends AmountSelectorController {
         return amount;
     }
 
-    private void showInfoScreen(String message) {
-        new InfoController(manager, message).showScreen();
+    private void showInfoScreen(String title, String message) {
+        new InfoController(manager, title, message).showScreen();
     }
 
 }
