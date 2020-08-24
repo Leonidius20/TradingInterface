@@ -18,10 +18,13 @@ Shop system with a graphical interface for [NukkitX][nukkitx] server software fo
 Trading Interface supports the _Trading Commands_' configuration files' format. Just copy _buyList.yml_ and _sellList.yml_ from _plugins/Trading_Commands_ folder to _plugins/Trading_Interface_.
 
 ## Setting up:
-Shop management functions are available for players with `shop.edit` permission (operators have it by default).
+Shop management functions are available for players with `shop.edit` permission (operators have it by default). Players with this permission will see management buttons in the interface.
 
 ## Usage:
-To open up shop's main menu type `/shop` into the chat.
+To open up the shop's interface type `/shop` into the chat.
+
+## Translations
+If the plugin is not translated into the language of your choosing, a file called `<your_lang>.lng`, where `<your_lang>` is the three-letter ID of your language, will be created in the plugin's data folder. It will contain text strings in the format of `key: value`, where `key` is the string's identifier and `value` is the string itself. Replace values in English with the values in your language, and these new strings will be used by the plugin. You can also start a pull request, placing `<your_lang>.lng` into `src/main/resources/lang`, and your translation may officially become a part of the plugin.
 
 ## Links
 -   [Trading Interface on nukkitx.com](https://nukkitx.com/resources/trading-interface.113/)

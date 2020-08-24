@@ -1,4 +1,10 @@
-# Plugin language. if <default> - server language will be used. If there is no translation in your language, there will be created a file called <your_lang>.lng with all strings in English. You'll have to translate them.
+# Plugin language. if <default> - server language will be used.
+# If there is no translation in your language, there will be created
+# a file called <your_lang>.lng with all strings in English.
+# You'll have to translate them. Once you've created a translation to
+# your language, you can start a pull request on github.com/Leonidius20/TradingInterface
+# placing <your_lang>.lng into src/main/resources/lang, and your translation will
+# officially become a part of the plugin.
 language: default
 # If true, a file with all strings will be created. You can edit the strings.
 save-translation: false
