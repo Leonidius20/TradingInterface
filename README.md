@@ -5,17 +5,15 @@ Shop system with a graphical interface for [NukkitX][nukkitx] server software fo
 
 ## Features:
 -   Buying and selling items & shop management through an intuitive interface;
+-   Support for items with enchantments, custom names & lores;
 -   The list of items, available for buying, is divided into categories for convenience;
--   Discounts for items;
--   Custom names for items.
+-   Temporary discounts for items (which expire after a set time);
+-   Custom translations of items' names (for displaying in the shop).
 
 ## Installation:
 -   Make sure that [EconomyAPI][economy] and [DbLib][dblib] are installed on your server;
 -   Place the plugin's _.jar_ file into _plugins_ folder on your server;
 -   Launch the server and set up the plugin through its interface.
-
-## Migrating from [Trading Commands](https://github.com/Leonidius20/TradingCommands):
-Trading Interface supports the _Trading Commands_' configuration files' format. Just copy _buyList.yml_ and _sellList.yml_ from _plugins/Trading_Commands_ folder to _plugins/Trading_Interface_.
 
 ## Setting up:
 Shop management functions are available for players with `shop.edit` permission (operators have it by default). Players with this permission will see management buttons in the interface.
